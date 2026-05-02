@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — CoachBuddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" style="background:#f8f9fc;min-height:100vh;display:flex;align-items:center;">
+  <div class="login-box">
+    <div style="font-size:48px;margin-bottom:16px;">🔐</div>
+    <h2>Admin Panel</h2>
+    <p>CoachBuddy content management</p>
+    <div id="login-alert"></div>
+    <div class="form-group" style="text-align:left;">
+      <label>GitHub Token (with repo access)</label>
+      <input type="password" id="gh-token" placeholder="ghp_..." />
+    </div>
+    <div class="form-group" style="text-align:left;">
+      <label>Admin Password</label>
+      <input type="password" id="admin-pass" placeholder="Your admin password" />
+    </div>
+    <button class="btn btn-primary" style="width:100%;" onclick="login()">Sign In</button>
+    <p style="font-size:12px;color:#9aa3be;margin-top:16px;">Your GitHub token is stored only in your browser. It is never sent anywhere except GitHub's API directly.</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-screen" style="display:none;min-height:100vh;background:#f8f9fc;">
+
+  <div class="admin-header">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h1>CoachBuddy Admin</h1>
+        <button class="btn btn-outline btn-sm" style="color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.2);" onclick="logout()">Sign Out</button>
+      </div>
+      <div class="admin-nav">
+        <button class="admin-tab active" onclick="showTab('blog')">📝 Blog Posts</button>
+        <button class="admin-tab" onclick="showTab('comments')">💬 Comments</button>
+        <button class="admin-tab" onclick="showTab('messages')">📧 Messages</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOG TAB -->
+  <div id="tab-blog" class="admin-panel">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+        <h2>Blog Posts</h2>
+        <button class="btn btn-primary" onclick="showNewPostForm()">+ New Post</button>
+      </div>
+
+      <!-- NEW/EDIT POST FORM -->
+      <div id="post-form" style="display:none;background:#fff;border:1px solid #e2e6f0;border-radius:12px;padding:32px;margin-bottom:28px;">
+        <h3 style="margin-bottom:20px;" id="post-form-title">New Blog Post</h3>
+        <div id="post-save-alert"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Title *</label><input type="text" id="p-title" placeholder="Article title" /></div>
+          <div class="form-group"><label>Category *</label>
+            <select id="p-category">
+              <option>Education</option><option>Parenting</option><option>Technology</option>
+              <option>Coding</option><option>Trading</option><option>General</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Excerpt (one-line summary) *</label><input type="text" id="p-excerpt" placeholder="Short summary shown in the blog list" /></div>
+        <div class="form-group">
+          <label>Content (HTML supported) *</label>
+          <textarea id="p-content" style="min-height:300px;font-family:monospace;font-size:14px;" placeholder="Write your article here. You can use HTML tags like &lt;h2&gt;, &lt;p&gt;, &lt;strong&gt;, &lt;blockquote&gt;, &lt;ul&gt;&lt;li&gt;..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Published?</label>
+            <select id="p-published"><option value="true">Yes — visible on site</option><option value="false">No — draft</option></select>
+          </div>
+          <div class="form-group"><label>Post ID (auto)</label><input type="text" id="p-id" readonly style="background:#f8f9fc;color:#9aa3be;" /></div>
+        </div>
+        <div style="display:flex;gap:12px;">
+          <button class="btn btn-primary" onclick="savePost()">Save Post</button>
+          <button class="btn btn-outline" onclick="document.getElementById('post-form').style.display='none'">Cancel</button>
+        </div>
+      </div>
+
+      <div id="posts-list"></div>
+    </div>
+  </div>
+
+  <!-- COMMENTS TAB -->
+  <div id="tab-comments" class="admin-panel" style="display:none;">
+    <div class="container">
+      <h2>Pending Comments</h2>
+      <p style="color:#9aa3be;font-size:14px;margin-bottom:24px;">Approve or delete comments before they appear on the site.</p>
+      <div id="comments-admin-list"></div>
+    </div>
+  </div>
+
+  <!-- MESSAGES TAB -->
+  <div id="tab-messages" class="admin-panel" style="display:none;">
+    <div class="container">
+      <h2>Contact Messages</h2>
+      <p style="color:#9aa3be;font-size:14px;margin-bottom:24px;">Messages sent via the contact form.</p>
+      <div id="messages-admin-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const REPO = 'Plh1952/coachbuddy-site';
+let GH_TOKEN = '';
+let posts = [];
+let editingPostId = null;
+
+function login() {
+  const token = document.getElementById('gh-token').value.trim();
+  const pass = document.getElementById('admin-pass').value.trim();
+  const alertEl = document.getElementById('login-alert');
+  if (!token) { alertEl.innerHTML = '<div class="alert alert-error">Please enter your GitHub token.</div>'; return; }
+  if (pass !== 'cb_admin_2026') { alertEl.innerHTML = '<div class="alert alert-error">Incorrect password.</div>'; return; }
+  GH_TOKEN = token;
+  sessionStorage.setItem('cb_gh_token', token);
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-screen').style.display = 'block';
+  loadAllData();
+}
+
+function logout() {
+  sessionStorage.removeItem('cb_gh_token');
+  GH_TOKEN = '';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-screen').style.display = 'none';
+}
+
+// Auto-login if token saved
+window.addEventListener('load', () => {
+  const saved = sessionStorage.getItem('cb_gh_token');
+  if (saved) { GH_TOKEN = saved; document.getElementById('gh-token').value = saved; }
+});
+
+function showTab(tab) {
+  ['blog','comments','messages'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+    document.querySelectorAll('.admin-tab')[['blog','comments','messages'].indexOf(t)].classList.toggle('active', t === tab);
+  });
+}
+
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    headers: { 'Authorization': `Bearer ${GH_TOKEN}`, 'Accept': 'application/vnd.github+json' }
+  });
+  return r.json();
+}
+
+async function ghPut(path, content, sha) {
+  const body = { message: `Update ${path}`, content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))) };
+  if (sha) body.sha = sha;
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { 'Authorization': `Bearer ${GH_TOKEN}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return r.json();
+}
+
+async function loadAllData() {
+  await loadPosts();
+  loadLocalComments();
+  loadLocalMessages();
+}
+
+async function loadPosts() {
+  const data = await ghGet('data/blog.json');
+  posts = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g,'')))));
+  window._blogSha = data.sha;
+  renderPosts();
+}
+
+function renderPosts() {
+  const el = document.getElementById('posts-list');
+  if (!posts.length) { el.innerHTML = '<p style="color:#9aa3be;">No posts yet. Create your first one!</p>'; return; }
+  el.innerHTML = posts.map(p => `
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <div>
+          <h3>${p.title}</h3>
+          <div style="font-size:13px;color:#9aa3be;margin-top:4px;font-family:Arial,sans-serif;">
+            <span class="blog-cat">${p.category}</span>
+            <span style="margin-left:10px;">${new Date(p.date).toLocaleDateString('en-GB')}</span>
+            <span style="margin-left:10px;color:${p.published ? '#059669' : '#d97706'};font-weight:600;">${p.published ? '● Published' : '○ Draft'}</span>
+          </div>
+          <p style="font-size:14px;color:#9aa3be;margin-top:8px;">${p.excerpt}</p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline btn-sm" onclick="editPost('${p.id}')">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost('${p.id}')">Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function showNewPostForm() {
+  editingPostId = null;
+  document.getElementById('post-form-title').textContent = 'New Blog Post';
+  document.getElementById('p-title').value = '';
+  document.getElementById('p-excerpt').value = '';
+  document.getElementById('p-content').value = '';
+  document.getElementById('p-published').value = 'true';
+  document.getElementById('p-id').value = 'auto-' + Date.now();
+  document.getElementById('post-form').style.display = 'block';
+  document.getElementById('post-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+function editPost(id) {
+  editingPostId = id;
+  const p = posts.find(x => x.id === id);
+  document.getElementById('post-form-title').textContent = 'Edit Post';
+  document.getElementById('p-title').value = p.title;
+  document.getElementById('p-excerpt').value = p.excerpt;
+  document.getElementById('p-content').value = p.content;
+  document.getElementById('p-category').value = p.category;
+  document.getElementById('p-published').value = p.published ? 'true' : 'false';
+  document.getElementById('p-id').value = p.id;
+  document.getElementById('post-form').style.display = 'block';
+  document.getElementById('post-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+async function savePost() {
+  const title = document.getElementById('p-title').value.trim();
+  const excerpt = document.getElementById('p-excerpt').value.trim();
+  const content = document.getElementById('p-content').value.trim();
+  const alertEl = document.getElementById('post-save-alert');
+  if (!title || !excerpt || !content) { alertEl.innerHTML = '<div class="alert alert-error">Please fill in title, excerpt and content.</div>'; return; }
+  alertEl.innerHTML = '<div class="alert alert-success">Saving to GitHub...</div>';
+
+  if (editingPostId) {
+    const idx = posts.findIndex(p => p.id === editingPostId);
+    posts[idx] = { ...posts[idx], title, excerpt, content, category: document.getElementById('p-category').value, published: document.getElementById('p-published').value === 'true' };
+  } else {
+    posts.unshift({ id: Date.now().toString(), title, excerpt, content, category: document.getElementById('p-category').value, date: new Date().toISOString().split('T')[0], published: document.getElementById('p-published').value === 'true' });
+  }
+
+  const result = await ghPut('data/blog.json', posts, window._blogSha);
+  if (result.content) {
+    window._blogSha = result.content.sha;
+    alertEl.innerHTML = '<div class="alert alert-success">✅ Post saved and live on the site!</div>';
+    renderPosts();
+    setTimeout(() => { document.getElementById('post-form').style.display = 'none'; }, 1500);
+  } else {
+    alertEl.innerHTML = '<div class="alert alert-error">Error saving: ' + (result.message || 'Unknown error') + '</div>';
+  }
+}
+
+async function deletePost(id) {
+  if (!confirm('Delete this post? This cannot be undone.')) return;
+  posts = posts.filter(p => p.id !== id);
+  const result = await ghPut('data/blog.json', posts, window._blogSha);
+  if (result.content) { window._blogSha = result.content.sha; renderPosts(); }
+}
+
+// Comments (from localStorage — pending moderation)
+function loadLocalComments() {
+  const pending = JSON.parse(localStorage.getItem('cb_pending_comments') || '[]');
+  const el = document.getElementById('comments-admin-list');
+  if (!pending.length) { el.innerHTML = '<p style="color:#9aa3be;">No pending comments.</p>'; return; }
+  el.innerHTML = pending.map((c,i) => `
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <div>
+          <span class="comment-author">${c.name}</span>
+          <span class="comment-date">${new Date(c.date).toLocaleDateString('en-GB')}</span>
+          <div style="font-size:12px;color:#9aa3be;margin-top:4px;font-family:Arial,sans-serif;">Post ID: ${c.postId}</div>
+          <div class="comment-text" style="margin-top:8px;">${c.text}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button class="btn btn-green btn-sm" onclick="approveComment(${i})">Approve</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteComment(${i})">Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+async function approveComment(i) {
+  const pending = JSON.parse(localStorage.getItem('cb_pending_comments') || '[]');
+  const comment = pending[i];
+  comment.approved = true;
+  // Add to approved comments in GitHub
+  const data = await ghGet('data/comments.json');
+  const comments = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g,'')))));
+  comments.push(comment);
+  await ghPut('data/comments.json', comments, data.sha);
+  pending.splice(i, 1);
+  localStorage.setItem('cb_pending_comments', JSON.stringify(pending));
+  loadLocalComments();
+}
+
+function deleteComment(i) {
+  const pending = JSON.parse(localStorage.getItem('cb_pending_comments') || '[]');
+  pending.splice(i, 1);
+  localStorage.setItem('cb_pending_comments', JSON.stringify(pending));
+  loadLocalComments();
+}
+
+// Contact messages
+function loadLocalMessages() {
+  const msgs = JSON.parse(localStorage.getItem('cb_contact_messages') || '[]');
+  const el = document.getElementById('messages-admin-list');
+  if (!msgs.length) { el.innerHTML = '<p style="color:#9aa3be;">No messages yet.</p>'; return; }
+  el.innerHTML = msgs.map((m,i) => `
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <div>
+          <h3>${m.subject}</h3>
+          <div style="font-size:13px;color:#9aa3be;margin-top:4px;font-family:Arial,sans-serif;">
+            From: <strong>${m.name}</strong> (${m.email}) · ${m.type} · ${new Date(m.date).toLocaleDateString('en-GB')}
+          </div>
+          <p style="margin-top:10px;font-size:15px;color:#5a6480;">${m.message}</p>
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="deleteMessage(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function deleteMessage(i) {
+  const msgs = JSON.parse(localStorage.getItem('cb_contact_messages') || '[]');
+  msgs.splice(i, 1);
+  localStorage.setItem('cb_contact_messages', JSON.stringify(msgs));
+  loadLocalMessages();
+}
+</script>
+</body>
+</html>
