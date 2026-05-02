@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post — CoachBuddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><div class="logo-icon">C</div><span>CoachBuddy</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="courses.html">Courses</a><a href="students.html">For Students</a>
+      <a href="blog.html" class="active">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app" class="nav-cta" target="_blank">Start Learning →</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div id="post-header" class="post-header">
+  <div class="container">
+    <a href="blog.html" style="font-size:14px;color:#5a6480;font-family:Arial,sans-serif;">← Back to Blog</a>
+    <div id="post-meta" class="post-meta" style="margin-top:16px;"></div>
+    <h1 id="post-title" style="font-size:clamp(24px,4vw,44px);max-width:760px;margin-top:12px;"></h1>
+  </div>
+</div>
+
+<div class="post-body" id="post-content"></div>
+
+<!-- COMMENTS -->
+<div class="comments-section">
+  <h3 id="comments-heading">Comments (0)</h3>
+
+  <div class="comment-form">
+    <h4 style="font-size:16px;margin-bottom:20px;">Leave a comment</h4>
+    <div id="comment-alert"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Your Name *</label><input type="text" id="c-name" placeholder="e.g. Marie Dupont" /></div>
+      <div class="form-group"><label>Email (not published)</label><input type="email" id="c-email" placeholder="your@email.com" /></div>
+    </div>
+    <div class="form-group"><label>Your Comment *</label><textarea id="c-text" placeholder="Share your thoughts..."></textarea></div>
+    <button class="btn btn-primary" onclick="submitComment()">Post Comment</button>
+  </div>
+
+  <div id="comments-list"></div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="logo-text">CoachBuddy</div><p>AI-powered education that teaches students to think — not just to memorise.</p></div>
+      <div class="footer-col"><h4>Courses</h4><a href="courses.html">JavaScript</a><a href="courses.html">React</a><a href="courses.html">Node.js</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Platform</h4><a href="https://elevate-u-ceda8d9f.base44.app" target="_blank">Login</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 CoachBuddy — Lam Ai Software Solutions LLC</p></div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  links.style.flexDirection = 'column'; links.style.position = 'absolute';
+  links.style.top = '70px'; links.style.left = '0'; links.style.right = '0';
+  links.style.background = '#fff'; links.style.padding = '20px 24px';
+  links.style.borderBottom = '1px solid #e2e6f0';
+}
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const postId = new URLSearchParams(location.search).get('id');
+
+fetch('data/blog.json')
+  .then(r => r.json())
+  .then(posts => {
+    const post = posts.find(p => p.id === postId);
+    if (!post) { document.getElementById('post-title').textContent = 'Post not found'; return; }
+    document.title = post.title + ' — CoachBuddy';
+    document.getElementById('post-title').textContent = post.title;
+    document.getElementById('post-meta').innerHTML = `
+      <span class="blog-cat">${post.category}</span>
+      <span style="font-size:14px;color:#9aa3be;margin-left:12px;font-family:Arial,sans-serif;">${new Date(post.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>`;
+    document.getElementById('post-content').innerHTML = post.content;
+  });
+
+fetch('data/comments.json')
+  .then(r => r.json())
+  .then(all => {
+    const comments = all.filter(c => c.postId === postId && c.approved);
+    document.getElementById('comments-heading').textContent = `Comments (${comments.length})`;
+    const list = document.getElementById('comments-list');
+    if (!comments.length) {
+      list.innerHTML = '<p style="color:#9aa3be;font-size:14px;">No comments yet. Be the first!</p>';
+      return;
+    }
+    list.innerHTML = comments.map(c => `
+      <div class="comment-item">
+        <span class="comment-author">${c.name}</span>
+        <span class="comment-date">${new Date(c.date).toLocaleDateString('en-GB')}</span>
+        <div class="comment-text">${c.text}</div>
+      </div>`).join('');
+  });
+
+function submitComment() {
+  const name = document.getElementById('c-name').value.trim();
+  const text = document.getElementById('c-text').value.trim();
+  const alertEl = document.getElementById('comment-alert');
+  if (!name || !text) {
+    alertEl.innerHTML = '<div class="alert alert-error">Please fill in your name and comment.</div>';
+    return;
+  }
+  // Save to localStorage as pending (admin approves via admin panel)
+  const pending = JSON.parse(localStorage.getItem('cb_pending_comments') || '[]');
+  pending.push({ id: Date.now().toString(), postId, name, email: document.getElementById('c-email').value, text, date: new Date().toISOString(), approved: false });
+  localStorage.setItem('cb_pending_comments', JSON.stringify(pending));
+  alertEl.innerHTML = '<div class="alert alert-success">Thank you! Your comment has been submitted for review.</div>';
+  document.getElementById('c-name').value = '';
+  document.getElementById('c-email').value = '';
+  document.getElementById('c-text').value = '';
+}
+</script>
+</body>
+</html>
