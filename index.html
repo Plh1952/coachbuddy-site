@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoachBuddy — Stop Scrolling. Start Building.</title>
+  <meta name="description" content="CoachBuddy teaches teenagers to build real things — games, apps, tools — with an AI coach that never gives you the answer, but always helps you find it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #08070e;
+      --surface: #10111a;
+      --card: #13141f;
+      --border: #1f2035;
+      --purple: #a855f7;
+      --cyan: #06b6d4;
+      --pink: #ec4899;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --text: #f1f0ff;
+      --dim: #8b8fa8;
+      --muted: #3d3f5c;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px; transition: all 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(8,7,14,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 40px; border-radius: 10px; }
+    .nav-logo span { font-weight: 900; font-size: 20px; letter-spacing: -0.5px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: var(--dim); font-size: 14px; font-weight: 600; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn {
+      display: inline-block; padding: 15px 32px; border-radius: 14px;
+      font-weight: 800; font-size: 15px; cursor: pointer;
+      border: none; transition: opacity 0.2s; color: #fff;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn-purple { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+    .btn-green  { background: linear-gradient(135deg, #10b981, #059669); color: #000; }
+    .btn-cyan   { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--dim);
+    }
+    .btn-sm { padding: 10px 22px; font-size: 14px; }
+    .btn-lg { padding: 18px 48px; font-size: 17px; }
+
+    /* ── BLOBS ── */
+    .blobs {
+      position: absolute; inset: 0; overflow: hidden;
+      pointer-events: none; z-index: 0;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(80px);
+    }
+
+    /* ── TAG ── */
+    .tag {
+      display: inline-block;
+      border-radius: 999px; padding: 4px 14px;
+      font-size: 11px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 120px 24px 80px; overflow: hidden; text-align: center;
+    }
+    #hero .inner { position: relative; z-index: 1; max-width: 860px; }
+    #hero h1 {
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -2px; margin: 0 0 8px;
+    }
+    .grad-text-purple {
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-cyan {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-pink {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-green {
+      background: linear-gradient(135deg, #10b981, #059669);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    #word-rotate {
+      display: inline-block; min-width: 260px; text-align: left;
+      transition: opacity 0.3s;
+    }
+    .hero-sub {
+      font-size: clamp(17px, 2.5vw, 21px);
+      color: var(--dim); line-height: 1.7;
+      max-width: 600px; margin: 28px auto 44px;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero-note { color: var(--muted); font-size: 12px; margin-top: 16px; }
+    .stats-row {
+      display: flex; max-width: 620px; margin: 64px auto 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; overflow: hidden; flex-wrap: wrap;
+    }
+    .stat {
+      flex: 1; min-width: 120px; padding: 24px 20px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-val {
+      font-size: 24px; font-weight: 900;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { color: var(--muted); font-size: 12px; margin-top: 4px; font-weight: 600; }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 24px; }
+    .section-inner { max-width: 1060px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header h2 {
+      font-size: clamp(28px, 5vw, 48px); font-weight: 900;
+      letter-spacing: -1px; margin: 20px 0 16px;
+    }
+    .section-header p { color: var(--dim); font-size: 17px; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    /* ── GRID CARDS ── */
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+      position: relative; overflow: hidden;
+    }
+    .card-top-bar {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .card h3 { color: var(--text); font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+    .card p { color: var(--dim); font-size: 14px; line-height: 1.7; margin: 0; }
+    .card-emoji { font-size: 36px; margin-bottom: 18px; display: block; }
+    .card-accent { height: 3px; border-radius: 99px; width: 40%; opacity: 0.6; margin-top: 20px; }
+
+    /* ── BUILD SECTION ── */
+    #build { background: var(--bg); }
+
+    /* ── WHO FOR ── */
+    #who { background: var(--surface); border-top: 1px solid var(--border); }
+    .profile-tabs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+    .profile-tab {
+      background: transparent; border: 1.5px solid var(--border);
+      color: var(--dim); border-radius: 12px; padding: 10px 20px;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: all 0.2s; font-family: inherit;
+    }
+    .profile-tab.active { border-color: var(--purple); color: var(--purple); background: rgba(168,85,247,0.1); }
+    .profile-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 48px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px; align-items: center;
+    }
+    .profile-emoji { font-size: 64px; margin-bottom: 20px; display: block; }
+    .profile-box h3 { color: var(--text); font-size: 26px; font-weight: 900; margin-bottom: 16px; line-height: 1.2; }
+    .profile-box p { color: var(--dim); font-size: 16px; line-height: 1.8; margin-bottom: 28px; }
+    .feature-list { display: flex; flex-direction: column; gap: 12px; }
+    .feature-item {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--surface); border-radius: 12px; padding: 14px 18px;
+    }
+    .feature-item span:first-child { color: var(--purple); font-size: 16px; }
+    .feature-item span:last-child { color: var(--dim); font-size: 14px; font-weight: 500; }
+
+    /* ── COURSES ── */
+    #courses { background: var(--bg); border-top: 1px solid var(--border); }
+    .course-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 24px;
+      display: flex; flex-direction: column; position: relative; overflow: hidden;
+    }
+    .course-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .course-emoji { font-size: 32px; }
+    .course-title { color: var(--text); font-size: 22px; font-weight: 900; margin-bottom: 10px; }
+    .course-desc { color: var(--dim); font-size: 14px; line-height: 1.7; flex: 1; margin-bottom: 20px; }
+    .course-outcome { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; }
+    .course-outcome span:first-child { font-size: 13px; margin-top: 1px; }
+    .course-outcome span:last-child { color: var(--dim); font-size: 13px; }
+    .course-footer {
+      border-top: 1px solid var(--border); margin-top: 20px; padding-top: 18px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .course-modules { color: var(--muted); font-size: 12px; }
+    .course-price { font-weight: 900; font-size: 16px; }
+
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--surface); border-top: 1px solid var(--border); }
+    .step-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 24px;
+    }
+    .step-num {
+      font-size: 36px; font-weight: 900; letter-spacing: -2px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--purple), rgba(168,85,247,0.5));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .step-card h3 { color: var(--text); font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+    .step-card p { color: var(--dim); font-size: 14px; line-height: 1.7; }
+
+    /* ── CHAT DEMO ── */
+    #demo { background: var(--bg); border-top: 1px solid var(--border); }
+    .demo-grid {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 60px; align-items: center;
+    }
+    .demo-features { display: flex; flex-direction: column; gap: 10px; }
+    .demo-feat {
+      display: flex; gap: 10px; background: var(--surface);
+      border-radius: 12px; padding: 12px 16px; align-items: center;
+    }
+    .demo-feat span:first-child { color: var(--purple); }
+    .demo-feat span:last-child { color: var(--dim); font-size: 14px; }
+    .chat-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+    }
+    .chat-header {
+      background: var(--card); padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .chat-header img { height: 28px; border-radius: 6px; }
+    .chat-name { color: var(--text); font-weight: 700; font-size: 14px; }
+    .chat-status { display: flex; align-items: center; gap: 5px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .chat-online { color: var(--green); font-size: 11px; }
+    .chat-messages { padding: 20px; min-height: 280px; display: flex; flex-direction: column; gap: 12px; }
+    .msg { display: flex; }
+    .msg.student { justify-content: flex-end; }
+    .msg.coach { justify-content: flex-start; }
+    .bubble {
+      border-radius: 18px; padding: 10px 16px;
+      max-width: 82%; font-size: 14px; line-height: 1.5;
+    }
+    .bubble.student {
+      background: rgba(168,85,247,0.2);
+      border: 1px solid rgba(168,85,247,0.3);
+      color: #d8b4fe;
+      border-radius: 18px 18px 4px 18px;
+    }
+    .bubble.coach {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--dim);
+      border-radius: 18px 18px 18px 4px;
+    }
+    .msg-hidden { display: none; }
+
+    /* ── STORIES ── */
+    #stories { background: var(--bg); border-top: 1px solid var(--border); }
+    .story-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+    }
+    .story-author { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .story-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .story-name { font-weight: 800; font-size: 15px; }
+    .story-tag { font-size: 12px; font-weight: 600; }
+    .story-quote {
+      color: var(--dim); font-style: italic; font-size: 14px; line-height: 1.8;
+      margin-bottom: 20px; padding-left: 16px;
+    }
+    .story-result {
+      border-radius: 10px; padding: 10px 14px; font-size: 13px; font-weight: 600;
+    }
+
+    /* ── CTA ── */
+    #cta { background: var(--surface); border-top: 1px solid var(--border); text-align: center; }
+    #cta .inner { max-width: 700px; margin: 0 auto; }
+    #cta .big-emoji { font-size: 60px; margin-bottom: 20px; }
+    #cta h2 {
+      font-size: clamp(30px, 6vw, 56px); font-weight: 900;
+      margin: 24px 0 20px; letter-spacing: -1px; line-height: 1.1;
+    }
+    #cta p { color: var(--dim); font-size: 17px; line-height: 1.75; max-width: 540px; margin: 0 auto 44px; }
+    .cta-notes { display: flex; gap: 28px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+    .cta-notes span { color: var(--muted); font-size: 13px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--card); border-top: 1px solid var(--border);
+      padding: 60px 24px 40px;
+    }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px; margin-bottom: 48px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo img { height: 36px; border-radius: 8px; }
+    .footer-logo span { font-weight: 900; font-size: 18px; }
+    .footer-desc { color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .footer-col-title {
+      color: var(--text); font-weight: 700; font-size: 13px;
+      margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .footer-col a {
+      display: block; color: var(--muted); font-size: 13px;
+      margin-bottom: 10px; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding-top: 24px;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom span { color: var(--muted); font-size: 12px; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s ease forwards; }
+    .fade-up-2 { animation: fadeUp 0.7s 0.15s ease forwards; opacity: 0; }
+    .fade-up-3 { animation: fadeUp 0.7s 0.3s ease forwards; opacity: 0; }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .profile-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" />
+      <span>CoachBuddy</span>
+    </a>
+    <div class="nav-links">
+      <a href="#courses">Courses</a>
+      <a href="#how">How It Works</a>
+      <a href="#cta">Challenge 🏆</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank" class="btn btn-purple btn-sm">Start Free →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blobs">
+    <div class="blob" style="top:-10%;left:-5%;width:500px;height:500px;background:#a855f7;opacity:0.12;"></div>
+    <div class="blob" style="top:30%;right:-10%;width:400px;height:400px;background:#06b6d4;opacity:0.08;"></div>
+    <div class="blob" style="top:60%;left:20%;width:300px;height:300px;background:#ec4899;opacity:0.07;"></div>
+  </div>
+  <div class="inner">
+    <div style="margin-bottom:24px" class="fade-up">
+      <span class="tag" style="background:rgba(16,185,129,0.13);border:1px solid rgba(16,185,129,0.35);color:#10b981;">🏆 Free 7-Day Challenge — Join Now</span>
+    </div>
+    <h1 class="fade-up-2">
+      Stop scrolling.<br />
+      Start building <span class="grad-text-purple" id="word-rotate">games.</span>
+    </h1>
+    <p class="hero-sub fade-up-3">
+      CoachBuddy teaches teenagers to build real things — games, apps, tools — with an AI coach that never gives you the answer, but always helps you find it.
+    </p>
+    <div class="hero-btns fade-up-3">
+      <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank" class="btn btn-purple btn-lg">Start Learning Free →</a>
+      <a href="#cta" class="btn btn-outline btn-lg">See the 7-Day Challenge</a>
+    </div>
+    <p class="hero-note">No credit card. No jargon. Works in your browser.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-val">4</div><div class="stat-label">Courses</div></div>
+      <div class="stat"><div class="stat-val">AI</div><div class="stat-label">Coach 24/7</div></div>
+      <div class="stat"><div class="stat-val">7</div><div class="stat-label">Days to build</div></div>
+      <div class="stat"><div class="stat-val">Free</div><div class="stat-label">To start</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD -->
+<section id="build">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag" style="background:rgba(168,85,247,0.13);border:1px solid rgba(168,85,247,0.35);color:#a855f7;">WHAT YOU'LL BUILD</span>
+      <h2>Not exercises. <span class="grad-text-purple">Real things.</span></h2>
+      <p>Every CoachBuddy project is something you'd actually want to show someone.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card">
+        <span class="card-emoji">🎮</span>
+        <h3>Design Your Own Game</h3>
+        <p>Stop playing games someone else built. Learn to build platformers, puzzle games, quizzes, and clickers — then share them with your friends.</p>
+        <div class="card-accent" style="background:#a855f7;"></div>
+      </div>
+      <div class="card">
+        <span class="card-emoji">📱</span>
+        <h3>Level Up Your Content</h3>
+        <p>Build automation tools, link-in-bio pages, and custom web tools that make your content work harder. The big creators build their own systems.</p>
+        <div class="card-accent" style="background:#ec4899;"></div>
+      </div>
+      <div class="card">
+        <span class="card-emoji">🤖</span>
+        <h3>Build Your Own AI Tool</h3>
+        <p>Chatbots, quiz generators, idea machines — once you know JavaScript and a bit of API magic, you can build the AI tools you wish existed.</p>
+        <div class="card-accent" style="background:#06b6d4;"></div>
+      </div>
+      <div class="card">
+        <span class="card-emoji">💸</span>
+        <h3>Build Things That Make Money</h3>
+        <p>Apps, tools, websites, games — people pay for things that solve problems or entertain them. You could be the one building those things.</p>
+        <div class="card-accent" style="background:#10b981;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO FOR -->
+<section id="who">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag" style="background:rgba(6,182,212,0.13);border:1px solid rgba(6,182,212,0.35);color:#06b6d4;">WHO IT'S FOR</span>
+      <h2>Built for the ones who <span class="grad-text-cyan">don't fit in.</span></h2>
+    </div>
+    <div class="profile-tabs" id="profileTabs"></div>
+    <div class="profile-box" id="profileBox"></div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag" style="background:rgba(168,85,247,0.13);border:1px solid rgba(168,85,247,0.35);color:#a855f7;">THE COURSES</span>
+      <h2>Four courses. <span class="grad-text-purple">One philosophy.</span></h2>
+      <p>Plain English first. Real code second. Real project always.</p>
+    </div>
+    <div class="grid-4" id="coursesGrid"></div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank" class="btn btn-purple" style="font-size:16px;padding:16px 40px;">Browse All Courses →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag" style="background:rgba(6,182,212,0.13);border:1px solid rgba(6,182,212,0.35);color:#06b6d4;">HOW IT WORKS</span>
+      <h2>The method behind <span class="grad-text-cyan">every course.</span></h2>
+    </div>
+    <div class="grid-4">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Plain English first</h3>
+        <p>Every lesson starts with the idea in plain English. No jargon, no assumed knowledge. You understand the concept before you ever see a line of code.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" style="background:linear-gradient(135deg,#06b6d4,rgba(6,182,212,0.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">02</div>
+        <h3>Then you write it</h3>
+        <p>Short, purposeful code with a clear reason behind every line. You type it — not copy it. Your hands learn too.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" style="background:linear-gradient(135deg,#ec4899,rgba(236,72,153,0.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">03</div>
+        <h3>Build something real</h3>
+        <p>Every module has a project. Not a drill — something that works, something you can show people. Making it real is the whole point.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" style="background:linear-gradient(135deg,#10b981,rgba(16,185,129,0.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">04</div>
+        <h3>Coach is there when stuck</h3>
+        <p>Ask anything. The AI coach responds with a question that helps you figure it out yourself. Every time. No exceptions. That's how you actually learn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT DEMO -->
+<section id="demo">
+  <div class="demo-grid">
+    <div>
+      <span class="tag" style="background:rgba(168,85,247,0.13);border:1px solid rgba(168,85,247,0.35);color:#a855f7;">THE AI COACH</span>
+      <h2 style="font-size:clamp(28px,4vw,44px);font-weight:900;margin:20px 0;line-height:1.15;letter-spacing:-1px;">
+        The tutor that <span class="grad-text-purple">never does your homework.</span>
+      </h2>
+      <p style="color:var(--dim);font-size:16px;line-height:1.8;margin-bottom:32px;">
+        When you ask "what's the answer?" — the coach asks you a question back. Because that moment of figuring it out yourself is literally the learning.
+      </p>
+      <div class="demo-features">
+        <div class="demo-feat"><span>✓</span><span>Available at midnight when you're finally in the mood</span></div>
+        <div class="demo-feat"><span>✓</span><span>Patient, honest, never makes you feel stupid</span></div>
+        <div class="demo-feat"><span>✓</span><span>Gets harder as you get better — automatically</span></div>
+      </div>
+    </div>
+    <div class="chat-box">
+      <div class="chat-header">
+        <img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" />
+        <div>
+          <div class="chat-name">CoachBuddy AI</div>
+          <div class="chat-status"><div class="dot"></div><span class="chat-online">Online now</span></div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section id="stories">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="tag" style="background:rgba(236,72,153,0.13);border:1px solid rgba(236,72,153,0.35);color:#ec4899;">REAL STORIES</span>
+      <h2>The kids who needed <span class="grad-text-pink">a different door.</span></h2>
+    </div>
+    <div class="grid-3">
+      <div class="story-card">
+        <div class="story-author">
+          <div class="story-avatar" style="background:rgba(168,85,247,0.15);border:2px solid rgba(168,85,247,0.3);">👤</div>
+          <div><div class="story-name">Tom, 16</div><div class="story-tag" style="color:#a855f7;">Hated every tutor</div></div>
+        </div>
+        <p class="story-quote" style="border-left:3px solid rgba(168,85,247,0.4);">"He needed a teacher that wasn't a person. Something he could push back against without it taking it personally. Four hours on a Saturday, building something. His mum said he looked alive in a way she hadn't seen in a long time."</p>
+        <div class="story-result" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);color:#a855f7;">→ Built his first app in week 3.</div>
+      </div>
+      <div class="story-card">
+        <div class="story-author">
+          <div class="story-avatar" style="background:rgba(236,72,153,0.15);border:2px solid rgba(236,72,153,0.3);">👤</div>
+          <div><div class="story-name">Léa, 14</div><div class="story-tag" style="color:#ec4899;">9 hrs screen time daily</div></div>
+        </div>
+        <p class="story-quote" style="border-left:3px solid rgba(236,72,153,0.4);">"Someone showed her the other direction. Do you know how that game was made? A shrug. Six weeks later she had her own mini-game. The screen can go both ways — she figured that out herself."</p>
+        <div class="story-result" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.25);color:#ec4899;">→ Now builds half the time she scrolls.</div>
+      </div>
+      <div class="story-card">
+        <div class="story-author">
+          <div class="story-avatar" style="background:rgba(6,182,212,0.15);border:2px solid rgba(6,182,212,0.3);">👤</div>
+          <div><div class="story-name">Clara, 15</div><div class="story-tag" style="color:#06b6d4;">Couldn't write properly</div></div>
+        </div>
+        <p class="story-quote" style="border-left:3px solid rgba(6,182,212,0.4);">"She built a chatbot. To make it speak properly, she had to write properly. Every sentence she programmed had to be correct or the bot sounded stupid. The chatbot was a mirror she actually wanted to look into."</p>
+        <div class="story-result" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);color:#06b6d4;">→ School essays unrecognisable in 4 months.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="inner">
+    <div class="big-emoji">🏆</div>
+    <span class="tag" style="background:rgba(16,185,129,0.13);border:1px solid rgba(16,185,129,0.35);color:#10b981;">FREE — NO EXPERIENCE NEEDED</span>
+    <h2>Build your first app<br /><span class="grad-text-green">in 7 days.</span></h2>
+    <p>One email a day. 45 minutes. By Day 7 you'll have a real, working, shareable app — built entirely by you.</p>
+    <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank" class="btn btn-green" style="font-size:18px;padding:20px 52px;">Join the Challenge — Free →</a>
+    <div class="cta-notes">
+      <span>✅ Zero experience needed</span>
+      <span>✅ No credit card</span>
+      <span>✅ Win a full course</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" />
+          <span>CoachBuddy</span>
+        </div>
+        <p class="footer-desc">The AI coach that helps you think — without doing your thinking for you.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Courses</div>
+        <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank">JavaScript</a>
+        <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank">React</a>
+        <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank">Node.js</a>
+        <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank">Trading Markets</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Get Started</div>
+        <a href="#cta">7-Day Challenge (Free)</a>
+        <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank">Go to the App</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Our Promise</div>
+        <p style="color:var(--muted);font-size:13px;line-height:1.7;">We don't give answers. We ask better questions. That's the whole secret.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CoachBuddy · Lam Ai Software Solutions LLC</span>
+      <span>Built for students who learn differently. 🦉</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── NAV scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // ── Word rotator
+  const words = ['games.', 'apps.', 'tools.', 'filters.', 'websites.', 'chatbots.'];
+  let wi = 0;
+  const wr = document.getElementById('word-rotate');
+  setInterval(() => {
+    wr.style.opacity = '0';
+    setTimeout(() => {
+      wi = (wi + 1) % words.length;
+      wr.textContent = words[wi];
+      wr.style.opacity = '1';
+    }, 300);
+  }, 2200);
+
+  // ── Profile tabs
+  const profiles = [
+    { emoji: '🎮', label: 'The Gamer', color: '#a855f7', headline: 'You play for hours. Now build for hours.', body: "Every game you've ever loved was made by someone who started exactly where you are. Your taste in games is actually a design sense. CoachBuddy turns it into a skill.", cta: 'Start building your first game →' },
+    { emoji: '📱', label: 'The Creator', color: '#ec4899', headline: 'You know content. Now build the tools behind it.', body: "The biggest creators don't just post — they build systems, trackers, and tools that run their brand. Learn to do the same. JavaScript makes it possible.", cta: 'See what creators build →' },
+    { emoji: '😴', label: 'The Unmotivated', color: '#f59e0b', headline: 'School is boring. This might not be.', body: "Nobody told you that knowing things leads to making things, and making things leads to money and freedom. You thought studying was for grades. We'll show you what it's actually for.", cta: 'Find your finish line →' },
+    { emoji: '🏠', label: 'The Homeschooler', color: '#06b6d4', headline: 'A structured path. A real outcome.', body: 'Full curriculum, real projects, AI coaching whenever you need it. CoachBuddy fits around your schedule. No classroom. No judgement. Just progress at your pace.', cta: 'Explore the curriculum →' },
+    { emoji: '👨‍👩‍👧', label: 'The Parent', color: '#10b981', headline: 'Something that actually holds their attention.', body: "If your child has ever spent hours on a game, they have the focus. CoachBuddy just redirects it. No fights, no forcing — just a door worth walking through.", cta: 'See how it works →' },
+  ];
+  const features = ['Plain English before any code','Real projects from day one','AI coach available 24/7','Learn at your own pace','No boring exercises'];
+
+  function renderProfiles(active) {
+    const tabs = document.getElementById('profileTabs');
+    const box = document.getElementById('profileBox');
+    const p = profiles[active];
+    tabs.innerHTML = profiles.map((pr, i) => `
+      <button class="profile-tab ${i === active ? 'active' : ''}" style="${i === active ? `border-color:${pr.color};color:${pr.color};background:${pr.color}18;` : ''}" onclick="renderProfiles(${i})">
+        ${pr.emoji} ${pr.label}
+      </button>`).join('');
+    box.innerHTML = `
+      <div>
+        <span class="profile-emoji">${p.emoji}</span>
+        <h3>${p.headline}</h3>
+        <p>${p.body}</p>
+        <a href="https://elevate-u-ceda8d9f.base44.app" target="_blank" class="btn" style="background:linear-gradient(135deg,${p.color},${p.color}bb);font-size:14px;padding:12px 24px;">${p.cta}</a>
+      </div>
+      <div class="feature-list">
+        ${features.map(f => `<div class="feature-item"><span style="color:${p.color}">✓</span><span>${f}</span></div>`).join('')}
+      </div>`;
+  }
+  renderProfiles(0);
+
+  // ── Courses
+  const courses = [
+    { emoji: '🟨', tag: 'Start here', tagColor: '#f59e0b', title: 'JavaScript', topBar: 'linear-gradient(135deg,#f59e0b,#d97706)', priceColor: '#f59e0b', desc: 'The language of the internet. Build interactive pages, games, quizzes, and tools from your very first session.', modules: '16 modules · 3 packs', price: '$35 / pack', outcomes: ['Interactive web apps','Games & quizzes','Real JavaScript fundamentals'] },
+    { emoji: '⚛️', tag: 'Level up', tagColor: '#06b6d4', title: 'React', topBar: 'linear-gradient(135deg,#06b6d4,#0891b2)', priceColor: '#06b6d4', desc: 'The framework behind Instagram, Airbnb, and Netflix. Build full-featured apps that feel professional.', modules: '15 modules', price: '$75', outcomes: ['Full-featured web apps','Component architecture','Apps people can actually use'] },
+    { emoji: '🟩', tag: 'Go deeper', tagColor: '#10b981', title: 'Node.js', topBar: 'linear-gradient(135deg,#10b981,#059669)', priceColor: '#10b981', desc: 'Take your code off the browser. Build servers, handle databases, create APIs — the invisible backbone of the web.', modules: '15 modules', price: '$75', outcomes: ['Backend servers','Databases & APIs','Full-stack thinking'] },
+    { emoji: '📈', tag: 'Adults', tagColor: '#a855f7', title: 'Trading Markets', topBar: 'linear-gradient(135deg,#a855f7,#7c3aed)', priceColor: '#a855f7', desc: "How financial markets actually work — not the retail myths, but the institutional reality. For adults who want to understand what moves price.", modules: '14 modules', price: 'Coming soon', outcomes: ['Market structure & order flow','What drives price','Think like a professional'] },
+  ];
+  document.getElementById('coursesGrid').innerHTML = courses.map(c => `
+    <div class="course-card">
+      <div class="card-top-bar" style="background:${c.topBar};"></div>
+      <div class="course-top">
+        <span class="course-emoji">${c.emoji}</span>
+        <span class="tag" style="background:${c.tagColor}18;border:1px solid ${c.tagColor}44;color:${c.tagColor};">${c.tag}</span>
+      </div>
+      <div class="course-title">${c.title}</div>
+      <div class="course-desc">${c.desc}</div>
+      ${c.outcomes.map(o => `<div class="course-outcome"><span style="color:${c.priceColor}">→</span><span>${o}</span></div>`).join('')}
+      <div class="course-footer">
+        <span class="course-modules">${c.modules}</span>
+        <span class="course-price" style="color:${c.priceColor};">${c.price}</span>
+      </div>
+    </div>`).join('');
+
+  // ── Animated chat
+  const msgs = [
+    { who: 'student', text: "I don't get it. Can you just tell me the answer?" },
+    { who: 'coach',   text: "I could — but you'd forget it by tomorrow. In plain English, what do you think the function is supposed to do?" },
+    { who: 'student', text: "Um... take the number and make it bigger?" },
+    { who: 'coach',   text: "Exactly right. So what's the simplest way to make a number bigger in code?" },
+    { who: 'student', text: "Oh wait. Just add something to it?" },
+    { who: 'coach',   text: "You just figured it out. Now write it. 🙌" },
+  ];
+  const chatEl = document.getElementById('chatMessages');
+  let mi = 0;
+  function showNextMsg() {
+    if (mi >= msgs.length) { setTimeout(() => { chatEl.innerHTML = ''; mi = 0; showNextMsg(); }, 3000); return; }
+    const m = msgs[mi++];
+    const div = document.createElement('div');
+    div.className = `msg ${m.who}`;
+    div.innerHTML = `<div class="bubble ${m.who}">${m.text}</div>`;
+    chatEl.appendChild(div);
+    chatEl.scrollTop = chatEl.scrollHeight;
+    setTimeout(showNextMsg, 1600);
+  }
+  showNextMsg();
+</script>
+</body>
+</html>
