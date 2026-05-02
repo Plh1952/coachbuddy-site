@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — CoachBuddy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><div class="logo-icon">C</div><span>CoachBuddy</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="students.html">For Students</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app" class="nav-cta" target="_blank">Start Learning →</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section style="background:#f8f9fc;border-bottom:1px solid #e2e6f0;padding:60px 0 40px;">
+  <div class="container">
+    <span class="hero-tag">Educational Insights</span>
+    <h1 style="font-size:clamp(28px,4vw,48px);margin-top:12px;">The CoachBuddy Blog</h1>
+    <p style="font-size:18px;color:#5a6480;margin-top:12px;max-width:560px;">Practical insights for parents, students, and educators navigating the future of learning.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:start;">
+      <div>
+        <div id="blog-filters" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;"></div>
+        <div class="blog-list" id="blog-list"></div>
+        <div id="no-posts" style="display:none;padding:40px 0;text-align:center;color:#9aa3be;">No articles in this category yet.</div>
+      </div>
+      <div>
+        <div style="background:#f8f9fc;border:1px solid #e2e6f0;border-radius:12px;padding:28px;margin-bottom:24px;">
+          <h3 style="font-size:18px;margin-bottom:16px;">Categories</h3>
+          <div id="category-list"></div>
+        </div>
+        <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:28px;">
+          <h3 style="font-size:18px;margin-bottom:12px;">Have a question?</h3>
+          <p style="font-size:14px;color:#5a6480;margin-bottom:16px;">Can't find what you're looking for? Ask us directly.</p>
+          <a href="contact.html" class="btn btn-primary btn-sm" style="width:100%;display:block;text-align:center;">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand"><div class="logo-text">CoachBuddy</div><p>AI-powered education that teaches students to think — not just to memorise.</p></div>
+      <div class="footer-col"><h4>Courses</h4><a href="courses.html">JavaScript</a><a href="courses.html">React</a><a href="courses.html">Node.js</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Platform</h4><a href="https://elevate-u-ceda8d9f.base44.app" target="_blank">Login</a><a href="courses.html">Pricing</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 CoachBuddy — Lam Ai Software Solutions LLC</p></div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  links.style.flexDirection = 'column';
+  links.style.position = 'absolute';
+  links.style.top = '70px'; links.style.left = '0'; links.style.right = '0';
+  links.style.background = '#fff'; links.style.padding = '20px 24px';
+  links.style.borderBottom = '1px solid #e2e6f0';
+}
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+let allPosts = [];
+let activeCategory = 'All';
+
+fetch('data/blog.json')
+  .then(r => r.json())
+  .then(posts => {
+    allPosts = posts.filter(p => p.published);
+    const cats = ['All', ...new Set(allPosts.map(p => p.category))];
+
+    // Filters
+    const filterEl = document.getElementById('blog-filters');
+    const catEl = document.getElementById('category-list');
+    cats.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.textContent = cat;
+      btn.className = 'btn btn-sm btn-outline' + (cat === 'All' ? ' btn-primary' : '');
+      btn.style.cssText = 'font-family:Arial,sans-serif;';
+      btn.onclick = () => { activeCategory = cat; renderPosts(); renderFilters(cats); };
+      filterEl.appendChild(btn);
+
+      if (cat !== 'All') {
+        const count = allPosts.filter(p => p.category === cat).length;
+        catEl.innerHTML += `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e2e6f0;font-size:14px;font-family:Arial,sans-serif;">
+          <a href="#" onclick="activeCategory='${cat}';renderPosts();return false;" style="color:#5a6480;">${cat}</a>
+          <span style="color:#9aa3be;">${count}</span></div>`;
+      }
+    });
+    renderPosts();
+  });
+
+function renderFilters(cats) {
+  const btns = document.querySelectorAll('#blog-filters button');
+  btns.forEach((btn, i) => {
+    btn.className = 'btn btn-sm ' + (cats[i] === activeCategory ? 'btn-primary' : 'btn-outline');
+    btn.style.fontFamily = 'Arial,sans-serif';
+  });
+}
+
+function renderPosts() {
+  const list = document.getElementById('blog-list');
+  const noEl = document.getElementById('no-posts');
+  const filtered = activeCategory === 'All' ? allPosts : allPosts.filter(p => p.category === activeCategory);
+  if (!filtered.length) { list.innerHTML = ''; noEl.style.display = 'block'; return; }
+  noEl.style.display = 'none';
+  list.innerHTML = filtered.map(p => `
+    <div class="blog-item" onclick="location.href='blog-post.html?id=${p.id}'">
+      <div class="blog-item-left">
+        <span class="blog-cat">${p.category}</span>
+        <div>
+          <div class="blog-title">${p.title}</div>
+          <div style="font-size:13px;color:#9aa3be;margin-top:4px;font-family:Arial,sans-serif;">${p.excerpt}</div>
+        </div>
+      </div>
+      <span class="blog-date">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>
