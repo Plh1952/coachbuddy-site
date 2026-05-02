@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "title": "Why Your Child Should Learn to Code Before University",
+    "category": "Education",
+    "date": "2026-04-15",
+    "excerpt": "The job market is changing faster than school curricula. Here's why coding literacy is no longer optional — and how to start.",
+    "content": "<p>Every parent wants their child to be prepared for the future. But what does 'prepared' mean in 2026? The answer increasingly involves technology — not just using it, but understanding and building with it.</p><h2>The Hidden Skill Gap</h2><p>Most schools still teach coding as an optional extra. Yet in the real world, companies across every sector — from finance to healthcare to marketing — are desperate for people who can think computationally. A student who arrives at university with solid coding foundations doesn't just have a skill. They have a superpower.</p><h2>It Is Not About Becoming a Programmer</h2><p>This is the most common misconception parents have. Learning to code does not mean your child will spend their career writing software. It means they will understand how systems work, how to break problems into logical steps, and how to communicate with the technical teams that run every modern company.</p><blockquote>The illiteracy of the 21st century will not be those who cannot read and write, but those who cannot learn, unlearn, and relearn.</blockquote><h2>Where to Start</h2><p>The best time to start was yesterday. The second best time is today. Platforms like CoachBuddy offer structured, guided learning that meets students where they are — without the pressure of a classroom, and without the frustration of trying to learn alone from YouTube videos.</p>",
+    "published": true
+  },
+  {
+    "id": "2",
+    "title": "The Problem With Homework: Why Doing It For Them Destroys Learning",
+    "category": "Parenting",
+    "date": "2026-04-22",
+    "excerpt": "When a parent Googles their child's homework, everyone loses. The science of why struggle is essential to learning.",
+    "content": "<p>It is 9pm. Your child is struggling over a maths problem. You know the answer. You explain it. They copy it down. Everyone goes to bed. Nobody learned anything.</p><h2>The Neuroscience of Struggle</h2><p>Educational psychologists call it desirable difficulty. When students struggle with a problem — genuinely wrestle with it — the neural pathways that form are stronger and more permanent. The struggle IS the learning.</p><h2>What Good Coaching Actually Looks Like</h2><p>A good coach never gives you the answer. They ask you the right question to help you find it yourself. This is exactly the philosophy behind CoachBuddy.</p>",
+    "published": true
+  },
+  {
+    "id": "3",
+    "title": "From Minecraft to Machine Learning: How Gaming Builds Developer Mindsets",
+    "category": "Technology",
+    "date": "2026-04-29",
+    "excerpt": "The same curiosity that drives a 12-year-old to build worlds in Minecraft is the exact same curiosity that drives great engineers.",
+    "content": "<p>Parents often worry about their children spending too much time gaming. But there is a growing body of evidence that certain types of games develop exactly the kind of thinking skills that technical careers require.</p><h2>Systems Thinking</h2><p>When a child builds an automated farm in Minecraft, they are learning systems thinking — inputs, outputs, conditions, and loops. These are not metaphors for programming concepts. They ARE programming concepts, just dressed in pixels.</p>",
+    "published": true
+  }
+]
