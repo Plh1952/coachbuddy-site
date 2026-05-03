@@ -231,6 +231,99 @@
   </div>
 </section>
 
+
+<!-- 7-DAY CHALLENGE -->
+<section class="section" style="background:linear-gradient(160deg,#06090f 0%,#0a1628 100%);color:#e3f2fd;border-top:1px solid #1e2a3a;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;flex-wrap:wrap;">
+      <div>
+        <div style="display:inline-block;background:rgba(41,182,246,0.1);border:1px solid #29b6f640;border-radius:20px;padding:6px 16px;font-size:12px;color:#29b6f6;font-weight:700;letter-spacing:1px;margin-bottom:20px;">
+          FREE · 7 DAYS · NO EXPERIENCE NEEDED
+        </div>
+        <h2 style="font-size:clamp(26px,3vw,40px);color:#fff;margin-bottom:16px;line-height:1.2;">Build Your First App<br/>in 7 Days — Free</h2>
+        <p style="color:#90a4ae;font-size:16px;line-height:1.7;margin-bottom:20px;">One email a day. Step-by-step instructions. By Day 7 you'll have a real, working app you built yourself.</p>
+        <ul style="list-style:none;padding:0;margin:0 0 24px;color:#b0bec5;font-size:15px;">
+          <li style="margin-bottom:8px;">✅ Day 1 — Your first webpage with your name on it</li>
+          <li style="margin-bottom:8px;">✅ Day 3 — Your first interactive button (JavaScript!)</li>
+          <li style="margin-bottom:8px;">✅ Day 4 — A quiz that keeps score</li>
+          <li style="margin-bottom:8px;">✅ Day 7 — Submit your app. Win a full course.</li>
+        </ul>
+        <p style="color:#546e7a;font-size:13px;">🏆 Best entry wins a full CoachBuddy course worth up to $75 — free.</p>
+      </div>
+      <div>
+        <div style="background:#0d1f35;border:1px solid #1e3a5a;border-radius:16px;padding:36px;">
+          <h3 style="color:#29b6f6;margin:0 0 8px;font-size:20px;">Join the Challenge</h3>
+          <p style="color:#546e7a;font-size:14px;margin:0 0 24px;">Day 1 arrives in your inbox in minutes.</p>
+          <div id="challenge-form">
+            <div style="margin-bottom:14px;">
+              <input type="text" id="cb-name" placeholder="Your first name" style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid #1e3a5a;background:#06090f;color:#e3f2fd;font-size:15px;box-sizing:border-box;outline:none;" />
+            </div>
+            <div style="margin-bottom:20px;">
+              <input type="email" id="cb-email" placeholder="Your email address" style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid #1e3a5a;background:#06090f;color:#e3f2fd;font-size:15px;box-sizing:border-box;outline:none;" />
+            </div>
+            <button onclick="joinChallenge()" id="cb-btn" style="width:100%;background:linear-gradient(135deg,#29b6f6,#0288d1);color:#fff;padding:14px;border-radius:8px;border:none;font-size:16px;font-weight:700;cursor:pointer;">
+              Start the Challenge — It's Free →
+            </button>
+            <p id="cb-status" style="text-align:center;margin-top:12px;font-size:14px;display:none;"></p>
+          </div>
+          <p style="color:#263238;font-size:12px;text-align:center;margin-top:16px;margin-bottom:0;">No credit card. No trial. Just code.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+async function joinChallenge() {
+  const name = document.getElementById('cb-name').value.trim();
+  const email = document.getElementById('cb-email').value.trim();
+  const btn = document.getElementById('cb-btn');
+  const status = document.getElementById('cb-status');
+
+  if (!name || !email) {
+    status.style.display = 'block';
+    status.style.color = '#ef5350';
+    status.textContent = 'Please enter your name and email.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Signing you up...';
+
+  try {
+    const res = await fetch('https://api.base44.com/api/apps/69cacc25a709616966f062a1/entities/ChallengeSignup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': 'public' },
+      body: JSON.stringify({
+        name,
+        email,
+        signup_date: new Date().toISOString(),
+        current_day: 1,
+        completed: false,
+        last_email_sent: ''
+      })
+    });
+
+    if (res.ok) {
+      document.getElementById('challenge-form').innerHTML = \`
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:48px;margin-bottom:16px;">🎉</div>
+          <h3 style="color:#81c784;margin:0 0 8px;">You're in, \${name}!</h3>
+          <p style="color:#90a4ae;margin:0;font-size:15px;">Check your inbox — Day 1 is on its way.</p>
+        </div>\`;
+    } else {
+      throw new Error('Signup failed');
+    }
+  } catch(e) {
+    status.style.display = 'block';
+    status.style.color = '#ef5350';
+    status.textContent = 'Something went wrong. Please try again.';
+    btn.disabled = false;
+    btn.textContent = 'Start the Challenge — It's Free →';
+  }
+}
+</script>
+
 <!-- CTA -->
 <section class="section" style="background:linear-gradient(135deg,#1a2340,#2d3f7a);color:#fff;">
   <div class="container" style="text-align:center;">
