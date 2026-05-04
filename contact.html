@@ -126,15 +126,34 @@ window.addEventListener('scroll', () => {
 });
 
 function submitContact() {
-  const name = document.getElementById('cn-name').value.trim();
-  const email = document.getElementById('cn-email').value.trim();
-  const subject = document.getElementById('cn-subject').value.trim();
-  const message = document.getElementById('cn-message').value.trim();
+  const name = document.getElementById('c-name') ? document.getElementById('c-name').value.trim() : '';
+  const email = document.getElementById('c-email') ? document.getElementById('c-email').value.trim() : '';
+  const message = document.getElementById('c-message') ? document.getElementById('c-message').value.trim() : '';
+  const subject = document.getElementById('c-subject') ? document.getElementById('c-subject').value.trim() : 'Contact Form';
   const alertEl = document.getElementById('contact-alert');
-  if (!name || !email || !subject || !message) {
-    alertEl.innerHTML = '<div class="alert alert-error">Please fill in all required fields.</div>';
+  if (!name || !message) {
+    if (alertEl) alertEl.innerHTML = '<p style="color:red;font-size:14px;">Please fill in your name and message.</p>';
     return;
   }
+  if (alertEl) alertEl.innerHTML = '<p style="color:#2563eb;font-size:14px;">Sending...</p>';
+  fetch('https://69cacc25a709616966f062a1.base44.app/api/functions/sendCommentEmail', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, text: message, page: 'Contact Form — ' + subject })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      if (alertEl) alertEl.innerHTML = '<p style="color:#059669;font-size:14px;">✅ Message sent! Philippe will reply shortly.</p>';
+      if (document.getElementById('c-name')) document.getElementById('c-name').value = '';
+      if (document.getElementById('c-email')) document.getElementById('c-email').value = '';
+      if (document.getElementById('c-message')) document.getElementById('c-message').value = '';
+    } else {
+      if (alertEl) alertEl.innerHTML = '<p style="color:red;font-size:14px;">Something went wrong. Please try again.</p>';
+    }
+  })
+  .catch(() => { if (alertEl) alertEl.innerHTML = '<p style="color:red;font-size:14px;">Connection error. Please try again.</p>'; });
+}
   const msgs = JSON.parse(localStorage.getItem('cb_contact_messages') || '[]');
   msgs.push({ id: Date.now().toString(), name, email, type: document.getElementById('cn-type').value, subject, message, date: new Date().toISOString() });
   localStorage.setItem('cb_contact_messages', JSON.stringify(msgs));
