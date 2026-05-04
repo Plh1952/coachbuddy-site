@@ -388,8 +388,29 @@ if (allComments.length) {
 function submitCourseComment() {
   const name = document.getElementById('cc-name').value.trim();
   const text = document.getElementById('cc-text').value.trim();
+  const email = document.getElementById('cc-email').value.trim();
+  const course = document.getElementById('cc-course') ? document.getElementById('cc-course').value : 'General';
   const alertEl = document.getElementById('course-comment-alert');
-  if (!name || !text) { alertEl.innerHTML = '<div class="alert alert-error">Please fill in your name and message.</div>'; return; }
+  if (!name || !text) { alertEl.innerHTML = '<p style="color:red;font-size:14px;">Please fill in your name and message.</p>'; return; }
+  alertEl.innerHTML = '<p style="color:#2563eb;font-size:14px;">Sending...</p>';
+  fetch('https://69cacc25a709616966f062a1.base44.app/api/functions/sendCommentEmail', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, text, course, page: 'Courses — ' + course })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      alertEl.innerHTML = '<p style="color:#059669;font-size:14px;">✅ Thank you! Your message has been sent.</p>';
+      document.getElementById('cc-name').value = '';
+      document.getElementById('cc-email').value = '';
+      if (document.getElementById('cc-text')) document.getElementById('cc-text').value = '';
+    } else {
+      alertEl.innerHTML = '<p style="color:red;font-size:14px;">Something went wrong. Please try again.</p>';
+    }
+  })
+  .catch(() => { alertEl.innerHTML = '<p style="color:red;font-size:14px;">Connection error. Please try again.</p>'; });
+}
   const pending = JSON.parse(localStorage.getItem('cb_course_comments_pending') || '[]');
   pending.push({ id: Date.now().toString(), name, email: document.getElementById('cc-email').value, course: document.getElementById('cc-course').value, text, date: new Date().toISOString(), approved: false });
   localStorage.setItem('cb_course_comments_pending', JSON.stringify(pending));
