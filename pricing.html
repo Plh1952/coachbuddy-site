@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing & Plans — CoachBuddy</title>
+  <meta name="description" content="Choose your CoachBuddy plan. School subjects, coding courses, Code Lab. Life Skills and Entrepreneurship unlock free with qualifying purchases." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .order-section { background:#fff; border:2px solid #e2e6f0; border-radius:16px; padding:36px; box-shadow:0 4px 24px rgba(26,35,64,0.08); }
+    .product-row { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-radius:10px; border:1.5px solid #e2e6f0; margin-bottom:10px; cursor:pointer; transition:all 0.18s; user-select:none; }
+    .product-row:hover { border-color:#2563eb; background:#f0f4ff; }
+    .product-row.selected { border-color:#2563eb; background:#eff6ff; }
+    .product-row input[type=checkbox] { width:20px; height:20px; accent-color:#2563eb; cursor:pointer; flex-shrink:0; }
+    .product-row label { flex:1; margin:0 14px; cursor:pointer; font-family:Arial,sans-serif; font-size:15px; color:#1a2340; font-weight:500; }
+    .product-row .price-tag { font-weight:700; font-family:Arial,sans-serif; font-size:15px; color:#2563eb; white-space:nowrap; }
+    .section-header { font-size:13px; font-weight:700; font-family:Arial,sans-serif; text-transform:uppercase; letter-spacing:1px; color:#9aa3be; margin:24px 0 10px; }
+    .bonus-note { background:#fef9ec; border:1.5px solid #fbbf24; border-radius:10px; padding:14px 18px; font-size:14px; font-family:Arial,sans-serif; color:#92400e; margin-top:16px; }
+    .order-summary { background:#f8f9fc; border-radius:12px; padding:20px; margin-top:20px; }
+    .summary-row { display:flex; justify-content:space-between; font-size:14px; font-family:Arial,sans-serif; padding:5px 0; color:#5a6480; }
+    .summary-total { display:flex; justify-content:space-between; font-size:18px; font-family:Arial,sans-serif; font-weight:700; color:#1a2340; padding-top:12px; border-top:2px solid #e2e6f0; margin-top:8px; }
+    .subject-selector { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:10px; }
+    .subject-btn { border:1.5px solid #e2e6f0; border-radius:8px; padding:10px; text-align:center; cursor:pointer; font-family:Arial,sans-serif; font-size:14px; font-weight:600; color:#5a6480; transition:all 0.15s; background:#fff; }
+    .subject-btn:hover { border-color:#2563eb; color:#2563eb; }
+    .subject-btn.active { border-color:#2563eb; background:#eff6ff; color:#2563eb; }
+    #placeOrderBtn { width:100%; padding:18px; font-size:18px; font-weight:700; border:none; border-radius:10px; background:#2563eb; color:#fff; cursor:pointer; font-family:Arial,sans-serif; transition:background 0.2s; margin-top:20px; }
+    #placeOrderBtn:hover { background:#1d4ed8; }
+    #placeOrderBtn:disabled { background:#9aa3be; cursor:not-allowed; }
+    .trial-note { text-align:center; font-size:13px; font-family:Arial,sans-serif; color:#9aa3be; margin-top:10px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <div class="logo-icon"><img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" style="width:36px;height:36px;object-fit:contain;border-radius:8px;"></div>
+      <span>CoachBuddy</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="pricing.html" class="active">Pricing</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app/login" class="nav-cta" target="_blank">Log In →</a>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:linear-gradient(135deg,#f0f4ff,#fff);padding:60px 0 40px;border-bottom:1px solid #e2e6f0;text-align:center;">
+  <div class="container">
+    <span class="hero-tag">Transparent Pricing</span>
+    <h1 style="font-size:clamp(28px,4vw,46px);margin-bottom:16px;">Choose what you need. Pay only for that.</h1>
+    <p style="font-size:18px;max-width:580px;margin:0 auto;">Select one or more products below and place a single order. All prices are tax-inclusive.</p>
+  </div>
+</section>
+
+<!-- ORDER BUILDER -->
+<section class="section" style="background:#f8f9fc;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start;">
+
+      <!-- LEFT: Product selector -->
+      <div>
+        <h2 style="font-size:24px;margin-bottom:6px;">Build your order</h2>
+        <p style="font-size:15px;margin-bottom:28px;">Tick everything you want, then click Place Order. You'll be taken to a secure checkout.</p>
+
+        <!-- SCHOOL SUBJECTS -->
+        <div class="section-header">📚 School Subjects — Monthly Subscription</div>
+        <p style="font-size:14px;color:#5a6480;font-family:Arial,sans-serif;margin-bottom:12px;">Choose how many subjects your child needs:</p>
+        <div class="subject-selector">
+          <div class="subject-btn" data-subjects="1" data-price="17" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/fb5e3962-b879-46f9-b080-29cf1e8437b5" onclick="selectSubjects(this)">1 Subject<br><strong>$17/mo</strong></div>
+          <div class="subject-btn" data-subjects="2" data-price="27" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/e9f88b81-84e6-4032-9803-fd0dbef33594" onclick="selectSubjects(this)">2 Subjects<br><strong>$27/mo</strong></div>
+          <div class="subject-btn active" data-subjects="3" data-price="37" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f" onclick="selectSubjects(this)">3 Subjects ⭐<br><strong>$37/mo</strong></div>
+          <div class="subject-btn" data-subjects="4" data-price="45" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/ee9ba735-b77e-4a9c-9d03-199f5fb6cb04" onclick="selectSubjects(this)">4 Subjects<br><strong>$45/mo</strong></div>
+          <div class="subject-btn" data-subjects="5" data-price="51" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/240286c6-7d30-41be-97aa-82be39c3b469" onclick="selectSubjects(this)">5 Subjects<br><strong>$51/mo</strong></div>
+          <div class="subject-btn" data-subjects="6" data-price="55" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/30015287-59a2-4e88-97f9-d130a187f784" onclick="selectSubjects(this)">6 Subjects<br><strong>$55/mo</strong></div>
+        </div>
+        <div class="product-row" id="subjectsRow">
+          <input type="checkbox" id="chk_subjects" onchange="toggleProduct('subjects')">
+          <label for="chk_subjects">School Subjects Tutoring — <span id="subjectsLabel">3 subjects</span></label>
+          <span class="price-tag" id="subjectsPrice">$37/mo</span>
+        </div>
+
+        <!-- JAVASCRIPT -->
+        <div class="section-header">⚡ JavaScript Course</div>
+        <div class="product-row" onclick="toggleCheck('chk_js_full')">
+          <input type="checkbox" id="chk_js_full" onchange="updateSummary()">
+          <label for="chk_js_full">Complete JavaScript Course — all 3 parts (best value)</label>
+          <span class="price-tag">$99</span>
+        </div>
+        <div style="font-size:13px;color:#9aa3be;font-family:Arial,sans-serif;margin:-4px 0 8px 52px;">Or buy individual parts:</div>
+        <div class="product-row" onclick="toggleCheck('chk_js1')">
+          <input type="checkbox" id="chk_js1" onchange="updateSummary()">
+          <label for="chk_js1">JavaScript Part 1 — Modules 1–5</label>
+          <span class="price-tag">$40</span>
+        </div>
+        <div class="product-row" onclick="toggleCheck('chk_js2')">
+          <input type="checkbox" id="chk_js2" onchange="updateSummary()">
+          <label for="chk_js2">JavaScript Part 2 — Modules 6–9</label>
+          <span class="price-tag">$40</span>
+        </div>
+        <div class="product-row" onclick="toggleCheck('chk_js3')">
+          <input type="checkbox" id="chk_js3" onchange="updateSummary()">
+          <label for="chk_js3">JavaScript Part 3 — Modules 10–16</label>
+          <span class="price-tag">$40</span>
+        </div>
+
+        <!-- ADVANCED COURSES -->
+        <div class="section-header">🚀 Advanced Coding Courses — One-Time Purchase</div>
+        <div class="product-row" onclick="toggleCheck('chk_react')">
+          <input type="checkbox" id="chk_react" onchange="updateSummary()">
+          <label for="chk_react">React — Modern front-end development</label>
+          <span class="price-tag">$86</span>
+        </div>
+        <div class="product-row" onclick="toggleCheck('chk_node')">
+          <input type="checkbox" id="chk_node" onchange="updateSummary()">
+          <label for="chk_node">Node.js — Server-side JavaScript</label>
+          <span class="price-tag">$86</span>
+        </div>
+        <div class="product-row" onclick="toggleCheck('chk_fullstack')">
+          <input type="checkbox" id="chk_fullstack" onchange="updateSummary()">
+          <label for="chk_fullstack">Full-Stack Integration</label>
+          <span class="price-tag">$28</span>
+        </div>
+        <div class="product-row" onclick="toggleCheck('chk_devops')">
+          <input type="checkbox" id="chk_devops" onchange="updateSummary()">
+          <label for="chk_devops">DevOps & Deployment</label>
+          <span class="price-tag">$28</span>
+        </div>
+        <div class="product-row" onclick="toggleCheck('chk_pro')">
+          <input type="checkbox" id="chk_pro" onchange="updateSummary()">
+          <label for="chk_pro">Professional Skills</label>
+          <span class="price-tag">$28</span>
+        </div>
+
+        <!-- CODE LAB -->
+        <div class="section-header">⌨️ Code Lab — Monthly Subscription</div>
+        <div class="product-row" onclick="toggleCheck('chk_codelab')">
+          <input type="checkbox" id="chk_codelab" onchange="updateSummary()">
+          <label for="chk_codelab">Code Lab — Live editor + AI coach (10+ languages)</label>
+          <span class="price-tag">$21/mo</span>
+        </div>
+
+        <!-- BONUS NOTE -->
+        <div class="bonus-note" id="bonusNote" style="display:none;">
+          🎁 <strong>Your order qualifies for free bonuses!</strong> Life Skills (21 modules) and Entrepreneurship will be automatically unlocked in your account after purchase.
+        </div>
+        <div class="bonus-note" style="border-color:#e2e6f0;background:#f8f9fc;color:#5a6480;margin-top:10px;">
+          ℹ️ <strong>Life Skills &amp; Entrepreneurship unlock free</strong> when you purchase a minimum of 3 school subjects OR any coding course.
+        </div>
+      </div>
+
+      <!-- RIGHT: Order summary + CTA -->
+      <div style="position:sticky;top:90px;">
+        <div class="order-section">
+          <h3 style="font-size:20px;margin-bottom:4px;">Your Order</h3>
+          <p style="font-size:14px;color:#9aa3be;font-family:Arial,sans-serif;margin-bottom:16px;">Select products on the left</p>
+
+          <div class="order-summary">
+            <div id="summaryItems" style="min-height:40px;">
+              <div style="font-size:14px;color:#9aa3be;font-family:Arial,sans-serif;text-align:center;padding:10px 0;">No products selected yet</div>
+            </div>
+            <div class="summary-total">
+              <span>Total</span>
+              <span id="totalPrice">$0</span>
+            </div>
+          </div>
+
+          <div id="bonusUnlocked" style="display:none;background:#ecfdf5;border:1.5px solid #059669;border-radius:8px;padding:12px 16px;margin-top:16px;font-size:13px;font-family:Arial,sans-serif;color:#065f46;">
+            ✅ <strong>Free bonuses included:</strong> Life Skills + Entrepreneurship will unlock automatically after purchase.
+          </div>
+
+          <button id="placeOrderBtn" disabled onclick="placeOrder()">Place Order →</button>
+          <div class="trial-note">All prices tax-inclusive · Secure checkout via Lemon Squeezy</div>
+
+          <div style="margin-top:24px;padding-top:20px;border-top:1px solid #e2e6f0;text-align:center;">
+            <p style="font-size:13px;color:#9aa3be;font-family:Arial,sans-serif;margin-bottom:10px;">Already have an account?</p>
+            <a href="https://elevate-u-ceda8d9f.base44.app/login" class="btn btn-outline btn-sm" target="_blank" style="width:100%;display:block;">Log In to Dashboard →</a>
+          </div>
+        </div>
+
+        <!-- What's included box -->
+        <div style="background:#fff;border:1px solid #e2e6f0;border-radius:12px;padding:20px;margin-top:20px;">
+          <div style="font-size:13px;font-weight:700;font-family:Arial,sans-serif;color:#9aa3be;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">All plans include</div>
+          <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;font-family:Arial,sans-serif;color:#5a6480;">
+            <div>✓ AI coach available 24/7</div>
+            <div>✓ Adapts to your country's syllabus</div>
+            <div>✓ Identifies student level automatically</div>
+            <div>✓ No homework done for you</div>
+            <div>✓ Progress tracking</div>
+            <div>✓ Cancel anytime (subscriptions)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--navy);color:rgba(255,255,255,0.6);padding:40px 0 28px;">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" style="width:28px;height:28px;border-radius:6px;">
+        <span style="color:#fff;font-weight:700;font-family:Georgia,serif;">CoachBuddy</span>
+      </div>
+      <div style="display:flex;gap:24px;font-size:14px;flex-wrap:wrap;">
+        <a href="index.html" style="color:rgba(255,255,255,0.6);">Home</a>
+        <a href="about.html" style="color:rgba(255,255,255,0.6);">About</a>
+        <a href="blog.html" style="color:rgba(255,255,255,0.6);">Blog</a>
+        <a href="contact.html" style="color:rgba(255,255,255,0.6);">Contact</a>
+      </div>
+      <div style="font-size:13px;">© 2026 Lam Ai Software Solutions LLC</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Product definitions
+const products = {
+  subjects:   { label: 'School Subjects', price: 37, type: 'monthly', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f' },
+  chk_js_full:{ label: 'Complete JavaScript Course', price: 99, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce' },
+  chk_js1:    { label: 'JavaScript Part 1', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58' },
+  chk_js2:    { label: 'JavaScript Part 2', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc' },
+  chk_js3:    { label: 'JavaScript Part 3', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/ad6df103-5215-4527-85a1-74bfa358a87e' },
+  chk_react:  { label: 'React', price: 86, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/f4633f20-5dfa-479c-8ea0-bd90c7a73b17' },
+  chk_node:   { label: 'Node.js', price: 86, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/18684d67-d223-4a8d-b7b0-0327fdb4c83c' },
+  chk_fullstack:{ label: 'Full-Stack Integration', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/08f92d60-027d-4afa-a4de-5f01b220d1b9' },
+  chk_devops: { label: 'DevOps & Deployment', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/8f2ea19f-cda9-4a9d-ad5c-0587565fa7ca' },
+  chk_pro:    { label: 'Professional Skills', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/3dc25a2f-5839-4609-b8ad-6366a6baaec3' },
+  chk_codelab:{ label: 'Code Lab', price: 21, type: 'monthly', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/e7a23d27-91f4-4008-8f14-a2b679f9e9b4' },
+};
+
+let selectedSubjectData = { subjects: 3, price: 37, url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f' };
+
+function selectSubjects(el) {
+  document.querySelectorAll('.subject-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  const n = el.dataset.subjects;
+  const p = el.dataset.price;
+  const u = el.dataset.url;
+  selectedSubjectData = { subjects: parseInt(n), price: parseInt(p), url: u };
+  products.subjects.price = parseInt(p);
+  products.subjects.url = u;
+  products.subjects.label = 'School Subjects (' + n + ' subject' + (n > 1 ? 's' : '') + ')';
+  document.getElementById('subjectsLabel').textContent = n + ' subject' + (n > 1 ? 's' : '');
+  document.getElementById('subjectsPrice').textContent = '$' + p + '/mo';
+  updateSummary();
+}
+
+function toggleProduct(id) {
+  const chk = document.getElementById('chk_' + id);
+  chk.checked = !chk.checked;
+  updateSummary();
+}
+
+function toggleCheck(id) {
+  const chk = document.getElementById(id);
+  chk.checked = !chk.checked;
+  updateSummary();
+}
+
+function qualifiesForBonus() {
+  const subjectsChecked = document.getElementById('chk_subjects').checked && selectedSubjectData.subjects >= 3;
+  const codingChecked = ['chk_js_full','chk_js1','chk_js2','chk_js3','chk_react','chk_node','chk_fullstack','chk_devops','chk_pro']
+    .some(id => document.getElementById(id).checked);
+  return subjectsChecked || codingChecked;
+}
+
+function updateSummary() {
+  const items = [];
+  let total = 0;
+  let hasMonthly = false;
+  let hasOneTime = false;
+
+  // subjects
+  if (document.getElementById('chk_subjects').checked) {
+    items.push({ label: products.subjects.label, price: products.subjects.price, type: products.subjects.type });
+    total += products.subjects.price;
+    hasMonthly = true;
+  }
+
+  // all other products
+  Object.keys(products).forEach(k => {
+    if (k === 'subjects') return;
+    const chk = document.getElementById(k);
+    if (chk && chk.checked) {
+      items.push({ label: products[k].label, price: products[k].price, type: products[k].type });
+      total += products[k].price;
+      if (products[k].type === 'monthly') hasMonthly = true;
+      else hasOneTime = true;
+    }
+  });
+
+  // Summary items
+  const container = document.getElementById('summaryItems');
+  if (items.length === 0) {
+    container.innerHTML = '<div style="font-size:14px;color:#9aa3be;font-family:Arial,sans-serif;text-align:center;padding:10px 0;">No products selected yet</div>';
+  } else {
+    container.innerHTML = items.map(i =>
+      '<div class="summary-row"><span>' + i.label + '</span><span style="font-weight:600;color:#1a2340;">$' + i.price + (i.type==='monthly'?'/mo':'') + '</span></div>'
+    ).join('');
+  }
+
+  // Total label
+  let totalLabel = '$' + total;
+  if (hasMonthly && hasOneTime) totalLabel = '$' + total + ' (incl. one-time + monthly)';
+  else if (hasMonthly) totalLabel = '$' + total + '/mo';
+  document.getElementById('totalPrice').textContent = totalLabel;
+
+  // Bonus
+  const bonus = qualifiesForBonus();
+  document.getElementById('bonusNote').style.display = bonus ? 'block' : 'none';
+  document.getElementById('bonusUnlocked').style.display = bonus ? 'block' : 'none';
+
+  // Button
+  const btn = document.getElementById('placeOrderBtn');
+  btn.disabled = items.length === 0;
+  btn.textContent = items.length === 0 ? 'Select a product above' : 'Place Order (' + items.length + ' item' + (items.length > 1 ? 's' : '') + ') →';
+}
+
+function placeOrder() {
+  const selected = [];
+  if (document.getElementById('chk_subjects').checked) selected.push(products.subjects.url);
+  Object.keys(products).forEach(k => {
+    if (k === 'subjects') return;
+    const chk = document.getElementById(k);
+    if (chk && chk.checked) selected.push(products[k].url);
+  });
+
+  if (selected.length === 1) {
+    window.open(selected[0], '_blank');
+  } else if (selected.length > 1) {
+    // Open each checkout in sequence with a note
+    alert('You selected ' + selected.length + ' products. Each will open in a separate checkout tab. Complete each one to activate your access.');
+    selected.forEach((url, i) => setTimeout(() => window.open(url, '_blank'), i * 800));
+  }
+}
+
+// Hamburger
+document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+</script>
+</body>
+</html>
