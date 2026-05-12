@@ -80,68 +80,68 @@
           <div class="subject-btn" data-subjects="5" data-price="51" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/240286c6-7d30-41be-97aa-82be39c3b469" onclick="selectSubjects(this)">5 Subjects<br><strong>$51/mo</strong></div>
           <div class="subject-btn" data-subjects="6" data-price="55" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/30015287-59a2-4e88-97f9-d130a187f784" onclick="selectSubjects(this)">6 Subjects<br><strong>$55/mo</strong></div>
         </div>
-        <div class="product-row" id="subjectsRow">
-          <input type="checkbox" id="chk_subjects" onchange="toggleProduct('subjects')">
+        <div class="product-row" id="subjectsRow" onclick="toggleRow('chk_subjects')">
+          <input type="checkbox" id="chk_subjects">
           <label for="chk_subjects">School Subjects Tutoring — <span id="subjectsLabel">3 subjects</span></label>
           <span class="price-tag" id="subjectsPrice">$37/mo</span>
         </div>
 
         <!-- JAVASCRIPT -->
         <div class="section-header">⚡ JavaScript Course</div>
-        <div class="product-row" onclick="toggleCheck('chk_js_full')">
-          <input type="checkbox" id="chk_js_full" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_js_full\')">
+          <input type="checkbox" id="chk_js_full">
           <label for="chk_js_full">Complete JavaScript Course — all 3 parts (best value)</label>
           <span class="price-tag">$99</span>
         </div>
         <div style="font-size:13px;color:#9aa3be;font-family:Arial,sans-serif;margin:-4px 0 8px 52px;">Or buy individual parts:</div>
-        <div class="product-row" onclick="toggleCheck('chk_js1')">
-          <input type="checkbox" id="chk_js1" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_js1\')">
+          <input type="checkbox" id="chk_js1">
           <label for="chk_js1">JavaScript Part 1 — Modules 1–5</label>
           <span class="price-tag">$40</span>
         </div>
-        <div class="product-row" onclick="toggleCheck('chk_js2')">
-          <input type="checkbox" id="chk_js2" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_js2\')">
+          <input type="checkbox" id="chk_js2">
           <label for="chk_js2">JavaScript Part 2 — Modules 6–9</label>
           <span class="price-tag">$40</span>
         </div>
-        <div class="product-row" onclick="toggleCheck('chk_js3')">
-          <input type="checkbox" id="chk_js3" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_js3\')">
+          <input type="checkbox" id="chk_js3">
           <label for="chk_js3">JavaScript Part 3 — Modules 10–16</label>
           <span class="price-tag">$40</span>
         </div>
 
         <!-- ADVANCED COURSES -->
         <div class="section-header">🚀 Advanced Coding Courses — One-Time Purchase</div>
-        <div class="product-row" onclick="toggleCheck('chk_react')">
-          <input type="checkbox" id="chk_react" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_react\')">
+          <input type="checkbox" id="chk_react">
           <label for="chk_react">React — Modern front-end development</label>
           <span class="price-tag">$86</span>
         </div>
-        <div class="product-row" onclick="toggleCheck('chk_node')">
-          <input type="checkbox" id="chk_node" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_node\')">
+          <input type="checkbox" id="chk_node">
           <label for="chk_node">Node.js — Server-side JavaScript</label>
           <span class="price-tag">$86</span>
         </div>
-        <div class="product-row" onclick="toggleCheck('chk_fullstack')">
-          <input type="checkbox" id="chk_fullstack" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_fullstack\')">
+          <input type="checkbox" id="chk_fullstack">
           <label for="chk_fullstack">Full-Stack Integration</label>
           <span class="price-tag">$28</span>
         </div>
-        <div class="product-row" onclick="toggleCheck('chk_devops')">
-          <input type="checkbox" id="chk_devops" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_devops\')">
+          <input type="checkbox" id="chk_devops">
           <label for="chk_devops">DevOps & Deployment</label>
           <span class="price-tag">$28</span>
         </div>
-        <div class="product-row" onclick="toggleCheck('chk_pro')">
-          <input type="checkbox" id="chk_pro" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_pro\')">
+          <input type="checkbox" id="chk_pro">
           <label for="chk_pro">Professional Skills</label>
           <span class="price-tag">$28</span>
         </div>
 
         <!-- CODE LAB -->
         <div class="section-header">⌨️ Code Lab — Monthly Subscription</div>
-        <div class="product-row" onclick="toggleCheck('chk_codelab')">
-          <input type="checkbox" id="chk_codelab" onchange="updateSummary()">
+        <div class="product-row" onclick="toggleRow(\'chk_codelab\')">
+          <input type="checkbox" id="chk_codelab">
           <label for="chk_codelab">Code Lab — Live editor + AI coach (10+ languages)</label>
           <span class="price-tag">$21/mo</span>
         </div>
@@ -220,132 +220,138 @@
   </div>
 </footer>
 
+
 <script>
-// Product definitions
+// ── Product definitions ──────────────────────────────────────────────────────
 const products = {
-  subjects:   { label: 'School Subjects', price: 37, type: 'monthly', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f' },
-  chk_js_full:{ label: 'Complete JavaScript Course', price: 99, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce' },
-  chk_js1:    { label: 'JavaScript Part 1', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58' },
-  chk_js2:    { label: 'JavaScript Part 2', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc' },
-  chk_js3:    { label: 'JavaScript Part 3', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/ad6df103-5215-4527-85a1-74bfa358a87e' },
-  chk_react:  { label: 'React', price: 86, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/f4633f20-5dfa-479c-8ea0-bd90c7a73b17' },
-  chk_node:   { label: 'Node.js', price: 86, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/18684d67-d223-4a8d-b7b0-0327fdb4c83c' },
+  subjects:     { label: 'School Subjects', price: 37, type: 'monthly',  url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f' },
+  chk_js_full:  { label: 'Complete JavaScript Course', price: 99, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce' },
+  chk_js1:      { label: 'JavaScript Part 1', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58' },
+  chk_js2:      { label: 'JavaScript Part 2', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc' },
+  chk_js3:      { label: 'JavaScript Part 3', price: 40, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/ad6df103-5215-4527-85a1-74bfa358a87e' },
+  chk_react:    { label: 'React', price: 86, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/f4633f20-5dfa-479c-8ea0-bd90c7a73b17' },
+  chk_node:     { label: 'Node.js', price: 86, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/18684d67-d223-4a8d-b7b0-0327fdb4c83c' },
   chk_fullstack:{ label: 'Full-Stack Integration', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/08f92d60-027d-4afa-a4de-5f01b220d1b9' },
-  chk_devops: { label: 'DevOps & Deployment', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/8f2ea19f-cda9-4a9d-ad5c-0587565fa7ca' },
-  chk_pro:    { label: 'Professional Skills', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/3dc25a2f-5839-4609-b8ad-6366a6baaec3' },
-  chk_codelab:{ label: 'Code Lab', price: 21, type: 'monthly', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/e7a23d27-91f4-4008-8f14-a2b679f9e9b4' },
+  chk_devops:   { label: 'DevOps & Deployment', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/8f2ea19f-cda9-4a9d-ad5c-0587565fa7ca' },
+  chk_pro:      { label: 'Professional Skills', price: 28, type: 'one-time', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/3dc25a2f-5839-4609-b8ad-6366a6baaec3' },
+  chk_codelab:  { label: 'Code Lab', price: 21, type: 'monthly', url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/e7a23d27-91f4-4008-8f14-a2b679f9e9b4' },
 };
 
-let selectedSubjectData = { subjects: 3, price: 37, url: 'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f' };
-
+// ── Subject tier selector ────────────────────────────────────────────────────
 function selectSubjects(el) {
   document.querySelectorAll('.subject-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
-  const n = el.dataset.subjects;
-  const p = el.dataset.price;
-  const u = el.dataset.url;
-  selectedSubjectData = { subjects: parseInt(n), price: parseInt(p), url: u };
-  products.subjects.price = parseInt(p);
-  products.subjects.url = u;
+  const n    = parseInt(el.dataset.subjects);
+  const p    = parseInt(el.dataset.price);
+  const u    = el.dataset.url;
+  products.subjects.price = p;
+  products.subjects.url   = u;
   products.subjects.label = 'School Subjects (' + n + ' subject' + (n > 1 ? 's' : '') + ')';
   document.getElementById('subjectsLabel').textContent = n + ' subject' + (n > 1 ? 's' : '');
   document.getElementById('subjectsPrice').textContent = '$' + p + '/mo';
+  // If subjects row is already ticked, refresh total
   updateSummary();
 }
 
-function toggleProduct(id) {
-  const chk = document.getElementById('chk_' + id);
+// ── Toggle a product row (click anywhere on the row) ────────────────────────
+function toggleRow(checkboxId) {
+  const chk = document.getElementById(checkboxId);
   chk.checked = !chk.checked;
+  const row = chk.closest('.product-row');
+  if (row) row.classList.toggle('selected', chk.checked);
   updateSummary();
 }
 
-function toggleCheck(id) {
-  const chk = document.getElementById(id);
-  chk.checked = !chk.checked;
-  updateSummary();
-}
-
-function qualifiesForBonus() {
-  const subjectsChecked = document.getElementById('chk_subjects').checked && selectedSubjectData.subjects >= 3;
-  const codingChecked = ['chk_js_full','chk_js1','chk_js2','chk_js3','chk_react','chk_node','chk_fullstack','chk_devops','chk_pro']
-    .some(id => document.getElementById(id).checked);
-  return subjectsChecked || codingChecked;
-}
-
+// ── Recalculate and render the order summary ─────────────────────────────────
 function updateSummary() {
   const items = [];
   let total = 0;
-  let hasMonthly = false;
-  let hasOneTime = false;
+  let hasMonthly  = false;
+  let hasOneTime  = false;
 
-  // subjects
-  if (document.getElementById('chk_subjects').checked) {
-    items.push({ label: products.subjects.label, price: products.subjects.price, type: products.subjects.type });
+  // School subjects
+  const subChk = document.getElementById('chk_subjects');
+  if (subChk && subChk.checked) {
+    items.push({ label: products.subjects.label, price: products.subjects.price, type: 'monthly' });
     total += products.subjects.price;
     hasMonthly = true;
   }
 
-  // all other products
-  Object.keys(products).forEach(k => {
-    if (k === 'subjects') return;
-    const chk = document.getElementById(k);
+  // All other products
+  ['chk_js_full','chk_js1','chk_js2','chk_js3','chk_react','chk_node',
+   'chk_fullstack','chk_devops','chk_pro','chk_codelab'].forEach(function(id) {
+    const chk = document.getElementById(id);
     if (chk && chk.checked) {
-      items.push({ label: products[k].label, price: products[k].price, type: products[k].type });
-      total += products[k].price;
-      if (products[k].type === 'monthly') hasMonthly = true;
-      else hasOneTime = true;
+      items.push({ label: products[id].label, price: products[id].price, type: products[id].type });
+      total += products[id].price;
+      if (products[id].type === 'monthly') hasMonthly = true; else hasOneTime = true;
     }
   });
 
-  // Summary items
+  // Render summary items
   const container = document.getElementById('summaryItems');
   if (items.length === 0) {
     container.innerHTML = '<div style="font-size:14px;color:#9aa3be;font-family:Arial,sans-serif;text-align:center;padding:10px 0;">No products selected yet</div>';
   } else {
-    container.innerHTML = items.map(i =>
-      '<div class="summary-row"><span>' + i.label + '</span><span style="font-weight:600;color:#1a2340;">$' + i.price + (i.type==='monthly'?'/mo':'') + '</span></div>'
-    ).join('');
+    container.innerHTML = items.map(function(i) {
+      return '<div class="summary-row"><span>' + i.label + '</span><span style="font-weight:600;color:#1a2340;">$' + i.price + (i.type === 'monthly' ? '/mo' : '') + '</span></div>';
+    }).join('');
   }
 
-  // Total label
-  let totalLabel = '$' + total;
-  if (hasMonthly && hasOneTime) totalLabel = '$' + total + ' (incl. one-time + monthly)';
+  // Render total
+  var totalLabel = '$' + total;
+  if (hasMonthly && hasOneTime) totalLabel = '$' + total + ' (one-time) + monthly';
   else if (hasMonthly) totalLabel = '$' + total + '/mo';
   document.getElementById('totalPrice').textContent = totalLabel;
 
-  // Bonus
-  const bonus = qualifiesForBonus();
-  document.getElementById('bonusNote').style.display = bonus ? 'block' : 'none';
+  // Bonus banner
+  var bonus = qualifiesForBonus();
+  document.getElementById('bonusNote').style.display    = bonus ? 'block' : 'none';
   document.getElementById('bonusUnlocked').style.display = bonus ? 'block' : 'none';
 
-  // Button
-  const btn = document.getElementById('placeOrderBtn');
-  btn.disabled = items.length === 0;
-  btn.textContent = items.length === 0 ? 'Select a product above' : 'Place Order (' + items.length + ' item' + (items.length > 1 ? 's' : '') + ') →';
+  // Place Order button
+  var btn = document.getElementById('placeOrderBtn');
+  btn.disabled = (items.length === 0);
+  btn.textContent = items.length === 0
+    ? 'Select a product above'
+    : 'Place Order (' + items.length + ' item' + (items.length > 1 ? 's' : '') + ') \u2192';
 }
 
-function placeOrder() {
-  const selected = [];
-  if (document.getElementById('chk_subjects').checked) selected.push(products.subjects.url);
-  Object.keys(products).forEach(k => {
-    if (k === 'subjects') return;
-    const chk = document.getElementById(k);
-    if (chk && chk.checked) selected.push(products[k].url);
-  });
+// ── Bonus unlock logic ───────────────────────────────────────────────────────
+function qualifiesForBonus() {
+  var subChk = document.getElementById('chk_subjects');
+  var subjectsTier = parseInt(document.querySelector('.subject-btn.active')?.dataset.subjects || '3');
+  if (subChk && subChk.checked && subjectsTier >= 3) return true;
+  var codingIds = ['chk_js_full','chk_js1','chk_js2','chk_js3','chk_react','chk_node','chk_fullstack','chk_devops','chk_pro'];
+  return codingIds.some(function(id) { var c = document.getElementById(id); return c && c.checked; });
+}
 
-  if (selected.length === 1) {
-    window.open(selected[0], '_blank');
-  } else if (selected.length > 1) {
-    // Open each checkout in sequence with a note
-    alert('You selected ' + selected.length + ' products. Each will open in a separate checkout tab. Complete each one to activate your access.');
-    selected.forEach((url, i) => setTimeout(() => window.open(url, '_blank'), i * 800));
+// ── Place Order ──────────────────────────────────────────────────────────────
+function placeOrder() {
+  var urls = [];
+  var subChk = document.getElementById('chk_subjects');
+  if (subChk && subChk.checked) urls.push(products.subjects.url);
+  ['chk_js_full','chk_js1','chk_js2','chk_js3','chk_react','chk_node',
+   'chk_fullstack','chk_devops','chk_pro','chk_codelab'].forEach(function(id) {
+    var chk = document.getElementById(id);
+    if (chk && chk.checked) urls.push(products[id].url);
+  });
+  if (urls.length === 1) {
+    window.open(urls[0], '_blank');
+  } else if (urls.length > 1) {
+    alert('You selected ' + urls.length + ' products. Each will open in a separate secure checkout tab.');
+    urls.forEach(function(url, i) { setTimeout(function() { window.open(url, '_blank'); }, i * 600); });
   }
 }
 
-// Hamburger
-document.getElementById('hamburger').addEventListener('click', function() {
-  document.getElementById('navLinks').classList.toggle('open');
+// ── Hamburger nav ────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var hb = document.getElementById('hamburger');
+  if (hb) hb.addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
 });
 </script>
+
 </body>
 </html>
