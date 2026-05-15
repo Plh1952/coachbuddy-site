@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- v=1778816600 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -226,6 +227,10 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
         <p>Already have an account?</p>
         <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="btn-outline" target="_blank">Log In to Dashboard →</a>
       </div>
+      <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
+        <p style="font-size:13px;color:#9aa3be;margin-bottom:8px;font-family:Arial,sans-serif;">Not ready to commit?</p>
+        <a href="https://coachbuddy.dev/challenge.html" style="display:inline-block;color:#fbbf24;font-size:13px;font-weight:600;text-decoration:none;font-family:Arial,sans-serif;">🎯 Try the Free 7-Day Coding Challenge →</a>
+      </div>
     </div>
     <div class="includes-box">
       <div class="lbl">All plans include</div>
@@ -351,12 +356,13 @@ function redraw() {
 // ── Place Order ───────────────────────────────────────────────────────────────
 function placeOrder() {
   var urls = Object.keys(P).filter(function(k){return selected[k]}).map(function(k){return P[k].url});
-  if (urls.length === 1) {
-    window.open(urls[0], '_blank');
-  } else {
-    alert('You selected ' + urls.length + ' products. Each will open in a separate secure checkout tab.');
-    urls.forEach(function(url, i){ setTimeout(function(){ window.open(url,'_blank'); }, i*500); });
-  }
+  if (urls.length === 0) return;
+  // Route through CoachBuddy register page first.
+  // The register page will redirect to Lemon Squeezy after the user signs up.
+  var firstUrl = urls[0];
+  var registerBase = 'https://elevate-u-ceda8d9f.base44.app/register';
+  var destination = registerBase + '?checkout=' + encodeURIComponent(firstUrl);
+  window.location.href = destination;
 }
 
 // ── Hamburger ─────────────────────────────────────────────────────────────────
@@ -366,3 +372,4 @@ document.getElementById('hamburger').addEventListener('click', function(){
 </script>
 </body>
 </html>
+<!-- cache bust Thu May 14 15:34:45 UTC 2026 -->
