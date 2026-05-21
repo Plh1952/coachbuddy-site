@@ -357,8 +357,8 @@ function redraw() {
 function placeOrder() {
   var urls = Object.keys(P).filter(function(k){return selected[k]}).map(function(k){return P[k].url});
   if (urls.length === 0) return;
-  
-  window.location.href = urls[0];
+  var registerUrl = 'https://elevate-u-ceda8d9f.base44.app/register?redirect=' + encodeURIComponent(urls[0]);
+  window.location.href = registerUrl;
 }
 
 // ── Hamburger ─────────────────────────────────────────────────────────────────
