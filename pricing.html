@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v=1778816600 -->
+<!-- v=1779347305 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -48,14 +48,21 @@ nav{background:#fff;border-bottom:1px solid #e2e6f0;position:sticky;top:0;z-inde
 .prow.on .prow-check::after{content:'✓';color:#fff;font-size:13px;font-family:Arial,sans-serif;font-weight:700}
 .prow-label{flex:1;font-family:Arial,sans-serif;font-size:15px;color:#1a2340;font-weight:500}
 .prow-price{font-weight:700;font-family:Arial,sans-serif;font-size:15px;color:#2563eb;white-space:nowrap}
-
-/* SUBJECT GRID */
-.subj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-.subj-btn{border:2px solid #e2e6f0;border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#5a6480;transition:all .12s;background:#fff;line-height:1.4}
-.subj-btn:hover{border-color:#2563eb;color:#2563eb;background:#f5f8ff}
-.subj-btn.on{border-color:#2563eb;background:#eff6ff;color:#2563eb}
-.subj-btn strong{display:block;font-size:15px;margin-top:2px}
 .hint{font-size:13px;color:#9aa3be;font-family:Arial,sans-serif;margin:-2px 0 10px 4px}
+
+/* SUBJECT BUNDLE CARD */
+.bundle-card{border:2px solid #2563eb;border-radius:14px;padding:22px 24px;background:#eff6ff;margin-bottom:10px;cursor:pointer;transition:all .12s;user-select:none}
+.bundle-card:hover{background:#e0eeff}
+.bundle-card.on{background:#dbeafe;border-color:#1d4ed8}
+.bundle-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bundle-check{width:24px;height:24px;border:2px solid #2563eb;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;transition:all .12s}
+.bundle-card.on .bundle-check{background:#2563eb;border-color:#2563eb}
+.bundle-card.on .bundle-check::after{content:'✓';color:#fff;font-size:14px;font-family:Arial,sans-serif;font-weight:700}
+.bundle-name{flex:1;font-family:Arial,sans-serif;font-size:16px;font-weight:700;color:#1a2340}
+.bundle-price{font-family:Arial,sans-serif;font-size:18px;font-weight:800;color:#2563eb;white-space:nowrap}
+.bundle-subjects{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.subj-tag{background:#fff;border:1px solid #bfdbfe;border-radius:999px;padding:3px 12px;font-size:12px;font-family:Arial,sans-serif;font-weight:600;color:#1d4ed8}
+.bundle-bonus{margin-top:12px;font-size:13px;font-family:Arial,sans-serif;color:#059669;font-weight:600}
 
 /* ORDER SUMMARY CARD */
 .summary-card{background:#fff;border:2px solid #e2e6f0;border-radius:16px;padding:28px;box-shadow:0 4px 24px rgba(26,35,64,.08);position:sticky;top:90px}
@@ -64,7 +71,6 @@ nav{background:#fff;border-bottom:1px solid #e2e6f0;position:sticky;top:0;z-inde
 .s-empty{font-size:14px;color:#9aa3be;font-family:Arial,sans-serif;text-align:center;padding:14px 0}
 .s-total{display:flex;justify-content:space-between;font-size:20px;font-weight:700;font-family:Arial,sans-serif;color:#1a2340;padding-top:12px;border-top:2px solid #e2e6f0;margin-top:6px}
 .bonus-box{background:#ecfdf5;border:1.5px solid #059669;border-radius:8px;padding:12px 16px;font-size:13px;font-family:Arial,sans-serif;color:#065f46;margin-top:14px;display:none}
-.info-box{background:#fef9ec;border:1.5px solid #fbbf24;border-radius:8px;padding:12px 16px;font-size:13px;font-family:Arial,sans-serif;color:#92400e;margin-top:10px}
 #orderBtn{width:100%;padding:18px;font-size:17px;font-weight:700;border:none;border-radius:10px;background:#2563eb;color:#fff;cursor:pointer;font-family:Arial,sans-serif;margin-top:18px;transition:background .15s}
 #orderBtn:hover{background:#1d4ed8}
 #orderBtn:disabled{background:#9aa3be;cursor:not-allowed}
@@ -85,12 +91,12 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 @media(max-width:768px){
   .order-wrap{grid-template-columns:1fr}
   .summary-card{position:static}
-  .subj-grid{grid-template-columns:repeat(2,1fr)}
   .hamburger{display:block}
   .nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;border-bottom:1px solid #e2e6f0;gap:16px}
   .nav-links.open{display:flex}
 }
 </style>
+<!-- cache-bust: 20260525 -->
 </head>
 <body>
 
@@ -132,43 +138,44 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 
     <!-- SCHOOL SUBJECTS -->
     <div class="section-label">📚 School Subjects — Monthly</div>
-    <p class="hint">How many subjects does your child need?</p>
-    <div class="subj-grid">
-      <div class="subj-btn" data-n="1" data-p="17" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/fb5e3962-b879-46f9-b080-29cf1e8437b5" onclick="pickSubj(this)">1 Subject<strong>$17/mo</strong></div>
-      <div class="subj-btn" data-n="2" data-p="27" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/e9f88b81-84e6-4032-9803-fd0dbef33594" onclick="pickSubj(this)">2 Subjects<strong>$27/mo</strong></div>
-      <div class="subj-btn on" data-n="3" data-p="37" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f" onclick="pickSubj(this)">3 Subjects ⭐<strong>$37/mo</strong></div>
-      <div class="subj-btn" data-n="4" data-p="45" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/ee9ba735-b77e-4a9c-9d03-199f5fb6cb04" onclick="pickSubj(this)">4 Subjects<strong>$45/mo</strong></div>
-      <div class="subj-btn" data-n="5" data-p="51" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/240286c6-7d30-41be-97aa-82be39c3b469" onclick="pickSubj(this)">5 Subjects<strong>$51/mo</strong></div>
-      <div class="subj-btn" data-n="6" data-p="55" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/30015287-59a2-4e88-97f9-d130a187f784" onclick="pickSubj(this)">6 Subjects<strong>$55/mo</strong></div>
-    </div>
-    <!-- Subjects toggle row — NO label element, no for= -->
-    <div class="prow" id="row_subjects" onclick="toggleRow('subjects')">
-      <div class="prow-check" id="chk_subjects"></div>
-      <div class="prow-label">School Subjects Tutoring — <span id="subjText">3 subjects</span></div>
-      <div class="prow-price" id="subjPrice">$37/mo</div>
+    <div class="bundle-card" id="row_subjects" onclick="toggleRow('subjects')">
+      <div class="bundle-top">
+        <div class="bundle-check" id="chk_subjects"></div>
+        <div class="bundle-name">All 6 School Subjects — Full Access</div>
+        <div class="bundle-price">$37/mo</div>
+      </div>
+      <div class="bundle-subjects">
+        <span class="subj-tag">Mathematics</span>
+        <span class="subj-tag">Physics</span>
+        <span class="subj-tag">Chemistry</span>
+        <span class="subj-tag">History</span>
+        <span class="subj-tag">Geography</span>
+        <span class="subj-tag">English Essay Writing</span>
+      </div>
+      <div class="bundle-bonus">🎁 Includes FREE bonus: Life Skills + Entrepreneurship courses</div>
     </div>
 
     <!-- JAVASCRIPT -->
     <div class="section-label">⚡ JavaScript Course</div>
     <div class="prow" id="row_js_full" onclick="toggleRow('js_full')">
       <div class="prow-check" id="chk_js_full"></div>
-      <div class="prow-label">Complete JavaScript Course — all 3 parts <em style="color:#059669;font-size:13px;">(best value)</em></div>
+      <div class="prow-label">Complete JavaScript Course — all 3 modules <em style="color:#059669;font-size:13px;">(best value)</em></div>
       <div class="prow-price">$99</div>
     </div>
-    <p class="hint" style="margin-top:-2px;">Or buy individual parts:</p>
+    <p class="hint" style="margin-top:-2px;">Or buy individual modules:</p>
     <div class="prow" id="row_js1" onclick="toggleRow('js1')">
       <div class="prow-check" id="chk_js1"></div>
-      <div class="prow-label">JavaScript Part 1 — Modules 1–5</div>
+      <div class="prow-label">JavaScript Module 1</div>
       <div class="prow-price">$40</div>
     </div>
     <div class="prow" id="row_js2" onclick="toggleRow('js2')">
       <div class="prow-check" id="chk_js2"></div>
-      <div class="prow-label">JavaScript Part 2 — Modules 6–9</div>
+      <div class="prow-label">JavaScript Module 2</div>
       <div class="prow-price">$40</div>
     </div>
     <div class="prow" id="row_js3" onclick="toggleRow('js3')">
       <div class="prow-check" id="chk_js3"></div>
-      <div class="prow-label">JavaScript Part 3 — Modules 10–16</div>
+      <div class="prow-label">JavaScript Module 3</div>
       <div class="prow-price">$40</div>
     </div>
 
@@ -176,27 +183,27 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
     <div class="section-label">🚀 Advanced Coding — One-Time</div>
     <div class="prow" id="row_react" onclick="toggleRow('react')">
       <div class="prow-check" id="chk_react"></div>
-      <div class="prow-label">React — Modern front-end development</div>
+      <div class="prow-label">React.js Full Coding Course</div>
       <div class="prow-price">$86</div>
     </div>
     <div class="prow" id="row_node" onclick="toggleRow('node')">
       <div class="prow-check" id="chk_node"></div>
-      <div class="prow-label">Node.js — Server-side JavaScript</div>
+      <div class="prow-label">Node.js Full Course</div>
       <div class="prow-price">$86</div>
     </div>
     <div class="prow" id="row_fullstack" onclick="toggleRow('fullstack')">
       <div class="prow-check" id="chk_fullstack"></div>
-      <div class="prow-label">Full-Stack Integration</div>
+      <div class="prow-label">Full-Stack Integration Course</div>
       <div class="prow-price">$28</div>
     </div>
     <div class="prow" id="row_devops" onclick="toggleRow('devops')">
       <div class="prow-check" id="chk_devops"></div>
-      <div class="prow-label">DevOps &amp; Deployment</div>
+      <div class="prow-label">DevOps &amp; Deployment Full Course</div>
       <div class="prow-price">$28</div>
     </div>
     <div class="prow" id="row_pro" onclick="toggleRow('pro')">
       <div class="prow-check" id="chk_pro"></div>
-      <div class="prow-label">Professional Skills</div>
+      <div class="prow-label">Professional Skills Coding Course</div>
       <div class="prow-price">$28</div>
     </div>
 
@@ -204,11 +211,9 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
     <div class="section-label">⌨️ Code Lab — Monthly</div>
     <div class="prow" id="row_codelab" onclick="toggleRow('codelab')">
       <div class="prow-check" id="chk_codelab"></div>
-      <div class="prow-label">Code Lab — Live editor + AI coach (10+ languages)</div>
-      <div class="prow-price">$21/mo</div>
+      <div class="prow-label">CoachBuddy Practice Lab — Live editor + AI coach (10+ languages)</div>
+      <div class="prow-price">$22/mo</div>
     </div>
-
-    <div class="info-box">ℹ️ <strong>Life Skills &amp; Entrepreneurship unlock free</strong> with 3+ subjects or any coding course purchase.</div>
   </div>
 
   <!-- RIGHT: Summary -->
@@ -227,9 +232,9 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
         <p>Already have an account?</p>
         <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="btn-outline" target="_blank">Log In to Dashboard →</a>
       </div>
-      <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid #e2e6f0;">
         <p style="font-size:13px;color:#9aa3be;margin-bottom:8px;font-family:Arial,sans-serif;">Not ready to commit?</p>
-        <a href="https://elevate-u-ceda8d9f.base44.app/register" style="display:inline-block;color:#fbbf24;font-size:13px;font-weight:600;text-decoration:none;font-family:Arial,sans-serif;">🎓 Not ready to buy? Start a Free 7-Day Trial →</a>
+        <a href="https://coachbuddy.dev/challenge.html" style="display:inline-block;color:#fbbf24;font-size:13px;font-weight:600;text-decoration:none;font-family:Arial,sans-serif;">🎯 Try the Free 7-Day Coding Challenge →</a>
       </div>
     </div>
     <div class="includes-box">
@@ -263,67 +268,46 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 </footer>
 
 <script>
-// ── Data ─────────────────────────────────────────────────────────────────────
 var P = {
-  subjects:  {label:'School Subjects',  price:37,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f'},
-  js_full:   {label:'Complete JavaScript Course', price:99,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce'},
-  js1:       {label:'JavaScript Part 1', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58'},
-  js2:       {label:'JavaScript Part 2', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc'},
-  js3:       {label:'JavaScript Part 3', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/ad6df103-5215-4527-85a1-74bfa358a87e'},
-  react:     {label:'React',             price:86,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/f4633f20-5dfa-479c-8ea0-bd90c7a73b17'},
-  node:      {label:'Node.js',           price:86,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/18684d67-d223-4a8d-b7b0-0327fdb4c83c'},
-  fullstack: {label:'Full-Stack Integration', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/08f92d60-027d-4afa-a4de-5f01b220d1b9'},
-  devops:    {label:'DevOps & Deployment', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/8f2ea19f-cda9-4a9d-ad5c-0587565fa7ca'},
-  pro:       {label:'Professional Skills', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/3dc25a2f-5839-4609-b8ad-6366a6baaec3'},
-  codelab:   {label:'Code Lab',          price:21,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/e7a23d27-91f4-4008-8f14-a2b679f9e9b4'}
+  subjects:  {label:'All 6 School Subjects',    price:37,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f'},
+  js_full:   {label:'Complete JavaScript Course',price:99,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce'},
+  js1:       {label:'JavaScript Module 1',       price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58'},
+  js2:       {label:'JavaScript Module 2',       price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc'},
+  js3:       {label:'JavaScript Module 3',       price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/ad6df103-5215-4527-85a1-74bfa358a87e'},
+  react:     {label:'React.js Full Coding Course',price:86, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/f4633f20-5dfa-479c-8ea0-bd90c7a73b17'},
+  node:      {label:'Node.js Full Course',        price:86, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/18684d67-d223-4a8d-b7b0-0327fdb4c83c'},
+  fullstack: {label:'Full-Stack Integration',     price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/08f92d60-027d-4afa-a4de-5f01b220d1b9'},
+  devops:    {label:'DevOps & Deployment',        price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/8f2ea19f-cda9-4a9d-ad5c-0587565fa7ca'},
+  pro:       {label:'Professional Skills',        price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/3dc25a2f-5839-4609-b8ad-6366a6baaec3'},
+  codelab:   {label:'CoachBuddy Practice Lab',    price:22, monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/e7a23d27-91f4-4008-8f14-a2b679f9e9b4'}
 };
 
-var selected = {}; // tracks which keys are ON
+var selected = {};
 
-// ── Pick subject tier ─────────────────────────────────────────────────────────
-function pickSubj(el) {
-  document.querySelectorAll('.subj-btn').forEach(function(b){b.classList.remove('on')});
-  el.classList.add('on');
-  var n = el.dataset.n;
-  var price = parseInt(el.dataset.p);
-  var url = el.dataset.url;
-  P.subjects.price = price;
-  P.subjects.url = url;
-  P.subjects.label = 'School Subjects (' + n + ' subject' + (n>1?'s':'') + ')';
-  document.getElementById('subjText').textContent = n + ' subject' + (n>1?'s':'');
-  document.getElementById('subjPrice').textContent = '$' + price + '/mo';
-  if (selected['subjects']) redraw(); // update total if already ticked
-}
-
-// ── Toggle a product row ──────────────────────────────────────────────────────
 function toggleRow(key) {
   selected[key] = !selected[key];
   var row = document.getElementById('row_' + key);
   var chk = document.getElementById('chk_' + key);
-  if (selected[key]) {
-    row.classList.add('on');
-  } else {
-    row.classList.remove('on');
-  }
+  if (selected[key]) { row.classList.add('on'); } else { row.classList.remove('on'); }
   redraw();
 }
 
-// ── Redraw summary ────────────────────────────────────────────────────────────
 function redraw() {
   var items = [];
   var total = 0;
   var hasMonthly = false;
   var hasOneTime = false;
+  var hasBonus = false;
 
   Object.keys(P).forEach(function(k) {
     if (selected[k]) {
       items.push({label: P[k].label, price: P[k].price, monthly: P[k].monthly});
       total += P[k].price;
       if (P[k].monthly) hasMonthly = true; else hasOneTime = true;
+      if (k === 'subjects') hasBonus = true;
     }
   });
 
-  // Summary items
   var si = document.getElementById('summaryItems');
   if (items.length === 0) {
     si.innerHTML = '<div class="s-empty">No products selected yet</div>';
@@ -333,39 +317,41 @@ function redraw() {
     }).join('');
   }
 
-  // Total
   var t = '$' + total;
-  if (hasMonthly && hasOneTime) t = '$' + total + ' + monthly';
+  if (hasMonthly && hasOneTime) t = '$' + total + ' (includes monthly)';
   else if (hasMonthly) t = '$' + total + '/mo';
   document.getElementById('totalAmt').textContent = t;
 
-  // Bonus
-  var coding = ['js_full','js1','js2','js3','react','node','fullstack','devops','pro'];
-  var subjectTier = parseInt(document.querySelector('.subj-btn.on').dataset.n);
-  var bonus = (selected['subjects'] && subjectTier >= 3) || coding.some(function(k){return selected[k]});
-  document.getElementById('bonusBox').style.display = bonus ? 'block' : 'none';
+  document.getElementById('bonusBox').style.display = hasBonus ? 'block' : 'none';
 
-  // Button
   var btn = document.getElementById('orderBtn');
-  btn.disabled = items.length === 0;
-  btn.textContent = items.length === 0
-    ? 'Select a product above'
-    : 'Place Order (' + items.length + ' item' + (items.length>1?'s':'') + ') \u2192';
+  if (items.length === 0) {
+    btn.disabled = true;
+    btn.textContent = 'Select a product above';
+  } else {
+    btn.disabled = false;
+    btn.textContent = 'Place Order — ' + t + ' →';
+  }
 }
 
-// ── Place Order ───────────────────────────────────────────────────────────────
 function placeOrder() {
-  var urls = Object.keys(P).filter(function(k){return selected[k]}).map(function(k){return P[k].url});
-  if (urls.length === 0) return;
-  var registerUrl = 'https://elevate-u-ceda8d9f.base44.app/register?redirect=' + encodeURIComponent(urls[0]);
-  window.location.href = registerUrl;
+  var keys = Object.keys(selected).filter(function(k){ return selected[k]; });
+  if (keys.length === 0) return;
+  var registerBase = 'https://elevate-u-ceda8d9f.base44.app/register';
+  if (keys.length === 1) {
+    var url = P[keys[0]].url;
+    window.location.href = registerBase + '?redirect=' + encodeURIComponent(url);
+  } else {
+    // Multiple items — send to first product checkout, user can purchase others separately
+    var url = P[keys[0]].url;
+    window.location.href = registerBase + '?redirect=' + encodeURIComponent(url);
+  }
 }
 
-// ── Hamburger ─────────────────────────────────────────────────────────────────
+// hamburger
 document.getElementById('hamburger').addEventListener('click', function(){
   document.getElementById('navLinks').classList.toggle('open');
 });
 </script>
 </body>
 </html>
-<!-- cache bust Thu May 14 15:34:45 UTC 2026 -->
