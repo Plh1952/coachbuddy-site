@@ -337,17 +337,11 @@ function redraw() {
 function placeOrder() {
   var keys = Object.keys(selected).filter(function(k){ return selected[k]; });
   if (keys.length === 0) return;
+  var url = P[keys[0]].url;
+  localStorage.setItem('cb_checkout_redirect', url);
   var registerBase = 'https://elevate-u-ceda8d9f.base44.app/register';
-  if (keys.length === 1) {
-    var url = P[keys[0]].url;
-    window.location.href = registerBase + '?redirect=' + encodeURIComponent(url);
-  } else {
-    // Multiple items — send to first product checkout, user can purchase others separately
-    var url = P[keys[0]].url;
-    window.location.href = registerBase + '?redirect=' + encodeURIComponent(url);
-  }
+  window.location.href = registerBase + '?redirect=' + encodeURIComponent(url);
 }
-
 // hamburger
 document.getElementById('hamburger').addEventListener('click', function(){
   document.getElementById('navLinks').classList.toggle('open');
