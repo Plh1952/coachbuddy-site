@@ -338,9 +338,9 @@ function placeOrder() {
   var keys = Object.keys(selected).filter(function(k){ return selected[k]; });
   if (keys.length === 0) return;
   var url = P[keys[0]].url;
-  localStorage.setItem('cb_checkout_redirect', url);
+  localStorage.setItem('cb_checkout_url', url);
   var registerBase = 'https://elevate-u-ceda8d9f.base44.app/register';
-  window.location.href = registerBase + '?redirect=' + encodeURIComponent(url);
+  window.location.href = registerBase + '?checkout_url=' + encodeURIComponent(url) + '&course_id=' + encodeURIComponent(selected[0]);
 }
 // hamburger
 document.getElementById('hamburger').addEventListener('click', function(){
