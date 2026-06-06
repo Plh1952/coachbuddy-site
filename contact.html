@@ -255,7 +255,7 @@ async function submitContact() {
   btn.textContent = 'Sending…';
 
   try {
-    const res = await fetch('https://69cacc25a709616966f062a1.base44.app/api/functions/sendContactEmail', {
+    const res = await fetch('https://elevate-u-ceda8d9f.base44.app/functions/sendContactEmail', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, type, subject, message })
