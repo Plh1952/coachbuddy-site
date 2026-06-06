@@ -40,7 +40,7 @@
             <span style="font-size:13px;color:#94a3b8;font-family:Arial,sans-serif;">The course no school ever taught you</span>
           </div>
         </div>
-        <p style="font-size:17px;line-height:1.9;margin-bottom:20px;color:#cbd5e1;">As a thank-you to every paying CoachBuddy student, Life Skills is included completely free — unlocked when you purchase a minimum of 3 subject packages, or any coding course.</p>
+        <p style="font-size:17px;line-height:1.9;margin-bottom:20px;color:#cbd5e1;">As a thank-you to every paying CoachBuddy student, Life Skills is included completely free — unlocked free when you subscribe to all 6 school subjects.</p>
         <p style="font-size:16px;line-height:1.9;margin-bottom:24px;color:#94a3b8;">In this course, you will learn what really determines success in adult life: how to manage your emotions under pressure, how to handle money intelligently, how to communicate clearly and persuasively, how to make good decisions when it matters, how to build real relationships, and how to design a life that actually belongs to you.</p>
         <p style="font-size:15px;color:#64748b;margin-bottom:28px;font-style:italic;">These are not soft skills. They are survival skills. And most schools never teach them.</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -97,13 +97,10 @@
           <div style="font-size:32px;margin-bottom:12px;">📚</div>
           <h3>School Subjects</h3>
           <p style="font-size:13px;color:#9aa3be;margin-bottom:16px;">Monthly subscription — tax inclusive</p>
-          <div style="background:#f8f9fc;border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;">
-            <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e2e6f0;"><span>1 Subject</span><strong>$17/mo</strong></div>
-            <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e2e6f0;"><span>2 Subjects</span><strong>$27/mo</strong></div>
-            <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e2e6f0;background:#eff6ff;border-radius:4px;padding-left:6px;"><span>3 Subjects ⭐</span><strong>$37/mo</strong></div>
-            <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e2e6f0;"><span>4 Subjects</span><strong>$45/mo</strong></div>
-            <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e2e6f0;"><span>5 Subjects</span><strong>$51/mo</strong></div>
-            <div style="display:flex;justify-content:space-between;padding:5px 0;"><span>6 Subjects</span><strong>$55/mo</strong></div>
+          <div style="background:#eff6ff;border-radius:10px;padding:18px;margin-bottom:16px;font-size:13px;text-align:center;">
+            <div style="font-size:28px;font-weight:900;color:#2563eb;">$37<span style="font-size:15px;font-weight:600;">/mo</span></div>
+            <div style="color:#1e3a5f;font-weight:700;margin-top:4px;">All 6 School Subjects — One Bundle</div>
+            <div style="color:#64748b;font-size:12px;margin-top:4px;">Tax inclusive · Cancel anytime</div>
           </div>
           <ul class="pricing-features" style="margin-top:8px;margin-bottom:16px;">
             <li>All school subjects</li>
@@ -558,25 +555,51 @@ window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   if (window.scrollY > 20) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
 });
-function submitCourseComment() {
-  const name = document.getElementById('cc-name').value.trim();
-  const text = document.getElementById('cc-text').value.trim();
-  const alert = document.getElementById('course-comment-alert');
-  if (!name || !text) { alert.innerHTML = '<div class="alert alert-error">Please fill in your name and message.</div>'; return; }
-  const comments = JSON.parse(localStorage.getItem('course_comments') || '[]');
-  comments.unshift({ name, email: document.getElementById('cc-email').value, course: document.getElementById('cc-course').value, text, date: new Date().toISOString() });
-  localStorage.setItem('course_comments', JSON.stringify(comments));
-  alert.innerHTML = '<div class="alert alert-success">Message sent! We will get back to you soon.</div>';
-  document.getElementById('cc-name').value = ''; document.getElementById('cc-email').value = ''; document.getElementById('cc-text').value = '';
-  loadCourseComments();
+async function submitCourseComment() {
+  const name    = document.getElementById('cc-name').value.trim();
+  const email   = document.getElementById('cc-email').value.trim();
+  const course  = document.getElementById('cc-course').value;
+  const text    = document.getElementById('cc-text').value.trim();
+  const alertEl = document.getElementById('course-comment-alert');
+  const btn     = document.querySelector('.comment-form .btn');
+
+  alertEl.innerHTML = '';
+  if (!name || !text) {
+    alertEl.innerHTML = '<div class="alert alert-error">Please fill in your name and message.</div>';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch('https://elevate-u-ceda8d9f.base44.app/functions/sendContactEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email: email || 'not provided',
+        type: 'courses',
+        subject: 'Course question: ' + course,
+        message: text
+      })
+    });
+
+    if (res.ok) {
+      alertEl.innerHTML = '<div class="alert alert-success">✅ Message sent! We will get back to you soon.</div>';
+      document.getElementById('cc-name').value = '';
+      document.getElementById('cc-email').value = '';
+      document.getElementById('cc-text').value = '';
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (e) {
+    alertEl.innerHTML = '<div class="alert alert-error">Could not send message. Please email us directly at <a href="mailto:phillippe2000@proton.me">phillippe2000@proton.me</a></div>';
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Send Message';
 }
-function loadCourseComments() {
-  const comments = JSON.parse(localStorage.getItem('course_comments') || '[]');
-  const el = document.getElementById('course-comments-list');
-  if (!comments.length) { el.innerHTML = ''; return; }
-  el.innerHTML = '<h3 style="margin:40px 0 20px;">Recent Questions</h3>' + comments.map(c => `<div class="comment-item"><div class="comment-meta"><strong>${c.name}</strong><span>${new Date(c.date).toLocaleDateString()}</span></div><p>${c.text}</p></div>`).join('');
-}
-loadCourseComments();
 </script>
 </body>
 </html>
