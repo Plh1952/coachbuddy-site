@@ -50,11 +50,6 @@ nav{background:#fff;border-bottom:1px solid #e2e6f0;position:sticky;top:0;z-inde
 .prow-price{font-weight:700;font-family:Arial,sans-serif;font-size:15px;color:#2563eb;white-space:nowrap}
 
 /* SUBJECT GRID */
-.subj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-.subj-btn{border:2px solid #e2e6f0;border-radius:10px;padding:12px 8px;text-align:center;cursor:pointer;font-family:Arial,sans-serif;font-size:13px;font-weight:600;color:#5a6480;transition:all .12s;background:#fff;line-height:1.4}
-.subj-btn:hover{border-color:#2563eb;color:#2563eb;background:#f5f8ff}
-.subj-btn.on{border-color:#2563eb;background:#eff6ff;color:#2563eb}
-.subj-btn strong{display:block;font-size:15px;margin-top:2px}
 .hint{font-size:13px;color:#9aa3be;font-family:Arial,sans-serif;margin:-2px 0 10px 4px}
 
 /* ORDER SUMMARY CARD */
@@ -85,8 +80,7 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 @media(max-width:768px){
   .order-wrap{grid-template-columns:1fr}
   .summary-card{position:static}
-  .subj-grid{grid-template-columns:repeat(2,1fr)}
-  .hamburger{display:block}
+    .hamburger{display:block}
   .nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;border-bottom:1px solid #e2e6f0;gap:16px}
   .nav-links.open{display:flex}
 }
@@ -133,19 +127,11 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 
     <!-- SCHOOL SUBJECTS -->
     <div class="section-label">📚 School Subjects — Monthly</div>
-    <p class="hint">How many subjects does your child need?</p>
-    <div class="subj-grid">
-      <div class="subj-btn" data-n="1" data-p="17" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/fb5e3962-b879-46f9-b080-29cf1e8437b5" onclick="pickSubj(this)">1 Subject<strong>$17/mo</strong></div>
-      <div class="subj-btn" data-n="2" data-p="27" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/e9f88b81-84e6-4032-9803-fd0dbef33594" onclick="pickSubj(this)">2 Subjects<strong>$27/mo</strong></div>
-      <div class="subj-btn on" data-n="3" data-p="37" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f" onclick="pickSubj(this)">3 Subjects ⭐<strong>$37/mo</strong></div>
-      <div class="subj-btn" data-n="4" data-p="45" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/ee9ba735-b77e-4a9c-9d03-199f5fb6cb04" onclick="pickSubj(this)">4 Subjects<strong>$45/mo</strong></div>
-      <div class="subj-btn" data-n="5" data-p="51" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/240286c6-7d30-41be-97aa-82be39c3b469" onclick="pickSubj(this)">5 Subjects<strong>$51/mo</strong></div>
-      <div class="subj-btn" data-n="6" data-p="55" data-url="https://lamaisoftware.lemonsqueezy.com/checkout/buy/30015287-59a2-4e88-97f9-d130a187f784" onclick="pickSubj(this)">6 Subjects<strong>$55/mo</strong></div>
-    </div>
+    <p class="hint">Access all 6 subjects for one flat price.</p>
     <!-- Subjects toggle row — NO label element, no for= -->
     <div class="prow" id="row_subjects" onclick="toggleRow('subjects')">
       <div class="prow-check" id="chk_subjects"></div>
-      <div class="prow-label">School Subjects Tutoring — <span id="subjText">3 subjects</span></div>
+      <div class="prow-label">All 6 School Subjects Tutoring</div>
       <div class="prow-price" id="subjPrice">$37/mo</div>
     </div>
 
@@ -266,7 +252,7 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 <script>
 // ── Data ─────────────────────────────────────────────────────────────────────
 var P = {
-  subjects:  {label:'School Subjects',  price:37,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f'},
+  subjects:  {label:'All 6 School Subjects', price:37,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f'},
   js_full:   {label:'Complete JavaScript Course', price:99,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce'},
   js1:       {label:'JavaScript Part 1', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58'},
   js2:       {label:'JavaScript Part 2', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc'},
@@ -281,20 +267,6 @@ var P = {
 
 var selected = {}; // tracks which keys are ON
 
-// ── Pick subject tier ─────────────────────────────────────────────────────────
-function pickSubj(el) {
-  document.querySelectorAll('.subj-btn').forEach(function(b){b.classList.remove('on')});
-  el.classList.add('on');
-  var n = el.dataset.n;
-  var price = parseInt(el.dataset.p);
-  var url = el.dataset.url;
-  P.subjects.price = price;
-  P.subjects.url = url;
-  P.subjects.label = 'School Subjects (' + n + ' subject' + (n>1?'s':'') + ')';
-  document.getElementById('subjText').textContent = n + ' subject' + (n>1?'s':'');
-  document.getElementById('subjPrice').textContent = '$' + price + '/mo';
-  if (selected['subjects']) redraw(); // update total if already ticked
-}
 
 // ── Toggle a product row ──────────────────────────────────────────────────────
 function toggleRow(key) {
@@ -342,8 +314,7 @@ function redraw() {
 
   // Bonus
   var coding = ['js_full','js1','js2','js3','react','node','fullstack','devops','pro'];
-  var subjectTier = parseInt(document.querySelector('.subj-btn.on').dataset.n);
-  var bonus = (selected['subjects'] && subjectTier >= 3) || coding.some(function(k){return selected[k]});
+  var bonus = selected['subjects'] || coding.some(function(k){return selected[k]});
   document.getElementById('bonusBox').style.display = bonus ? 'block' : 'none';
 
   // Button
