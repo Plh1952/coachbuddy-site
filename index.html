@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="style.css" />
 <script>window.lemonSqueezyAffiliateConfig = { store: "lamaisoftware" };</script>
 <script src="https://lmsqueezy.com/affiliate.js" defer></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </head>
 <body>
 
@@ -20,15 +22,25 @@
       <span>CoachBuddy</span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="index.html" class="active">Home</a>
-      <a href="courses.html">Courses</a>
-      <a href="students.html">For Students</a>
-      <a href="order.html">Pricing</a>
-      <a href="blog.html">Blog</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://elevate-u-ceda8d9f.base44.app/parent-dashboard" target="_blank">Parent Login / Progress</a>
-      <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="nav-cta" target="_blank">Student Log In →</a>
+      <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+      <a href="courses.html" data-i18n="nav.courses">Courses</a>
+      <a href="students.html" data-i18n="nav.students">For Students</a>
+      <a href="order.html" data-i18n="nav.pricing">Pricing</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app/parent-dashboard" target="_blank" data-i18n="nav.parent">Parent Login / Progress</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="nav-cta" target="_blank" data-i18n="nav.student_login">Student Log In →</a>
+      <div class="cb-lang-switcher" id="cbLangSwitcher" style="position:relative;">
+        <button id="cbLangCurrent" onclick="cbToggleLangMenu()" style="background:none;border:1px solid #d1d5db;border-radius:6px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;color:inherit;font-family:inherit;">EN ▾</button>
+        <div id="cbLangMenu" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:150px;z-index:1000;overflow:hidden;">
+          <a class="cb-lang-option" data-lang="en" onclick="cbSetLang('en')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">English</a>
+          <a class="cb-lang-option" data-lang="fr" onclick="cbSetLang('fr')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Français</a>
+          <a class="cb-lang-option" data-lang="es" onclick="cbSetLang('es')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Español</a>
+          <a class="cb-lang-option" data-lang="vi" onclick="cbSetLang('vi')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Tiếng Việt</a>
+          <a class="cb-lang-option" data-lang="zh" onclick="cbSetLang('zh')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">中文</a>
+        </div>
+      </div>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -41,32 +53,32 @@
   <div class="container">
     <div class="hero-inner">
       <div>
-        <span class="hero-tag">AI-Powered Education</span>
-        <h1>The tutor that teaches — not tells.</h1>
-        <p>CoachBuddy doesn't give your child the answer. It asks the right question so they find it themselves. Real understanding. Real confidence. Real results.</p>
+        <span class="hero-tag" data-i18n="hero.tag">AI-Powered Education</span>
+        <h1 data-i18n="hero.title">The tutor that teaches — not tells.</h1>
+        <p data-i18n="hero.subtitle">CoachBuddy doesn't give your child the answer. It asks the right question so they find it themselves. Real understanding. Real confidence. Real results.</p>
         <div class="hero-btns">
-          <a href="order.html" class="btn btn-primary btn-lg">See Plans &amp; Pricing</a>
-          <a href="about.html" class="btn btn-outline btn-lg">Our Philosophy</a>
+          <a href="order.html" class="btn btn-primary btn-lg" data-i18n="hero.btn_pricing">See Plans &amp; Pricing</a>
+          <a href="about.html" class="btn btn-outline btn-lg" data-i18n="hero.btn_philosophy">Our Philosophy</a>
         </div>
         <div style="margin-top:20px;">
           <a href="https://elevate-u-ceda8d9f.base44.app/register" style="display:inline-flex;align-items:center;gap:8px;background:rgba(251,191,36,0.12);border:1.5px solid #fbbf24;color:#fbbf24;padding:10px 22px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;font-family:Arial,sans-serif;">
-            🎯 Try the Free 7-Day Coding Challenge
+            <span data-i18n="hero.trial">🎯 Try the Free 7-Day Coding Challenge</span>
           </a>
         </div>
         <div style="margin-top:28px;display:flex;gap:24px;flex-wrap:wrap;">
-          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;">📚 School subjects</span>
-          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;">💻 Coding courses</span>
-          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;">🎁 Free Life Skills bonus</span>
-          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;">🌍 Learn from anywhere</span>
+          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;" data-i18n="hero.tag_subjects">📚 School subjects</span>
+          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;" data-i18n="hero.tag_coding">💻 Coding courses</span>
+          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;" data-i18n="hero.tag_freebonus">🎁 Free Life Skills bonus</span>
+          <span style="font-size:14px;color:var(--dim);font-family:Arial,sans-serif;" data-i18n="hero.tag_anywhere">🌍 Learn from anywhere</span>
         </div>
       </div>
       <div class="hero-image">
         <div class="big-icon"><img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" style="width:80px;height:80px;object-fit:contain;border-radius:16px;"></div>
         <div class="chat-demo">
-          <div class="chat-bubble student">Student: "Why isn't my loop working?"</div>
-          <div class="chat-bubble coach">CoachBuddy: "Good question. What do you think happens on the third iteration? Walk me through it."</div>
-          <div class="chat-bubble student">Student: "Oh… it keeps going even when the number reaches 50?"</div>
-          <div class="chat-bubble coach">CoachBuddy: "Exactly. So what condition do you think you need to stop it at 50?"</div>
+          <div class="chat-bubble student" data-i18n="hero.chat1">Student: "Why isn't my loop working?"</div>
+          <div class="chat-bubble coach" data-i18n="hero.chat2">CoachBuddy: "Good question. What do you think happens on the third iteration? Walk me through it."</div>
+          <div class="chat-bubble student" data-i18n="hero.chat3">Student: "Oh… it keeps going even when the number reaches 50?"</div>
+          <div class="chat-bubble coach" data-i18n="hero.chat4">CoachBuddy: "Exactly. So what condition do you think you need to stop it at 50?"</div>
         </div>
       </div>
     </div>
@@ -77,46 +89,46 @@
 <section class="section" style="background:#fff;">
   <div class="container">
     <div style="text-align:center;max-width:640px;margin:0 auto 56px;">
-      <h2 style="font-size:36px;margin-bottom:16px;">Everything a student needs. One platform.</h2>
-      <p>From school homework help to professional coding skills — CoachBuddy covers the full journey.</p>
+      <h2 style="font-size:36px;margin-bottom:16px;" data-i18n="offer.title">Everything a student needs. One platform.</h2>
+      <p data-i18n="offer.subtitle">From school homework help to professional coding skills — CoachBuddy covers the full journey.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;">
 
       <div class="feature-card" style="border-top:3px solid #2563eb;">
         <div style="font-size:32px;margin-bottom:12px;">📚</div>
-        <h3 style="font-size:20px;margin-bottom:10px;">School Subjects</h3>
-        <p style="font-size:15px;">Maths, sciences, languages, history — CoachBuddy adapts to your child's curriculum and level. The AI identifies gaps and guides through dialogue, not lectures.</p>
-        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:var(--blue);font-weight:600;">$37/month →</div>
+        <h3 style="font-size:20px;margin-bottom:10px;" data-i18n="offer.subjects.title">School Subjects</h3>
+        <p style="font-size:15px;" data-i18n="offer.subjects.desc">Maths, sciences, languages, history — CoachBuddy adapts to your child's curriculum and level. The AI identifies gaps and guides through dialogue, not lectures.</p>
+        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:var(--blue);font-weight:600;" data-i18n="offer.subjects.price">$37/month →</div>
       </div>
 
       <div class="feature-card" style="border-top:3px solid #7c3aed;">
         <div style="font-size:32px;margin-bottom:12px;">💻</div>
-        <h3 style="font-size:20px;margin-bottom:10px;">Coding Courses</h3>
-        <p style="font-size:15px;">JavaScript, React, Node.js, Full-Stack, DevOps, and Professional Skills. Step-by-step courses built for beginners who want to become real developers.</p>
-        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#7c3aed;font-weight:600;">From $28 one-time →</div>
+        <h3 style="font-size:20px;margin-bottom:10px;" data-i18n="offer.coding.title">Coding Courses</h3>
+        <p style="font-size:15px;" data-i18n="offer.coding.desc">JavaScript, React, Node.js, Full-Stack, DevOps, and Professional Skills. Step-by-step courses built for beginners who want to become real developers.</p>
+        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#7c3aed;font-weight:600;" data-i18n="offer.coding.price">From $28 one-time →</div>
       </div>
 
       <div class="feature-card" style="border-top:3px solid #d97706;">
         <div style="font-size:32px;margin-bottom:12px;">⌨️</div>
-        <h3 style="font-size:20px;margin-bottom:10px;">Code Lab</h3>
-        <p style="font-size:15px;">A live 3-panel coding environment — editor, output, and AI coach side by side. Write code, run it, make mistakes, and get guided hints in real time.</p>
-        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#d97706;font-weight:600;">$21/month →</div>
+        <h3 style="font-size:20px;margin-bottom:10px;" data-i18n="offer.codelab.title">Code Lab</h3>
+        <p style="font-size:15px;" data-i18n="offer.codelab.desc">A live 3-panel coding environment — editor, output, and AI coach side by side. Write code, run it, make mistakes, and get guided hints in real time.</p>
+        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#d97706;font-weight:600;" data-i18n="offer.codelab.price">$21/month →</div>
       </div>
 
       <div class="feature-card" style="border-top:3px solid #059669;position:relative;">
         <div style="position:absolute;top:-12px;right:16px;background:#fbbf24;color:#1a1a1a;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;font-family:Arial,sans-serif;letter-spacing:0.5px;">FREE BONUS</div>
         <div style="font-size:32px;margin-bottom:12px;">🧠</div>
-        <h3 style="font-size:20px;margin-bottom:10px;">Life Skills</h3>
-        <p style="font-size:15px;">21 modules covering emotional intelligence, financial literacy, critical thinking, negotiation, and leadership. Unlocks free with any qualifying plan.</p>
-        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#059669;font-weight:600;">Included free →</div>
+        <h3 style="font-size:20px;margin-bottom:10px;" data-i18n="offer.lifeskills.title">Life Skills</h3>
+        <p style="font-size:15px;" data-i18n="offer.lifeskills.desc">21 modules covering emotional intelligence, financial literacy, critical thinking, negotiation, and leadership. Unlocks free with any qualifying plan.</p>
+        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#059669;font-weight:600;" data-i18n="offer.lifeskills.price">Included free →</div>
       </div>
 
       <div class="feature-card" style="border-top:3px solid #0891b2;position:relative;">
         <div style="position:absolute;top:-12px;right:16px;background:#fbbf24;color:#1a1a1a;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;font-family:Arial,sans-serif;letter-spacing:0.5px;">FREE BONUS</div>
         <div style="font-size:32px;margin-bottom:12px;">🚀</div>
-        <h3 style="font-size:20px;margin-bottom:10px;">Entrepreneurship</h3>
-        <p style="font-size:15px;">Learn how businesses are built, how money works, and how to turn an idea into something real. Practical, narrative-driven modules for young thinkers.</p>
-        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#0891b2;font-weight:600;">Included free →</div>
+        <h3 style="font-size:20px;margin-bottom:10px;" data-i18n="offer.entrepreneurship.title">Entrepreneurship</h3>
+        <p style="font-size:15px;" data-i18n="offer.entrepreneurship.desc">Learn how businesses are built, how money works, and how to turn an idea into something real. Practical, narrative-driven modules for young thinkers.</p>
+        <div style="margin-top:16px;font-size:14px;font-family:Arial,sans-serif;color:#0891b2;font-weight:600;" data-i18n="offer.entrepreneurship.price">Included free →</div>
       </div>
 
     </div>
