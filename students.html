@@ -21,6 +21,8 @@
   </style>
 <script>window.lemonSqueezyAffiliateConfig = { store: "lamaisoftware" };</script>
 <script src="https://lmsqueezy.com/affiliate.js" defer></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </head>
 <body>
 
@@ -31,14 +33,24 @@
       <div class="logo-icon"><img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" style="width:36px;height:36px;object-fit:contain;border-radius:8px;"></div>
       <span style="color:#fff;">CoachBuddy</span>
     </a>
-    <div class="nav-links" style="display:flex;">
-      <a href="index.html" style="color:rgba(255,255,255,0.6);">Home</a>
-      <a href="courses.html" style="color:rgba(255,255,255,0.6);">Courses</a>
-      <a href="students.html" style="color:#a855f7;">For Students</a>
-      <a href="blog.html" style="color:rgba(255,255,255,0.6);">Blog</a>
-      <a href="about.html" style="color:rgba(255,255,255,0.6);">About</a>
-      <a href="contact.html" style="color:rgba(255,255,255,0.6);">Contact</a>
-      <a href="https://elevate-u-ceda8d9f.base44.app" class="nav-cta" target="_blank">Start Learning →</a>
+    <div class="nav-links" style="display:flex;align-items:center;">
+      <a href="index.html" style="color:rgba(255,255,255,0.6);" data-i18n="nav.home">Home</a>
+      <a href="courses.html" style="color:rgba(255,255,255,0.6);" data-i18n="nav.courses">Courses</a>
+      <a href="students.html" style="color:#a855f7;" data-i18n="nav.students">For Students</a>
+      <a href="blog.html" style="color:rgba(255,255,255,0.6);" data-i18n="nav.blog">Blog</a>
+      <a href="about.html" style="color:rgba(255,255,255,0.6);" data-i18n="nav.about">About</a>
+      <a href="contact.html" style="color:rgba(255,255,255,0.6);" data-i18n="nav.contact">Contact</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app" class="nav-cta" target="_blank" data-i18n="nav.start_learning">Start Learning →</a>
+      <div class="cb-lang-switcher" id="cbLangSwitcher" style="position:relative;display:inline-block;">
+        <button id="cbLangCurrent" onclick="cbToggleLangMenu()" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;color:#fff;font-family:inherit;">EN ▾</button>
+        <div id="cbLangMenu" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:150px;z-index:1000;overflow:hidden;">
+          <a class="cb-lang-option" data-lang="en" onclick="cbSetLang('en')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">English</a>
+          <a class="cb-lang-option" data-lang="fr" onclick="cbSetLang('fr')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Français</a>
+          <a class="cb-lang-option" data-lang="es" onclick="cbSetLang('es')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Español</a>
+          <a class="cb-lang-option" data-lang="vi" onclick="cbSetLang('vi')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Tiếng Việt</a>
+          <a class="cb-lang-option" data-lang="zh" onclick="cbSetLang('zh')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">中文</a>
+        </div>
+      </div>
     </div>
     <button class="hamburger" onclick="toggleMenu()" style="filter:invert(1);"><span></span><span></span><span></span></button>
   </div>
