@@ -86,6 +86,8 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 }
 </style>
 <!-- cache-bust: 1779185975 -->
+<script>window.lemonSqueezyAffiliateConfig = { store: "lamaisoftware" };</script>
+<script src="https://lmsqueezy.com/affiliate.js" defer></script>
 </head>
 <body>
 
@@ -334,7 +336,13 @@ function placeOrder() {
   var urls = Object.keys(P).filter(function(k){return selected[k]}).map(function(k){return P[k].url});
   if (urls.length === 0) return;
   // Go directly to Lemon Squeezy checkout
-  window.location.href = urls[0];
+  var finalUrl = urls[0];
+  try {
+    if (window.LemonSqueezy && window.LemonSqueezy.Url && window.LemonSqueezy.Url.Build) {
+      finalUrl = window.LemonSqueezy.Url.Build(urls[0]);
+    }
+  } catch (e) {}
+  window.location.href = finalUrl;
 }
 
 // ── Hamburger ─────────────────────────────────────────────────────────────────
