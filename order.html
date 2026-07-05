@@ -126,9 +126,9 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 <!-- HERO -->
 <div class="hero-strip">
   <div class="container">
-    <span class="tag">Transparent Pricing</span>
-    <h1 style="font-size:clamp(26px,4vw,42px);margin-bottom:12px;">Choose what you need. Pay only for that.</h1>
-    <p style="font-size:17px;max-width:540px;margin:0 auto;">Tick the products you want, see the total update instantly, then place your order. All prices are tax-inclusive.</p>
+    <span class="tag" data-i18n="order.hero_tag">Transparent Pricing</span>
+    <h1 style="font-size:clamp(26px,4vw,42px);margin-bottom:12px;" data-i18n="order.hero_title">Choose what you need. Pay only for that.</h1>
+    <p style="font-size:17px;max-width:540px;margin:0 auto;" data-i18n="order.hero_subtitle">Tick the products you want, see the total update instantly, then place your order. All prices are tax-inclusive.</p>
   </div>
 </div>
 
@@ -137,111 +137,111 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 
   <!-- LEFT: Products -->
   <div>
-    <h2 style="font-size:22px;margin-bottom:6px;">Build your order</h2>
-    <p style="font-size:15px;margin-bottom:24px;">Select everything you want, then click Place Order below.</p>
+    <h2 style="font-size:22px;margin-bottom:6px;" data-i18n="order.build_title">Build your order</h2>
+    <p style="font-size:15px;margin-bottom:24px;" data-i18n="order.build_subtitle">Select everything you want, then click Place Order below.</p>
 
     <!-- SCHOOL SUBJECTS -->
-    <div class="section-label">📚 School Subjects — Monthly</div>
-    <p class="hint">Access all 6 subjects for one flat price.</p>
+    <div class="section-label" data-i18n="order.section_subjects">📚 School Subjects — Monthly</div>
+    <p class="hint" data-i18n="order.hint_subjects">Access all 6 subjects for one flat price.</p>
     <!-- Subjects toggle row — NO label element, no for= -->
     <div class="prow" id="row_subjects" onclick="toggleRow('subjects')">
       <div class="prow-check" id="chk_subjects"></div>
-      <div class="prow-label">All 6 School Subjects Tutoring</div>
+      <div class="prow-label" data-i18n="order.label_subjects">All 6 School Subjects Tutoring</div>
       <div class="prow-price" id="subjPrice">$37/mo</div>
     </div>
 
     <!-- JAVASCRIPT -->
-    <div class="section-label">⚡ JavaScript Course</div>
+    <div class="section-label" data-i18n="order.section_js">⚡ JavaScript Course</div>
     <div class="prow" id="row_js_full" onclick="toggleRow('js_full')">
       <div class="prow-check" id="chk_js_full"></div>
-      <div class="prow-label">Complete JavaScript Course — all 3 parts <em style="color:#059669;font-size:13px;">(best value)</em></div>
+      <div class="prow-label"><span data-i18n="order.label_js_full">Complete JavaScript Course — all 3 parts</span> <em style="color:#059669;font-size:13px;" data-i18n="order.best_value">(best value)</em></div>
       <div class="prow-price">$99</div>
     </div>
-    <p class="hint" style="margin-top:-2px;">Or buy individual parts:</p>
+    <p class="hint" style="margin-top:-2px;" data-i18n="order.hint_js_individual">Or buy individual parts:</p>
     <div class="prow" id="row_js1" onclick="toggleRow('js1')">
       <div class="prow-check" id="chk_js1"></div>
-      <div class="prow-label">JavaScript Part 1 — Modules 1–5</div>
+      <div class="prow-label" data-i18n="order.label_js1">JavaScript Part 1 — Modules 1–5</div>
       <div class="prow-price">$40</div>
     </div>
     <div class="prow" id="row_js2" onclick="toggleRow('js2')">
       <div class="prow-check" id="chk_js2"></div>
-      <div class="prow-label">JavaScript Part 2 — Modules 6–9</div>
+      <div class="prow-label" data-i18n="order.label_js2">JavaScript Part 2 — Modules 6–9</div>
       <div class="prow-price">$40</div>
     </div>
     <div class="prow" id="row_js3" onclick="toggleRow('js3')">
       <div class="prow-check" id="chk_js3"></div>
-      <div class="prow-label">JavaScript Part 3 — Modules 10–16</div>
+      <div class="prow-label" data-i18n="order.label_js3">JavaScript Part 3 — Modules 10–16</div>
       <div class="prow-price">$40</div>
     </div>
 
     <!-- ADVANCED -->
-    <div class="section-label">🚀 Advanced Coding — One-Time</div>
+    <div class="section-label" data-i18n="order.section_advanced">🚀 Advanced Coding — One-Time</div>
     <div class="prow" id="row_react" onclick="toggleRow('react')">
       <div class="prow-check" id="chk_react"></div>
-      <div class="prow-label">React — Modern front-end development</div>
+      <div class="prow-label" data-i18n="order.label_react">React — Modern front-end development</div>
       <div class="prow-price">$86</div>
     </div>
     <div class="prow" id="row_node" onclick="toggleRow('node')">
       <div class="prow-check" id="chk_node"></div>
-      <div class="prow-label">Node.js — Server-side JavaScript</div>
+      <div class="prow-label" data-i18n="order.label_node">Node.js — Server-side JavaScript</div>
       <div class="prow-price">$86</div>
     </div>
     <div class="prow" id="row_fullstack" onclick="toggleRow('fullstack')">
       <div class="prow-check" id="chk_fullstack"></div>
-      <div class="prow-label">Full-Stack Integration</div>
+      <div class="prow-label" data-i18n="order.label_fullstack">Full-Stack Integration</div>
       <div class="prow-price">$28</div>
     </div>
     <div class="prow" id="row_devops" onclick="toggleRow('devops')">
       <div class="prow-check" id="chk_devops"></div>
-      <div class="prow-label">DevOps &amp; Deployment</div>
+      <div class="prow-label" data-i18n="order.label_devops">DevOps &amp; Deployment</div>
       <div class="prow-price">$28</div>
     </div>
     <div class="prow" id="row_pro" onclick="toggleRow('pro')">
       <div class="prow-check" id="chk_pro"></div>
-      <div class="prow-label">Professional Skills</div>
+      <div class="prow-label" data-i18n="order.label_pro">Professional Skills</div>
       <div class="prow-price">$28</div>
     </div>
 
     <!-- CODE LAB -->
-    <div class="section-label">⌨️ Code Lab — Monthly</div>
+    <div class="section-label" data-i18n="order.section_codelab">⌨️ Code Lab — Monthly</div>
     <div class="prow" id="row_codelab" onclick="toggleRow('codelab')">
       <div class="prow-check" id="chk_codelab"></div>
-      <div class="prow-label">Code Lab — Live editor + AI coach (10+ languages)</div>
+      <div class="prow-label" data-i18n="order.label_codelab">Code Lab — Live editor + AI coach (10+ languages)</div>
       <div class="prow-price">$21/mo</div>
     </div>
 
-    <div class="info-box">ℹ️ <strong>Life Skills &amp; Entrepreneurship unlock free</strong> with 3+ subjects or any coding course purchase.</div>
+    <div class="info-box" data-i18n="order.info_bonus">ℹ️ <strong>Life Skills &amp; Entrepreneurship unlock free</strong> with 3+ subjects or any coding course purchase.</div>
   </div>
 
   <!-- RIGHT: Summary -->
   <div>
     <div class="summary-card">
-      <h3 style="font-size:20px;margin-bottom:4px;">Your Order</h3>
-      <p style="font-size:14px;color:#9aa3be;font-family:Arial,sans-serif;margin-bottom:16px;">Select products on the left</p>
+      <h3 style="font-size:20px;margin-bottom:4px;" data-i18n="order.summary_title">Your Order</h3>
+      <p style="font-size:14px;color:#9aa3be;font-family:Arial,sans-serif;margin-bottom:16px;" data-i18n="order.summary_subtitle">Select products on the left</p>
       <div class="summary-items" id="summaryItems">
-        <div class="s-empty">No products selected yet</div>
+        <div class="s-empty" data-i18n="order.empty_selection">No products selected yet</div>
       </div>
-      <div class="s-total"><span>Total</span><span id="totalAmt">$0</span></div>
-      <div class="bonus-box" id="bonusBox">✅ <strong>Free bonuses included:</strong> Life Skills + Entrepreneurship unlock automatically after purchase.</div>
-      <button id="orderBtn" disabled onclick="placeOrder()">Select a product above</button>
-      <div class="fine">All prices tax-inclusive · Secure checkout via Lemon Squeezy</div>
+      <div class="s-total"><span data-i18n="order.total_label">Total</span><span id="totalAmt">$0</span></div>
+      <div class="bonus-box" id="bonusBox" data-i18n="order.bonus_box">✅ <strong>Free bonuses included:</strong> Life Skills + Entrepreneurship unlock automatically after purchase.</div>
+      <button id="orderBtn" disabled onclick="placeOrder()" data-i18n="order.btn_select">Select a product above</button>
+      <div class="fine" data-i18n="order.fine_print">All prices tax-inclusive · Secure checkout via Lemon Squeezy</div>
       <div class="login-box">
-        <p>Already have an account?</p>
-        <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="btn-outline" target="_blank">Log In to Dashboard →</a>
+        <p data-i18n="order.login_prompt">Already have an account?</p>
+        <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="btn-outline" target="_blank" data-i18n="order.login_btn">Log In to Dashboard →</a>
       </div>
       <div style="text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
-        <p style="font-size:13px;color:#9aa3be;margin-bottom:8px;font-family:Arial,sans-serif;">Not ready to commit?</p>
-        <a href="https://elevate-u-ceda8d9f.base44.app/register" style="display:inline-block;color:#fbbf24;font-size:13px;font-weight:600;text-decoration:none;font-family:Arial,sans-serif;">🎯 Try the Free 7-Day Coding Challenge →</a>
+        <p style="font-size:13px;color:#9aa3be;margin-bottom:8px;font-family:Arial,sans-serif;" data-i18n="order.not_ready">Not ready to commit?</p>
+        <a href="https://elevate-u-ceda8d9f.base44.app/register" style="display:inline-block;color:#fbbf24;font-size:13px;font-weight:600;text-decoration:none;font-family:Arial,sans-serif;" data-i18n="order.challenge_cta">🎯 Try the Free 7-Day Coding Challenge →</a>
       </div>
     </div>
     <div class="includes-box">
-      <div class="lbl">All plans include</div>
-      <div>✓ AI coach available 24/7</div>
-      <div>✓ Adapts to your country's syllabus</div>
-      <div>✓ Identifies student level automatically</div>
-      <div>✓ No homework done for you</div>
-      <div>✓ Progress tracking</div>
-      <div>✓ Cancel anytime (subscriptions)</div>
+      <div class="lbl" data-i18n="order.includes_label">All plans include</div>
+      <div data-i18n="order.includes_1">✓ AI coach available 24/7</div>
+      <div data-i18n="order.includes_2">✓ Adapts to your country's syllabus</div>
+      <div data-i18n="order.includes_3">✓ Identifies student level automatically</div>
+      <div data-i18n="order.includes_4">✓ No homework done for you</div>
+      <div data-i18n="order.includes_5">✓ Progress tracking</div>
+      <div data-i18n="order.includes_6">✓ Cancel anytime (subscriptions)</div>
     </div>
   </div>
 
@@ -259,29 +259,31 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
       <a href="about.html">About</a>
       <a href="blog.html">Blog</a>
       <a href="contact.html">Contact</a>
-    <a href="terms.html">Terms</a>
-      <a href="privacy.html">Privacy</a>
-    <a href="affiliate.html">Affiliate</a>
+    <a href="terms.html" data-i18n="footer.terms">Terms</a>
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+    <a href="affiliate.html" data-i18n="footer.affiliate">Affiliate</a>
     </div>
-    <div style="font-size:13px;">© 2026 Lam Ai Software Solutions LLC</div>
+    <div style="font-size:13px;" data-i18n="footer.copyright">© 2026 Lam Ai Software Solutions LLC</div>
   </div>
 </footer>
 
 <script>
 // ── Data ─────────────────────────────────────────────────────────────────────
 var P = {
-  subjects:  {label:'All 6 School Subjects', price:37,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f'},
-  js_full:   {label:'Complete JavaScript Course', price:99,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce'},
-  js1:       {label:'JavaScript Part 1', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58'},
-  js2:       {label:'JavaScript Part 2', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc'},
-  js3:       {label:'JavaScript Part 3', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/ad6df103-5215-4527-85a1-74bfa358a87e'},
-  react:     {label:'React',             price:86,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/f4633f20-5dfa-479c-8ea0-bd90c7a73b17'},
-  node:      {label:'Node.js',           price:86,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/18684d67-d223-4a8d-b7b0-0327fdb4c83c'},
-  fullstack: {label:'Full-Stack Integration', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/08f92d60-027d-4afa-a4de-5f01b220d1b9'},
-  devops:    {label:'DevOps & Deployment', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/8f2ea19f-cda9-4a9d-ad5c-0587565fa7ca'},
-  pro:       {label:'Professional Skills', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/3dc25a2f-5839-4609-b8ad-6366a6baaec3'},
-  codelab:   {label:'Code Lab',          price:21,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/e7a23d27-91f4-4008-8f14-a2b679f9e9b4'}
+  subjects:  {labelKey:'order.label_subjects', price:37,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/1dd03085-007c-4c29-86d0-4f2294b7f69f'},
+  js_full:   {labelKey:'order.label_js_full', price:99,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/99ad95e3-4efc-4182-8f46-0ca04f6675ce'},
+  js1:       {labelKey:'order.label_js1', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/25dd3d4b-ba59-44ec-ac3e-9822666acf58'},
+  js2:       {labelKey:'order.label_js2', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/0c817e0f-5e60-4157-9790-bac16e5095dc'},
+  js3:       {labelKey:'order.label_js3', price:40,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/ad6df103-5215-4527-85a1-74bfa358a87e'},
+  react:     {labelKey:'order.label_react', price:86,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/f4633f20-5dfa-479c-8ea0-bd90c7a73b17'},
+  node:      {labelKey:'order.label_node', price:86,  monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/18684d67-d223-4a8d-b7b0-0327fdb4c83c'},
+  fullstack: {labelKey:'order.label_fullstack', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/08f92d60-027d-4afa-a4de-5f01b220d1b9'},
+  devops:    {labelKey:'order.label_devops', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/8f2ea19f-cda9-4a9d-ad5c-0587565fa7ca'},
+  pro:       {labelKey:'order.label_pro', price:28, monthly:false, url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/3dc25a2f-5839-4609-b8ad-6366a6baaec3'},
+  codelab:   {labelKey:'order.label_codelab', price:21,  monthly:true,  url:'https://lamaisoftware.lemonsqueezy.com/checkout/buy/e7a23d27-91f4-4008-8f14-a2b679f9e9b4'}
 };
+
+function T(key){ return (typeof window.cbT === 'function') ? window.cbT(key) : key; }
 
 var selected = {}; // tracks which keys are ON
 
@@ -308,7 +310,7 @@ function redraw() {
 
   Object.keys(P).forEach(function(k) {
     if (selected[k]) {
-      items.push({label: P[k].label, price: P[k].price, monthly: P[k].monthly});
+      items.push({label: T(P[k].labelKey), price: P[k].price, monthly: P[k].monthly});
       total += P[k].price;
       if (P[k].monthly) hasMonthly = true; else hasOneTime = true;
     }
@@ -317,7 +319,7 @@ function redraw() {
   // Summary items
   var si = document.getElementById('summaryItems');
   if (items.length === 0) {
-    si.innerHTML = '<div class="s-empty">No products selected yet</div>';
+    si.innerHTML = '<div class="s-empty">' + T('order.empty_selection') + '</div>';
   } else {
     si.innerHTML = items.map(function(i){
       return '<div class="s-row"><span>'+i.label+'</span><span style="font-weight:700;color:#1a2340;">$'+i.price+(i.monthly?'/mo':'')+'</span></div>';
@@ -339,9 +341,11 @@ function redraw() {
   var btn = document.getElementById('orderBtn');
   btn.disabled = items.length === 0;
   btn.textContent = items.length === 0
-    ? 'Select a product above'
-    : 'Place Order (' + items.length + ' item' + (items.length>1?'s':'') + ') \u2192';
+    ? T('order.btn_select')
+    : (items.length === 1 ? T('order.place_order_singular') : T('order.place_order_plural').replace('{n}', items.length));
 }
+
+document.addEventListener('cblangchange', function(){ redraw(); });
 
 // ── Place Order ───────────────────────────────────────────────────────────────
 function placeOrder() {
