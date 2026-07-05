@@ -88,6 +88,8 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
 <!-- cache-bust: 1779185975 -->
 <script>window.lemonSqueezyAffiliateConfig = { store: "lamaisoftware" };</script>
 <script src="https://lmsqueezy.com/affiliate.js" defer></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </head>
 <body>
 
@@ -99,13 +101,23 @@ footer a{color:rgba(255,255,255,.6);font-size:14px;font-family:Arial,sans-serif}
       <span>CoachBuddy</span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="order.html" class="active">Pricing</a>
-      <a href="blog.html">Blog</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://elevate-u-ceda8d9f.base44.app/parent-dashboard" target="_blank">Parent Login / Progress</a>
-      <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="nav-cta" target="_blank">Student Log In →</a>
+      <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="order.html" class="active" data-i18n="nav.pricing">Pricing</a>
+      <a href="blog.html" data-i18n="nav.blog">Blog</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app/parent-dashboard" target="_blank" data-i18n="nav.parent">Parent Login / Progress</a>
+      <a href="https://elevate-u-ceda8d9f.base44.app/subjects" class="nav-cta" target="_blank" data-i18n="nav.student_login">Student Log In →</a>
+      <div class="cb-lang-switcher" id="cbLangSwitcher" style="position:relative;display:inline-block;">
+        <button id="cbLangCurrent" onclick="cbToggleLangMenu()" style="background:none;border:1px solid #d1d5db;border-radius:6px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;color:inherit;font-family:inherit;">EN ▾</button>
+        <div id="cbLangMenu" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:150px;z-index:1000;overflow:hidden;">
+          <a class="cb-lang-option" data-lang="en" onclick="cbSetLang('en')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">English</a>
+          <a class="cb-lang-option" data-lang="fr" onclick="cbSetLang('fr')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Français</a>
+          <a class="cb-lang-option" data-lang="es" onclick="cbSetLang('es')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Español</a>
+          <a class="cb-lang-option" data-lang="vi" onclick="cbSetLang('vi')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Tiếng Việt</a>
+          <a class="cb-lang-option" data-lang="zh" onclick="cbSetLang('zh')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">中文</a>
+        </div>
+      </div>
     </div>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
