@@ -24,7 +24,19 @@
     document.querySelectorAll('.cb-lang-option').forEach(function(a){
       a.classList.toggle('active', a.getAttribute('data-lang') === lang);
     });
+    document.dispatchEvent(new CustomEvent('cblangchange', { detail: { lang: lang } }));
   }
+
+  // Global helper so inline/dynamic JS (e.g. the order builder) can fetch a
+  // translated string for the currently active language, with fallback to English.
+  window.cbT = function(key){
+    var lang = getLang();
+    var dict = (window.CB_TRANSLATIONS && window.CB_TRANSLATIONS[lang]) || {};
+    var fallback = (window.CB_TRANSLATIONS && window.CB_TRANSLATIONS.en) || {};
+    return dict[key] || fallback[key] || key;
+  };
+
+  window.cbGetLang = getLang;
 
   window.cbSetLang = function(lang){
     applyLang(lang);
