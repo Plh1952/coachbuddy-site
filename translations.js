@@ -2,7 +2,7 @@ window.CB_TRANSLATIONS = {
   en: {
     "nav.home":"Home","nav.courses":"Courses","nav.students":"For Students","nav.pricing":"Pricing",
     "nav.blog":"Blog","nav.about":"About","nav.contact":"Contact",
-    "nav.parent":"Parent Login / Progress","nav.student_login":"Student Log In →",
+    "nav.parent":"Parent Login / Progress","nav.student_login":"Student Log In →","nav.see_plans":"See Plans →","nav.start_learning":"Start Learning →",
     "hero.tag":"AI-Powered Education","hero.title":"The tutor that teaches — not tells.",
     "hero.subtitle":"CoachBuddy doesn't give your child the answer. It asks the right question so they find it themselves. Real understanding. Real confidence. Real results.",
     "hero.btn_pricing":"See Plans & Pricing","hero.btn_philosophy":"Our Philosophy",
@@ -34,7 +34,7 @@ window.CB_TRANSLATIONS = {
   fr: {
     "nav.home":"Accueil","nav.courses":"Cours","nav.students":"Pour les étudiants","nav.pricing":"Tarifs",
     "nav.blog":"Blog","nav.about":"À propos","nav.contact":"Contact",
-    "nav.parent":"Connexion parent / Suivi","nav.student_login":"Connexion élève →",
+    "nav.parent":"Connexion parent / Suivi","nav.student_login":"Connexion élève →","nav.see_plans":"Voir les offres →","nav.start_learning":"Commencer à apprendre →",
     "hero.tag":"Éducation propulsée par l'IA","hero.title":"Le tuteur qui enseigne — et ne donne pas la réponse.",
     "hero.subtitle":"CoachBuddy ne donne pas la réponse à votre enfant. Il pose la bonne question pour qu'il la trouve lui-même. Vraie compréhension. Vraie confiance. Vrais résultats.",
     "hero.btn_pricing":"Voir les offres et tarifs","hero.btn_philosophy":"Notre philosophie",
@@ -66,7 +66,7 @@ window.CB_TRANSLATIONS = {
   es: {
     "nav.home":"Inicio","nav.courses":"Cursos","nav.students":"Para estudiantes","nav.pricing":"Precios",
     "nav.blog":"Blog","nav.about":"Nosotros","nav.contact":"Contacto",
-    "nav.parent":"Acceso de padres / Progreso","nav.student_login":"Acceso de estudiante →",
+    "nav.parent":"Acceso de padres / Progreso","nav.student_login":"Acceso de estudiante →","nav.see_plans":"Ver planes →","nav.start_learning":"Empezar a aprender →",
     "hero.tag":"Educación impulsada por IA","hero.title":"El tutor que enseña — no que da la respuesta.",
     "hero.subtitle":"CoachBuddy no le da la respuesta a tu hijo. Le hace la pregunta correcta para que la encuentre por sí mismo. Comprensión real. Confianza real. Resultados reales.",
     "hero.btn_pricing":"Ver planes y precios","hero.btn_philosophy":"Nuestra filosofía",
@@ -98,7 +98,7 @@ window.CB_TRANSLATIONS = {
   vi: {
     "nav.home":"Trang chủ","nav.courses":"Khóa học","nav.students":"Dành cho học sinh","nav.pricing":"Bảng giá",
     "nav.blog":"Blog","nav.about":"Giới thiệu","nav.contact":"Liên hệ",
-    "nav.parent":"Đăng nhập phụ huynh / Theo dõi","nav.student_login":"Đăng nhập học sinh →",
+    "nav.parent":"Đăng nhập phụ huynh / Theo dõi","nav.student_login":"Đăng nhập học sinh →","nav.see_plans":"Xem các gói →","nav.start_learning":"Bắt đầu học →",
     "hero.tag":"Giáo dục ứng dụng AI","hero.title":"Gia sư dạy cách tư duy — không cho đáp án.",
     "hero.subtitle":"CoachBuddy không đưa đáp án cho con bạn. CoachBuddy đặt đúng câu hỏi để con tự tìm ra câu trả lời. Hiểu bài thật sự. Tự tin thật sự. Kết quả thật sự.",
     "hero.btn_pricing":"Xem gói & bảng giá","hero.btn_philosophy":"Triết lý của chúng tôi",
@@ -130,7 +130,7 @@ window.CB_TRANSLATIONS = {
   zh: {
     "nav.home":"首页","nav.courses":"课程","nav.students":"学生专区","nav.pricing":"价格",
     "nav.blog":"博客","nav.about":"关于我们","nav.contact":"联系我们",
-    "nav.parent":"家长登录 / 进度查看","nav.student_login":"学生登录 →",
+    "nav.parent":"家长登录 / 进度查看","nav.student_login":"学生登录 →","nav.see_plans":"查看套餐 →","nav.start_learning":"开始学习 →",
     "hero.tag":"AI驱动的教育","hero.title":"引导思考的导师——而不是直接给答案。",
     "hero.subtitle":"CoachBuddy不会直接告诉孩子答案,而是提出正确的问题,引导孩子自己找到答案。真正的理解,真正的自信,真正的进步。",
     "hero.btn_pricing":"查看套餐与价格","hero.btn_philosophy":"我们的理念",
