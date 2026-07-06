@@ -22,6 +22,11 @@
       var text = dict[key] || fallback[key];
       if (text) el.setAttribute('placeholder', text);
     });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      var text = dict[key] || fallback[key];
+      if (text) el.innerHTML = text;
+    });
     document.documentElement.lang = lang;
     localStorage.setItem('cb_lang', lang);
     var curBtn = document.getElementById('cbLangCurrent');
