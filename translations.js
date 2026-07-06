@@ -271,7 +271,11 @@ window.CB_TRANSLATIONS = {
     "cta.title":"Ready to get started?",
     "cta.subtitle":"Choose your plan, place your order, and get immediate access. Life Skills and Entrepreneurship unlock automatically with qualifying purchases.",
     "cta.btn_plans":"See Plans & Place Order →",
-    "cta.btn_trial":"Try Free 7-Day Challenge"
+    "cta.btn_trial":"Try Free 7-Day Challenge",
+    "footer.affiliate_program":"Affiliate Program",
+    "footer.account_heading":"Account",
+    "footer.link_student_login":"Student Log In",
+    "footer.link_sign_up":"Sign Up"
   },
   fr: {
     "nav.home":"Accueil","nav.courses":"Cours","nav.students":"Pour les étudiants","nav.pricing":"Tarifs",
@@ -545,7 +549,11 @@ window.CB_TRANSLATIONS = {
     "cta.title":"Prêt à commencer ?",
     "cta.subtitle":"Choisissez votre plan, passez votre commande, et obtenez un accès immédiat. Life Skills et Entrepreneuriat se débloquent automatiquement avec les achats éligibles.",
     "cta.btn_plans":"Voir les plans & Commander →",
-    "cta.btn_trial":"Essayer le défi gratuit de 7 jours"
+    "cta.btn_trial":"Essayer le défi gratuit de 7 jours",
+    "footer.affiliate_program":"Programme d'affiliation",
+    "footer.account_heading":"Compte",
+    "footer.link_student_login":"Connexion élève",
+    "footer.link_sign_up":"S'inscrire"
   },
   es: {
     "nav.home":"Inicio","nav.courses":"Cursos","nav.students":"Para estudiantes","nav.pricing":"Precios",
@@ -819,7 +827,11 @@ window.CB_TRANSLATIONS = {
     "cta.title":"¿Listo para empezar?",
     "cta.subtitle":"Elige tu plan, haz tu pedido, y obtén acceso inmediato. Life Skills y Emprendimiento se desbloquean automáticamente con compras elegibles.",
     "cta.btn_plans":"Ver planes y hacer pedido →",
-    "cta.btn_trial":"Prueba el reto gratuito de 7 días"
+    "cta.btn_trial":"Prueba el reto gratuito de 7 días",
+    "footer.affiliate_program":"Programa de afiliados",
+    "footer.account_heading":"Cuenta",
+    "footer.link_student_login":"Iniciar sesión (estudiante)",
+    "footer.link_sign_up":"Registrarse"
   },
   vi: {
     "nav.home":"Trang chủ","nav.courses":"Khóa học","nav.students":"Dành cho học sinh","nav.pricing":"Bảng giá",
@@ -1093,7 +1105,11 @@ window.CB_TRANSLATIONS = {
     "cta.title":"Sẵn sàng bắt đầu chưa?",
     "cta.subtitle":"Chọn gói của bạn, đặt hàng, và nhận quyền truy cập ngay lập tức. Life Skills và Khởi Nghiệp sẽ tự động mở khóa khi mua hàng đủ điều kiện.",
     "cta.btn_plans":"Xem Các Gói & Đặt Hàng →",
-    "cta.btn_trial":"Dùng Thử Thử Thách 7 Ngày Miễn Phí"
+    "cta.btn_trial":"Dùng Thử Thử Thách 7 Ngày Miễn Phí",
+    "footer.affiliate_program":"Chương Trình Liên Kết",
+    "footer.account_heading":"Tài Khoản",
+    "footer.link_student_login":"Đăng Nhập Học Sinh",
+    "footer.link_sign_up":"Đăng Ký"
   },
   zh: {
     "nav.home":"首页","nav.courses":"课程","nav.students":"学生专区","nav.pricing":"价格",
@@ -1367,6 +1383,10 @@ window.CB_TRANSLATIONS = {
     "cta.title":"准备好开始了吗?",
     "cta.subtitle":"选择你的计划,下单,立即获得访问权限。购买符合条件的产品后,Life Skills 和创业课程会自动解锁。",
     "cta.btn_plans":"查看计划并下单 →",
-    "cta.btn_trial":"试用免费7天挑战"
+    "cta.btn_trial":"试用免费7天挑战",
+    "footer.affiliate_program":"联盟计划",
+    "footer.account_heading":"账户",
+    "footer.link_student_login":"学生登录",
+    "footer.link_sign_up":"注册"
   }
 };
