@@ -17,6 +17,11 @@
       var text = dict[key] || fallback[key];
       if (text) el.textContent = text;
     });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      var text = dict[key] || fallback[key];
+      if (text) el.setAttribute('placeholder', text);
+    });
     document.documentElement.lang = lang;
     localStorage.setItem('cb_lang', lang);
     var curBtn = document.getElementById('cbLangCurrent');
