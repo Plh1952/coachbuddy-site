@@ -35,6 +35,19 @@
       a.classList.toggle('active', a.getAttribute('data-lang') === lang);
     });
     document.dispatchEvent(new CustomEvent('cblangchange', { detail: { lang: lang } }));
+    rewriteAppLinks(lang);
+  }
+
+  // Pass the visitor's chosen language through to the CoachBuddy app
+  // (a different domain, so localStorage can't carry it — use a URL param instead).
+  function rewriteAppLinks(lang){
+    document.querySelectorAll('a[href*="elevate-u-ceda8d9f.base44.app"]').forEach(function(a){
+      try {
+        var url = new URL(a.getAttribute('href'), window.location.href);
+        url.searchParams.set('lang', lang);
+        a.setAttribute('href', url.toString());
+      } catch(e) {}
+    });
   }
 
   // Global helper so inline/dynamic JS (e.g. the order builder) can fetch a
