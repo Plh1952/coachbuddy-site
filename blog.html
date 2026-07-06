@@ -97,57 +97,64 @@ window.addEventListener('scroll', () => {
 let allPosts = [];
 let activeCategory = 'All';
 
+function pd(p) {
+  const lang = (window.cbGetLang && window.cbGetLang()) || 'en';
+  return (p.i18n && (p.i18n[lang] || p.i18n.en)) || {};
+}
+
 fetch('data/blog.json')
   .then(r => r.json())
   .then(posts => {
     allPosts = posts.filter(p => p.published);
-    const cats = ['All', ...new Set(allPosts.map(p => p.category))];
-
-    const filterEl = document.getElementById('blog-filters');
-    const catEl = document.getElementById('category-list');
-    cats.forEach(cat => {
-      const btn = document.createElement('button');
-      btn.textContent = cat;
-      btn.className = 'btn btn-sm ' + (cat === 'All' ? 'btn-primary' : 'btn-outline');
-      btn.style.cssText = 'font-family:Arial,sans-serif;';
-      btn.onclick = () => { activeCategory = cat; renderPosts(); renderFilters(cats); };
-      filterEl.appendChild(btn);
-
-      if (cat !== 'All') {
-        const count = allPosts.filter(p => p.category === cat).length;
-        catEl.innerHTML += `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e2e6f0;font-size:14px;font-family:Arial,sans-serif;">
-          <a href="#" onclick="activeCategory='${cat}';renderPosts();return false;" style="color:#5a6480;">${cat}</a>
-          <span style="color:#9aa3be;">${count}</span></div>`;
-      }
-    });
+    renderFilters();
     renderPosts();
   });
 
-function renderFilters(cats) {
-  const btns = document.querySelectorAll('#blog-filters button');
-  btns.forEach((btn, i) => {
-    btn.className = 'btn btn-sm ' + (cats[i] === activeCategory ? 'btn-primary' : 'btn-outline');
-    btn.style.fontFamily = 'Arial,sans-serif';
+document.addEventListener('cblangchange', () => { renderFilters(); renderPosts(); });
+
+function renderFilters() {
+  const cats = ['All', ...new Set(allPosts.map(p => pd(p).category))];
+  const filterEl = document.getElementById('blog-filters');
+  const catEl = document.getElementById('category-list');
+  filterEl.innerHTML = '';
+  catEl.innerHTML = '';
+  cats.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.textContent = cat === 'All' ? (window.cbT ? window.cbT('blog.cat_all') : 'All') : cat;
+    btn.className = 'btn btn-sm ' + (cat === activeCategory ? 'btn-primary' : 'btn-outline');
+    btn.style.cssText = 'font-family:Arial,sans-serif;';
+    btn.onclick = () => { activeCategory = cat; renderPosts(); renderFilters(); };
+    filterEl.appendChild(btn);
+
+    if (cat !== 'All') {
+      const count = allPosts.filter(p => pd(p).category === cat).length;
+      catEl.innerHTML += `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #e2e6f0;font-size:14px;font-family:Arial,sans-serif;">
+        <a href="#" onclick="activeCategory='${cat}';renderPosts();renderFilters();return false;" style="color:#5a6480;">${cat}</a>
+        <span style="color:#9aa3be;">${count}</span></div>`;
+    }
   });
 }
 
 function renderPosts() {
   const list = document.getElementById('blog-list');
   const noEl = document.getElementById('no-posts');
-  const filtered = activeCategory === 'All' ? allPosts : allPosts.filter(p => p.category === activeCategory);
+  const filtered = activeCategory === 'All' ? allPosts : allPosts.filter(p => pd(p).category === activeCategory);
   if (!filtered.length) { list.innerHTML = ''; noEl.style.display = 'block'; return; }
   noEl.style.display = 'none';
-  list.innerHTML = filtered.map(p => `
+  list.innerHTML = filtered.map(p => {
+    const d = pd(p);
+    return `
     <div class="blog-item" onclick="location.href='blog-post.html?id=${p.id}'">
       <div class="blog-item-left">
-        <span class="blog-cat">${p.category}</span>
+        <span class="blog-cat">${d.category}</span>
         <div>
-          <div class="blog-title">${p.title}</div>
-          <div style="font-size:13px;color:#9aa3be;margin-top:4px;font-family:Arial,sans-serif;">${p.excerpt}</div>
+          <div class="blog-title">${d.title}</div>
+          <div style="font-size:13px;color:#9aa3be;margin-top:4px;font-family:Arial,sans-serif;">${d.excerpt}</div>
         </div>
       </div>
       <span class="blog-date">${new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 </script>
 </body>
