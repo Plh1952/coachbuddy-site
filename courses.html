@@ -524,21 +524,21 @@
 <!-- COURSE COMMENTS -->
 <section class="section">
   <div class="container" style="max-width:760px;">
-    <h2 style="font-size:28px;margin-bottom:8px;">Questions about our courses?</h2>
-    <p style="margin-bottom:36px;">Ask a question or leave feedback. We respond to every message.</p>
+    <h2 style="font-size:28px;margin-bottom:8px;" data-i18n="courses.comment_heading">Questions about our courses?</h2>
+    <p style="margin-bottom:36px;" data-i18n="courses.comment_subtitle">Ask a question or leave feedback. We respond to every message.</p>
     <div class="comment-form">
       <div id="course-comment-alert"></div>
       <div class="form-row">
-        <div class="form-group"><label>Your Name *</label><input type="text" id="cc-name" placeholder="e.g. Marie Dupont" /></div>
-        <div class="form-group"><label>Email</label><input type="email" id="cc-email" placeholder="your@email.com" /></div>
+        <div class="form-group"><label data-i18n="courses.comment_name_label">Your Name *</label><input type="text" id="cc-name" data-i18n-placeholder="courses.comment_name_ph" placeholder="e.g. Marie Dupont" /></div>
+        <div class="form-group"><label data-i18n="courses.comment_email_label">Email</label><input type="email" id="cc-email" data-i18n-placeholder="courses.comment_email_ph" placeholder="your@email.com" /></div>
       </div>
-      <div class="form-group"><label>Which course are you asking about?</label>
+      <div class="form-group"><label data-i18n="courses.comment_which_label">Which course are you asking about?</label>
         <select id="cc-course">
-          <option>Life Skills (Member Bonus)</option><option>School Subjects</option><option>JavaScript</option><option>React</option><option>Node.js</option><option>Full-Stack Integration</option><option>DevOps & Deployment</option><option>Professional Skills</option><option>Trading Markets</option><option>General question</option>
+          <option data-i18n="courses.opt_lifeskills">Life Skills (Member Bonus)</option><option data-i18n="courses.opt_subjects">School Subjects</option><option data-i18n="courses.opt_js">JavaScript</option><option data-i18n="courses.opt_react">React</option><option data-i18n="courses.opt_node">Node.js</option><option data-i18n="courses.opt_fullstack">Full-Stack Integration</option><option data-i18n="courses.opt_devops">DevOps & Deployment</option><option data-i18n="courses.opt_professional">Professional Skills</option><option data-i18n="courses.opt_trading">Trading Markets</option><option data-i18n="courses.opt_general">General question</option>
         </select>
       </div>
-      <div class="form-group"><label>Your Question or Comment *</label><textarea id="cc-text" placeholder="What would you like to know?"></textarea></div>
-      <button class="btn btn-primary" onclick="submitCourseComment()">Send Message</button>
+      <div class="form-group"><label data-i18n="courses.comment_text_label">Your Question or Comment *</label><textarea id="cc-text" data-i18n-placeholder="courses.comment_text_ph" placeholder="What would you like to know?"></textarea></div>
+      <button class="btn btn-primary" onclick="submitCourseComment()" data-i18n="courses.comment_send_btn">Send Message</button>
     </div>
     <div id="course-comments-list"></div>
   </div>
@@ -547,12 +547,12 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-brand"><div class="logo-text"><img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" style="width:28px;height:28px;object-fit:contain;border-radius:6px;vertical-align:middle;margin-right:8px;">CoachBuddy</div><p>AI-powered education that teaches students to think — not just to memorise.</p></div>
-      <div class="footer-col"><h4>Courses</h4><a href="courses.html">Life Skills (Member Bonus)</a><a href="courses.html">School Subjects</a><a href="courses.html">JavaScript</a><a href="courses.html">React & Node.js</a><a href="courses.html">Full-Stack Integration</a><a href="courses.html">DevOps & Professional</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="affiliate.html">Affiliate</a></div>
-      <div class="footer-col"><h4>Platform</h4><a href="order.html" class="btn btn-primary">See Plans →</a></div>
+      <div class="footer-brand"><div class="logo-text"><img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" style="width:28px;height:28px;object-fit:contain;border-radius:6px;vertical-align:middle;margin-right:8px;">CoachBuddy</div><p data-i18n="footer.tagline">AI-powered education that teaches students to think — not just to memorise.</p></div>
+      <div class="footer-col"><h4 data-i18n="footer.courses_heading">Courses</h4><a href="courses.html" data-i18n="courses.opt_lifeskills">Life Skills (Member Bonus)</a><a href="courses.html" data-i18n="footer.link_subjects">School Subjects</a><a href="courses.html" data-i18n="footer.link_js">JavaScript</a><a href="courses.html" data-i18n="footer.link_react_node">React & Node.js</a><a href="courses.html" data-i18n="courses.opt_fullstack">Full-Stack Integration</a><a href="courses.html" data-i18n="courses.footer_devops_professional">DevOps & Professional</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.company_heading">Company</h4><a href="about.html" data-i18n="nav.about">About</a><a href="blog.html" data-i18n="nav.blog">Blog</a><a href="contact.html" data-i18n="nav.contact">Contact</a><a href="terms.html" data-i18n="footer.terms">Terms</a><a href="privacy.html" data-i18n="footer.privacy">Privacy</a><a href="affiliate.html" data-i18n="footer.affiliate">Affiliate</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.platform_heading">Platform</h4><a href="order.html" class="btn btn-primary" data-i18n="nav.see_plans">See Plans →</a></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 CoachBuddy — Lam Ai Software Solutions LLC</p></div>
+    <div class="footer-bottom"><p data-i18n="footer.copyright_full">© 2026 CoachBuddy — Lam Ai Software Solutions LLC</p></div>
   </div>
 </footer>
 
