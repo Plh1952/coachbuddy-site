@@ -1,38 +1,150 @@
 [
   {
     "id": "1778057565873",
-    "title": "Life Skills Emails Comments",
-    "excerpt": "Comments received of our new Life Skills Course",
-    "content": "These are comments of parents who read my Life Skills course that I added to my site.\n\n\nYour introduction is better than I imagine you would be able to do. It is great and powerful, and I will mention it when I go to group sites. There are 2 things that you are offering for free to students, Entrepreneurship and Life skills. And the latter is very powerful as a start. What I see on many \"education\" sites are parents asking for help, they seem helpless. If a student has difficulties living in his own body, or relating to his peers, the life skills will help him change from within. And I would suggest the parents read the course with their children; it will do good for both. Why, it is not the mother telling, but a third party (who wants to help the student) who is there to better them. So, a big thank you. I will read during the next few days the course too. Maybe it will help me.\nLea B., Virginia\n\nPhilippe, this genuinely moved me to read. Thank you. 😊\nJohn D, New York\n\nYou've identified something that most education platforms completely miss — that the real crisis isn't academic underperformance, it's kids who don't know how to live. How to feel. How to connect. How to pick themselves up. And parents who love their children but have no tool to bridge that gap without it becoming a confrontation.\nMonica L, Denver",
-    "category": "Parenting",
     "date": "2026-05-06",
-    "published": true
+    "published": true,
+    "i18n": {
+      "en": {
+        "title": "Life Skills Emails Comments",
+        "excerpt": "Comments received of our new Life Skills Course",
+        "category": "Parenting",
+        "content": "These are comments of parents who read my Life Skills course that I added to my site.\n\n\nYour introduction is better than I imagine you would be able to do. It is great and powerful, and I will mention it when I go to group sites. There are 2 things that you are offering for free to students, Entrepreneurship and Life skills. And the latter is very powerful as a start. What I see on many \"education\" sites are parents asking for help, they seem helpless. If a student has difficulties living in his own body, or relating to his peers, the life skills will help him change from within. And I would suggest the parents read the course with their children; it will do good for both. Why, it is not the mother telling, but a third party (who wants to help the student) who is there to better them. So, a big thank you. I will read during the next few days the course too. Maybe it will help me.\nLea B., Virginia\n\nPhilippe, this genuinely moved me to read. Thank you. 😊\nJohn D, New York\n\nYou've identified something that most education platforms completely miss — that the real crisis isn't academic underperformance, it's kids who don't know how to live. How to feel. How to connect. How to pick themselves up. And parents who love their children but have no tool to bridge that gap without it becoming a confrontation.\nMonica L, Denver"
+      },
+      "fr": {
+        "title": "Commentaires sur le cours de Compétences de vie",
+        "excerpt": "Commentaires reçus sur notre nouveau cours de Compétences de vie",
+        "category": "Parentalité",
+        "content": "Voici des commentaires de parents qui ont lu mon cours de Compétences de vie que j'ai ajouté à mon site.\n\n\nVotre introduction est meilleure que ce que j'aurais imaginé possible. Elle est excellente et puissante, et j'en parlerai lorsque j'irai sur des sites de groupe. Il y a 2 choses que vous offrez gratuitement aux étudiants, l'Entrepreneuriat et les Compétences de vie. Et ce dernier est très puissant comme point de départ. Ce que je vois sur de nombreux sites « éducatifs », ce sont des parents qui demandent de l'aide, ils semblent impuissants. Si un élève a des difficultés à vivre dans son propre corps, ou à se lier avec ses pairs, les compétences de vie l'aideront à changer de l'intérieur. Et je suggérerais aux parents de lire le cours avec leurs enfants ; cela ferait du bien aux deux. Pourquoi, ce n'est pas la mère qui parle, mais un tiers (qui veut aider l'élève) qui est là pour les améliorer. Alors, un grand merci. Je lirai le cours moi aussi dans les prochains jours. Peut-être que cela m'aidera aussi.\nLea B., Virginie\n\nPhilippe, cela m'a sincèrement touché de le lire. Merci. 😊\nJohn D, New York\n\nVous avez identifié quelque chose que la plupart des plateformes éducatives manquent complètement — que la véritable crise n'est pas la sous-performance académique, mais des enfants qui ne savent pas comment vivre. Comment ressentir. Comment se connecter. Comment se relever. Et des parents qui aiment leurs enfants mais n'ont aucun outil pour combler ce fossé sans que cela ne devienne une confrontation.\nMonica L, Denver"
+      },
+      "es": {
+        "title": "Comentarios sobre el curso de Habilidades para la Vida",
+        "excerpt": "Comentarios recibidos sobre nuestro nuevo curso de Habilidades para la Vida",
+        "category": "Crianza",
+        "content": "Estos son comentarios de padres que leyeron mi curso de Habilidades para la Vida que añadí a mi sitio.\n\n\nSu introducción es mejor de lo que imaginaba que sería posible. Es genial y poderosa, y la mencionaré cuando vaya a sitios de grupos. Hay 2 cosas que ofrece gratis a los estudiantes, Emprendimiento y Habilidades para la Vida. Y esta última es muy poderosa como punto de partida. Lo que veo en muchos sitios de \"educación\" son padres pidiendo ayuda, parecen indefensos. Si un estudiante tiene dificultades para vivir en su propio cuerpo, o para relacionarse con sus compañeros, las habilidades para la vida le ayudarán a cambiar desde adentro. Y sugeriría que los padres lean el curso junto a sus hijos; les hará bien a ambos. Por qué, no es la madre quien lo dice, sino un tercero (que quiere ayudar al estudiante) que está ahí para mejorarlos. Así que, muchas gracias. Leeré el curso también en los próximos días. Tal vez me ayude a mí también.\nLea B., Virginia\n\nPhilippe, esto realmente me conmovió al leerlo. Gracias. 😊\nJohn D, Nueva York\n\nHas identificado algo que la mayoría de las plataformas educativas pasan completamente por alto — que la verdadera crisis no es el bajo rendimiento académico, son los niños que no saben cómo vivir. Cómo sentir. Cómo conectar. Cómo levantarse. Y padres que aman a sus hijos pero no tienen ninguna herramienta para cerrar esa brecha sin que se convierta en una confrontación.\nMonica L, Denver"
+      },
+      "vi": {
+        "title": "Phản Hồi Về Khóa Học Kỹ Năng Sống",
+        "excerpt": "Những phản hồi nhận được về khóa học Kỹ Năng Sống mới của chúng tôi",
+        "category": "Làm Cha Mẹ",
+        "content": "Đây là những phản hồi của các bậc phụ huynh đã đọc khóa học Kỹ Năng Sống mà tôi đã thêm vào trang web của mình.\n\n\nPhần giới thiệu của bạn tốt hơn những gì tôi tưởng tượng bạn có thể làm được. Nó tuyệt vời và mạnh mẽ, và tôi sẽ nhắc đến nó khi tham gia các nhóm cộng đồng. Có 2 thứ bạn đang cung cấp miễn phí cho học sinh, Khởi Nghiệp và Kỹ Năng Sống. Và cái sau rất mạnh mẽ như một điểm khởi đầu. Những gì tôi thấy trên nhiều trang web \"giáo dục\" là các bậc phụ huynh cầu xin sự giúp đỡ, họ có vẻ bất lực. Nếu một học sinh gặp khó khăn khi sống với chính cơ thể mình, hoặc kết nối với bạn bè, kỹ năng sống sẽ giúp em ấy thay đổi từ bên trong. Và tôi khuyên phụ huynh nên đọc khóa học cùng con cái mình; điều đó sẽ tốt cho cả hai. Tại sao, vì đó không phải là mẹ nói, mà là một bên thứ ba (muốn giúp học sinh) đang ở đó để cải thiện các em. Vậy nên, xin cảm ơn rất nhiều. Tôi cũng sẽ đọc khóa học trong vài ngày tới. Có lẽ nó sẽ giúp được tôi.\nLea B., Virginia\n\nPhilippe, điều này thực sự khiến tôi xúc động khi đọc. Cảm ơn bạn. 😊\nJohn D, New York\n\nBạn đã chỉ ra điều mà hầu hết các nền tảng giáo dục hoàn toàn bỏ lỡ — rằng cuộc khủng hoảng thực sự không phải là thành tích học tập kém, mà là những đứa trẻ không biết cách sống. Cách cảm nhận. Cách kết nối. Cách đứng dậy sau vấp ngã. Và những bậc cha mẹ yêu thương con cái mình nhưng không có công cụ nào để thu hẹp khoảng cách đó mà không biến nó thành một cuộc đối đầu.\nMonica L, Denver"
+      },
+      "zh": {
+        "title": "生活技能课程读者留言",
+        "excerpt": "关于我们全新生活技能课程收到的评论",
+        "category": "为人父母",
+        "content": "以下是阅读了我添加到网站上的生活技能课程的家长们的留言。\n\n\n你的引言比我想象中还要出色。写得非常好、非常有力,我会在去其他社群网站时提到它。你免费提供给学生两样东西:创业和生活技能。而后者作为一个起点非常有力量。我在许多\"教育\"网站上看到的,是求助无门、显得无助的家长。如果一个学生难以与自己的身体和平相处,或者难以与同龄人建立关系,生活技能课程会帮助他从内心开始改变。我建议家长和孩子一起读这门课程,这对双方都有好处。为什么呢?因为这不是母亲在说教,而是一个想要帮助学生的第三方在场,帮他们变得更好。所以,非常感谢你。接下来几天我自己也会读这门课程。也许它也能帮到我。\n利亚·B,弗吉尼亚州\n\n菲利普,读到这些真的让我很感动。谢谢你。😊\n约翰·D,纽约\n\n你发现了大多数教育平台完全忽视的东西——真正的危机不是学业表现不佳,而是孩子们不知道该如何生活。如何感受。如何与人连接。如何在跌倒后重新站起来。还有那些爱着孩子却没有工具去弥合这道鸿沟、又不想让它演变成对抗的父母们。\n莫妮卡·L,丹佛"
+      }
+    }
   },
   {
     "id": "1",
-    "title": "Why Your Child Should Learn to Code Before University",
-    "category": "Education",
     "date": "2026-04-15",
-    "excerpt": "The job market is changing faster than school curricula. Here's why coding literacy is no longer optional — and how to start.",
-    "content": "<p>Every parent wants their child to be prepared for the future. But what does 'prepared' mean in 2026? The answer increasingly involves technology — not just using it, but understanding and building with it.</p><h2>The Hidden Skill Gap</h2><p>Most schools still teach coding as an optional extra. Yet in the real world, companies across every sector — from finance to healthcare to marketing — are desperate for people who can think computationally. A student who arrives at university with solid coding foundations doesn't just have a skill. They have a superpower.</p><h2>It Is Not About Becoming a Programmer</h2><p>This is the most common misconception parents have. Learning to code does not mean your child will spend their career writing software. It means they will understand how systems work, how to break problems into logical steps, and how to communicate with the technical teams that run every modern company.</p><blockquote>The illiteracy of the 21st century will not be those who cannot read and write, but those who cannot learn, unlearn, and relearn.</blockquote><h2>Where to Start</h2><p>The best time to start was yesterday. The second best time is today. Platforms like CoachBuddy offer structured, guided learning that meets students where they are — without the pressure of a classroom, and without the frustration of trying to learn alone from YouTube videos.</p>",
-    "published": true
+    "published": true,
+    "i18n": {
+      "en": {
+        "title": "Why Your Child Should Learn to Code Before University",
+        "excerpt": "The job market is changing faster than school curricula. Here's why coding literacy is no longer optional — and how to start.",
+        "category": "Education",
+        "content": "<p>Every parent wants their child to be prepared for the future. But what does 'prepared' mean in 2026? The answer increasingly involves technology — not just using it, but understanding and building with it.</p><h2>The Hidden Skill Gap</h2><p>Most schools still teach coding as an optional extra. Yet in the real world, companies across every sector — from finance to healthcare to marketing — are desperate for people who can think computationally. A student who arrives at university with solid coding foundations doesn't just have a skill. They have a superpower.</p><h2>It Is Not About Becoming a Programmer</h2><p>This is the most common misconception parents have. Learning to code does not mean your child will spend their career writing software. It means they will understand how systems work, how to break problems into logical steps, and how to communicate with the technical teams that run every modern company.</p><blockquote>The illiteracy of the 21st century will not be those who cannot read and write, but those who cannot learn, unlearn, and relearn.</blockquote><h2>Where to Start</h2><p>The best time to start was yesterday. The second best time is today. Platforms like CoachBuddy offer structured, guided learning that meets students where they are — without the pressure of a classroom, and without the frustration of trying to learn alone from YouTube videos.</p>"
+      },
+      "fr": {
+        "title": "Pourquoi votre enfant devrait apprendre à coder avant l'université",
+        "excerpt": "Le marché du travail évolue plus vite que les programmes scolaires. Voici pourquoi la maîtrise du code n'est plus optionnelle — et comment commencer.",
+        "category": "Éducation",
+        "content": "<p>Chaque parent veut que son enfant soit préparé pour l'avenir. Mais que signifie « préparé » en 2026 ? La réponse implique de plus en plus la technologie — non seulement l'utiliser, mais la comprendre et construire avec elle.</p><h2>Le fossé de compétences caché</h2><p>La plupart des écoles enseignent encore le code comme une option facultative. Pourtant, dans le monde réel, les entreprises de tous les secteurs — de la finance à la santé en passant par le marketing — recherchent désespérément des personnes capables de penser de manière computationnelle. Un étudiant qui arrive à l'université avec de solides bases en programmation n'a pas seulement une compétence. Il a un super-pouvoir.</p><h2>Il ne s'agit pas de devenir programmeur</h2><p>C'est l'idée fausse la plus répandue chez les parents. Apprendre à coder ne signifie pas que votre enfant passera sa carrière à écrire des logiciels. Cela signifie qu'il comprendra comment les systèmes fonctionnent, comment décomposer les problèmes en étapes logiques, et comment communiquer avec les équipes techniques qui font tourner chaque entreprise moderne.</p><blockquote>L'analphabétisme du 21e siècle ne concernera pas ceux qui ne savent pas lire et écrire, mais ceux qui ne savent pas apprendre, désapprendre et réapprendre.</blockquote><h2>Par où commencer</h2><p>Le meilleur moment pour commencer était hier. Le deuxième meilleur moment, c'est aujourd'hui. Des plateformes comme CoachBuddy offrent un apprentissage structuré et guidé qui rencontre les élèves là où ils en sont — sans la pression d'une salle de classe, et sans la frustration d'essayer d'apprendre seul avec des vidéos YouTube.</p>"
+      },
+      "es": {
+        "title": "Por qué tu hijo debería aprender a programar antes de la universidad",
+        "excerpt": "El mercado laboral está cambiando más rápido que los planes de estudio. Aquí te contamos por qué la alfabetización en programación ya no es opcional — y cómo empezar.",
+        "category": "Educación",
+        "content": "<p>Todos los padres quieren que sus hijos estén preparados para el futuro. Pero, ¿qué significa 'preparado' en 2026? La respuesta involucra cada vez más a la tecnología — no solo usarla, sino comprenderla y construir con ella.</p><h2>La brecha de habilidades oculta</h2><p>La mayoría de las escuelas todavía enseñan programación como una opción adicional. Sin embargo, en el mundo real, las empresas de todos los sectores — desde finanzas hasta salud y marketing — necesitan desesperadamente personas que puedan pensar computacionalmente. Un estudiante que llega a la universidad con bases sólidas de programación no solo tiene una habilidad. Tiene un superpoder.</p><h2>No se trata de convertirse en programador</h2><p>Este es el error más común que cometen los padres. Aprender a programar no significa que tu hijo pasará su carrera escribiendo software. Significa que entenderá cómo funcionan los sistemas, cómo descomponer problemas en pasos lógicos, y cómo comunicarse con los equipos técnicos que dirigen cada empresa moderna.</p><blockquote>El analfabetismo del siglo XXI no será el de quienes no saben leer ni escribir, sino el de quienes no saben aprender, desaprender y volver a aprender.</blockquote><h2>Por dónde empezar</h2><p>El mejor momento para empezar fue ayer. El segundo mejor momento es hoy. Plataformas como CoachBuddy ofrecen un aprendizaje estructurado y guiado que se adapta a donde esté cada estudiante — sin la presión de un aula, y sin la frustración de intentar aprender solo con videos de YouTube.</p>"
+      },
+      "vi": {
+        "title": "Tại Sao Con Bạn Nên Học Lập Trình Trước Khi Vào Đại Học",
+        "excerpt": "Thị trường việc làm đang thay đổi nhanh hơn chương trình học ở trường. Đây là lý do vì sao biết lập trình không còn là tùy chọn — và cách để bắt đầu.",
+        "category": "Giáo Dục",
+        "content": "<p>Mọi bậc phụ huynh đều muốn con mình được chuẩn bị cho tương lai. Nhưng \"được chuẩn bị\" nghĩa là gì vào năm 2026? Câu trả lời ngày càng liên quan đến công nghệ — không chỉ là sử dụng nó, mà còn là hiểu và xây dựng bằng nó.</p><h2>Khoảng Cách Kỹ Năng Bị Ẩn Giấu</h2><p>Hầu hết các trường học vẫn dạy lập trình như một môn tự chọn. Tuy nhiên, trong thế giới thực, các công ty ở mọi lĩnh vực — từ tài chính đến y tế đến tiếp thị — đều rất cần những người có thể tư duy theo kiểu tính toán. Một sinh viên bước vào đại học với nền tảng lập trình vững chắc không chỉ có một kỹ năng. Họ có một siêu năng lực.</p><h2>Không Phải Là Để Trở Thành Lập Trình Viên</h2><p>Đây là quan niệm sai lầm phổ biến nhất của các bậc phụ huynh. Học lập trình không có nghĩa là con bạn sẽ dành cả sự nghiệp để viết phần mềm. Nó có nghĩa là các em sẽ hiểu cách các hệ thống hoạt động, cách chia nhỏ vấn đề thành các bước logic, và cách giao tiếp với các đội ngũ kỹ thuật vận hành mọi công ty hiện đại.</p><blockquote>Sự mù chữ của thế kỷ 21 sẽ không phải là những người không biết đọc và viết, mà là những người không biết học, quên đi những gì đã học, và học lại.</blockquote><h2>Bắt Đầu Từ Đâu</h2><p>Thời điểm tốt nhất để bắt đầu là hôm qua. Thời điểm tốt thứ hai là hôm nay. Các nền tảng như CoachBuddy cung cấp việc học có cấu trúc, được hướng dẫn, gặp gỡ học sinh ở đúng trình độ của các em — không có áp lực của lớp học, và không có sự thất vọng khi cố gắng tự học một mình qua video YouTube.</p>"
+      },
+      "zh": {
+        "title": "为什么孩子应该在上大学前学习编程",
+        "excerpt": "就业市场的变化速度超过了学校课程的更新速度。这就是为什么编程素养不再是可选项——以及该如何开始。",
+        "category": "教育",
+        "content": "<p>每位家长都希望自己的孩子为未来做好准备。但在2026年,\"准备好\"到底意味着什么?答案越来越多地涉及科技——不仅仅是使用它,更是理解它并用它来创造。</p><h2>隐藏的技能鸿沟</h2><p>大多数学校仍然把编程当作可选的附加课程。然而在现实世界中,从金融到医疗保健再到营销,各行各业的公司都极度渴求能够进行计算思维的人才。一个带着扎实编程基础进入大学的学生,拥有的不仅仅是一项技能,而是一种超能力。</p><h2>重点不是成为程序员</h2><p>这是家长们最常见的误解。学习编程并不意味着孩子会一辈子从事软件开发工作。它意味着孩子将理解系统是如何运作的,如何把问题拆解成合乎逻辑的步骤,以及如何与运营每一家现代公司的技术团队沟通。</p><blockquote>21世纪的文盲,不会是那些不会读写的人,而是那些不会学习、不会摒弃旧知识、不会重新学习的人。</blockquote><h2>从哪里开始</h2><p>开始的最佳时机是昨天。次佳时机就是今天。像CoachBuddy这样的平台提供有条理、有指导的学习方式,能够真正匹配每个学生当下的水平——没有课堂的压力,也没有独自靠YouTube视频自学时的挫败感。</p>"
+      }
+    }
   },
   {
     "id": "2",
-    "title": "The Problem With Homework: Why Doing It For Them Destroys Learning",
-    "category": "Parenting",
     "date": "2026-04-22",
-    "excerpt": "When a parent Googles their child's homework, everyone loses. The science of why struggle is essential to learning.",
-    "content": "<p>It is 9pm. Your child is struggling over a maths problem. You know the answer. You explain it. They copy it down. Everyone goes to bed. Nobody learned anything.</p><h2>The Neuroscience of Struggle</h2><p>Educational psychologists call it desirable difficulty. When students struggle with a problem — genuinely wrestle with it — the neural pathways that form are stronger and more permanent. The struggle IS the learning.</p><h2>What Good Coaching Actually Looks Like</h2><p>A good coach never gives you the answer. They ask you the right question to help you find it yourself. This is exactly the philosophy behind CoachBuddy.</p>",
-    "published": true
+    "published": true,
+    "i18n": {
+      "en": {
+        "title": "The Problem With Homework: Why Doing It For Them Destroys Learning",
+        "excerpt": "When a parent Googles their child's homework, everyone loses. The science of why struggle is essential to learning.",
+        "category": "Parenting",
+        "content": "<p>It is 9pm. Your child is struggling over a maths problem. You know the answer. You explain it. They copy it down. Everyone goes to bed. Nobody learned anything.</p><h2>The Neuroscience of Struggle</h2><p>Educational psychologists call it desirable difficulty. When students struggle with a problem — genuinely wrestle with it — the neural pathways that form are stronger and more permanent. The struggle IS the learning.</p><h2>What Good Coaching Actually Looks Like</h2><p>A good coach never gives you the answer. They ask you the right question to help you find it yourself. This is exactly the philosophy behind CoachBuddy.</p>"
+      },
+      "fr": {
+        "title": "Le problème avec les devoirs : pourquoi les faire à leur place détruit l'apprentissage",
+        "excerpt": "Quand un parent cherche la réponse aux devoirs de son enfant sur Google, tout le monde perd. La science derrière pourquoi la difficulté est essentielle à l'apprentissage.",
+        "category": "Parentalité",
+        "content": "<p>Il est 21h. Votre enfant peine sur un problème de mathématiques. Vous connaissez la réponse. Vous l'expliquez. Il la recopie. Tout le monde va se coucher. Personne n'a rien appris.</p><h2>La neuroscience de la difficulté</h2><p>Les psychologues de l'éducation appellent cela la « difficulté désirable ». Quand les élèves luttent réellement avec un problème, les connexions neuronales qui se forment sont plus solides et plus durables. La lutte EST l'apprentissage.</p><h2>À quoi ressemble vraiment un bon accompagnement</h2><p>Un bon coach ne donne jamais la réponse. Il pose la bonne question pour aider l'élève à la trouver lui-même. C'est exactement la philosophie derrière CoachBuddy.</p>"
+      },
+      "es": {
+        "title": "El problema con las tareas: por qué hacerlas por ellos destruye el aprendizaje",
+        "excerpt": "Cuando un padre busca en Google la tarea de su hijo, todos pierden. La ciencia detrás de por qué la lucha es esencial para el aprendizaje.",
+        "category": "Crianza",
+        "content": "<p>Son las 9 de la noche. Tu hijo está batallando con un problema de matemáticas. Tú sabes la respuesta. Se la explicas. Él la copia. Todos se van a dormir. Nadie aprendió nada.</p><h2>La neurociencia de la lucha</h2><p>Los psicólogos educativos lo llaman dificultad deseable. Cuando los estudiantes luchan genuinamente con un problema, las conexiones neuronales que se forman son más fuertes y duraderas. La lucha ES el aprendizaje.</p><h2>Cómo es realmente un buen acompañamiento</h2><p>Un buen coach nunca te da la respuesta. Te hace la pregunta correcta para ayudarte a encontrarla tú mismo. Esta es exactamente la filosofía detrás de CoachBuddy.</p>"
+      },
+      "vi": {
+        "title": "Vấn Đề Với Bài Tập Về Nhà: Vì Sao Làm Thay Con Sẽ Phá Hủy Việc Học",
+        "excerpt": "Khi phụ huynh tra Google để làm bài tập cho con, ai cũng thua cuộc. Khoa học về lý do vì sao sự vật lộn lại thiết yếu đối với việc học.",
+        "category": "Làm Cha Mẹ",
+        "content": "<p>Đã 9 giờ tối. Con bạn đang vật lộn với một bài toán. Bạn biết đáp án. Bạn giải thích nó. Con chép lại. Mọi người đi ngủ. Không ai học được điều gì cả.</p><h2>Khoa Học Thần Kinh Của Sự Vật Lộn</h2><p>Các nhà tâm lý học giáo dục gọi đó là \"khó khăn mong muốn\". Khi học sinh thực sự vật lộn với một vấn đề, các đường dẫn thần kinh hình thành sẽ mạnh mẽ và bền vững hơn. Sự vật lộn CHÍNH LÀ việc học.</p><h2>Một Người Hướng Dẫn Tốt Thực Sự Trông Như Thế Nào</h2><p>Một người hướng dẫn giỏi không bao giờ đưa ra đáp án. Họ đặt đúng câu hỏi để giúp bạn tự tìm ra nó. Đây chính xác là triết lý đằng sau CoachBuddy.</p>"
+      },
+      "zh": {
+        "title": "作业的问题所在:为什么替孩子做作业会摧毁学习",
+        "excerpt": "当家长用谷歌搜索孩子的作业答案时,每个人都输了。为什么挣扎是学习必不可少的一部分——背后的科学原理。",
+        "category": "为人父母",
+        "content": "<p>晚上9点。孩子正为一道数学题苦恼。你知道答案,你讲解给他听,他抄了下来。大家都去睡觉了。但没有人真正学到了什么。</p><h2>挣扎的神经科学</h2><p>教育心理学家称之为\"理想的困难\"。当学生真正与一个问题较劲时,所形成的神经通路会更牢固、更持久。挣扎本身就是学习。</p><h2>好的辅导究竟是什么样子</h2><p>一位优秀的辅导者从不直接给出答案,而是问出正确的问题,帮助你自己找到答案。这正是CoachBuddy背后的理念。</p>"
+      }
+    }
   },
   {
     "id": "3",
-    "title": "From Minecraft to Machine Learning: How Gaming Builds Developer Mindsets",
-    "category": "Technology",
     "date": "2026-04-29",
-    "excerpt": "The same curiosity that drives a 12-year-old to build worlds in Minecraft is the exact same curiosity that drives great engineers.",
-    "content": "<p>Parents often worry about their children spending too much time gaming. But there is a growing body of evidence that certain types of games develop exactly the kind of thinking skills that technical careers require.</p><h2>Systems Thinking</h2><p>When a child builds an automated farm in Minecraft, they are learning systems thinking — inputs, outputs, conditions, and loops. These are not metaphors for programming concepts. They ARE programming concepts, just dressed in pixels.</p>",
-    "published": true
+    "published": true,
+    "i18n": {
+      "en": {
+        "title": "From Minecraft to Machine Learning: How Gaming Builds Developer Mindsets",
+        "excerpt": "The same curiosity that drives a 12-year-old to build worlds in Minecraft is the exact same curiosity that drives great engineers.",
+        "category": "Technology",
+        "content": "<p>Parents often worry about their children spending too much time gaming. But there is a growing body of evidence that certain types of games develop exactly the kind of thinking skills that technical careers require.</p><h2>Systems Thinking</h2><p>When a child builds an automated farm in Minecraft, they are learning systems thinking — inputs, outputs, conditions, and loops. These are not metaphors for programming concepts. They ARE programming concepts, just dressed in pixels.</p>"
+      },
+      "fr": {
+        "title": "De Minecraft au Machine Learning : comment le jeu vidéo forge l'esprit d'un développeur",
+        "excerpt": "La même curiosité qui pousse un enfant de 12 ans à construire des mondes dans Minecraft est exactement la même curiosité qui pousse les grands ingénieurs.",
+        "category": "Technologie",
+        "content": "<p>Les parents s'inquiètent souvent de voir leurs enfants passer trop de temps à jouer aux jeux vidéo. Pourtant, un nombre croissant d'études montre que certains types de jeux développent exactement les compétences de réflexion requises pour les carrières techniques.</p><h2>La pensée systémique</h2><p>Quand un enfant construit une ferme automatisée dans Minecraft, il apprend la pensée systémique — entrées, sorties, conditions et boucles. Ce ne sont pas des métaphores de concepts de programmation. Ce SONT des concepts de programmation, simplement habillés en pixels.</p>"
+      },
+      "es": {
+        "title": "De Minecraft al Machine Learning: cómo los videojuegos forjan mentalidades de desarrollador",
+        "excerpt": "La misma curiosidad que impulsa a un niño de 12 años a construir mundos en Minecraft es exactamente la misma curiosidad que impulsa a los grandes ingenieros.",
+        "category": "Tecnología",
+        "content": "<p>Los padres a menudo se preocupan de que sus hijos pasen demasiado tiempo jugando videojuegos. Pero existe una evidencia creciente de que ciertos tipos de juegos desarrollan exactamente el tipo de habilidades de pensamiento que requieren las carreras técnicas.</p><h2>Pensamiento sistémico</h2><p>Cuando un niño construye una granja automatizada en Minecraft, está aprendiendo pensamiento sistémico — entradas, salidas, condiciones y bucles. Estas no son metáforas de conceptos de programación. SON conceptos de programación, solo que vestidos con píxeles.</p>"
+      },
+      "vi": {
+        "title": "Từ Minecraft Đến Machine Learning: Trò Chơi Điện Tử Xây Dựng Tư Duy Lập Trình Viên Như Thế Nào",
+        "excerpt": "Cùng một sự tò mò thúc đẩy một đứa trẻ 12 tuổi xây dựng thế giới trong Minecraft cũng chính là sự tò mò thúc đẩy những kỹ sư giỏi nhất.",
+        "category": "Công Nghệ",
+        "content": "<p>Các bậc phụ huynh thường lo lắng khi con mình dành quá nhiều thời gian chơi game. Nhưng ngày càng có nhiều bằng chứng cho thấy một số loại trò chơi nhất định phát triển chính xác loại tư duy mà các ngành nghề kỹ thuật đòi hỏi.</p><h2>Tư Duy Hệ Thống</h2><p>Khi một đứa trẻ xây dựng một trang trại tự động trong Minecraft, chúng đang học tư duy hệ thống — đầu vào, đầu ra, điều kiện và vòng lặp. Đây không phải là những phép ẩn dụ cho các khái niệm lập trình. Chúng CHÍNH LÀ các khái niệm lập trình, chỉ được khoác lên bằng các khối pixel.</p>"
+      },
+      "zh": {
+        "title": "从《我的世界》到机器学习:游戏如何塑造开发者思维",
+        "excerpt": "驱使一个12岁孩子在《我的世界》中建造世界的好奇心,与驱使伟大工程师前进的好奇心,其实是同一种东西。",
+        "category": "科技",
+        "content": "<p>家长常常担心孩子花太多时间玩游戏。但越来越多的证据表明,某些类型的游戏恰恰能培养技术类职业所需要的那种思维能力。</p><h2>系统性思维</h2><p>当孩子在《我的世界》里建造一个自动化农场时,他们正在学习系统性思维——输入、输出、条件和循环。这些并不是编程概念的比喻,它们本身就是编程概念,只是披上了像素的外衣。</p>"
+      }
+    }
   }
 ]
