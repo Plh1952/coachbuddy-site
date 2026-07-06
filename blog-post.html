@@ -7,15 +7,27 @@
   <link rel="stylesheet" href="style.css" />
 <script>window.lemonSqueezyAffiliateConfig = { store: "lamaisoftware" };</script>
 <script src="https://lmsqueezy.com/affiliate.js" defer></script>
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </head>
 <body>
 <nav id="navbar">
   <div class="nav-inner">
     <a class="nav-logo" href="index.html"><div class="logo-icon"><img src="https://media.base44.com/images/public/69cacc25a709616966f062a1/b816aecb3_generated_image.png" alt="CoachBuddy" style="width:36px;height:36px;object-fit:contain;border-radius:8px;"></div><span>CoachBuddy</span></a>
-    <div class="nav-links">
-      <a href="index.html">Home</a><a href="courses.html">Courses</a><a href="students.html">For Students</a>
-      <a href="blog.html" class="active">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-      <a href="order.html" class="btn btn-primary">See Plans →</a>
+    <div class="nav-links" style="display:flex;align-items:center;">
+      <a href="index.html" data-i18n="nav.home">Home</a><a href="courses.html" data-i18n="nav.courses">Courses</a><a href="students.html" data-i18n="nav.students">For Students</a>
+      <a href="blog.html" class="active" data-i18n="nav.blog">Blog</a><a href="about.html" data-i18n="nav.about">About</a><a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="order.html" class="btn btn-primary" data-i18n="nav.see_plans">See Plans →</a>
+      <div class="cb-lang-switcher" id="cbLangSwitcher" style="position:relative;display:inline-block;">
+        <button id="cbLangCurrent" onclick="cbToggleLangMenu()" style="background:#f5f6fa;border:1px solid #e2e6f0;border-radius:6px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;color:#1e293b;font-family:inherit;">EN ▾</button>
+        <div id="cbLangMenu" style="display:none;position:absolute;top:calc(100% + 6px);right:0;background:#fff;border:1px solid #e2e6f0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:150px;z-index:1000;overflow:hidden;">
+          <a class="cb-lang-option" data-lang="en" onclick="cbSetLang('en')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">English</a>
+          <a class="cb-lang-option" data-lang="fr" onclick="cbSetLang('fr')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Français</a>
+          <a class="cb-lang-option" data-lang="es" onclick="cbSetLang('es')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Español</a>
+          <a class="cb-lang-option" data-lang="vi" onclick="cbSetLang('vi')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">Tiếng Việt</a>
+          <a class="cb-lang-option" data-lang="zh" onclick="cbSetLang('zh')" style="display:block;padding:10px 16px;font-size:14px;color:#1e293b;text-decoration:none;cursor:pointer;">中文</a>
+        </div>
+      </div>
     </div>
     <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
@@ -23,7 +35,7 @@
 
 <div id="post-header" class="post-header">
   <div class="container">
-    <a href="blog.html" style="font-size:14px;color:#5a6480;font-family:Arial,sans-serif;">← Back to Blog</a>
+    <a href="blog.html" style="font-size:14px;color:#5a6480;font-family:Arial,sans-serif;" data-i18n="blogpost.back_link">← Back to Blog</a>
     <div id="post-meta" class="post-meta" style="margin-top:16px;"></div>
     <h1 id="post-title" style="font-size:clamp(24px,4vw,44px);max-width:760px;margin-top:12px;"></h1>
   </div>
@@ -36,14 +48,14 @@
   <h3 id="comments-heading">Comments (0)</h3>
 
   <div class="comment-form">
-    <h4 style="font-size:16px;margin-bottom:20px;">Leave a comment</h4>
+    <h4 style="font-size:16px;margin-bottom:20px;" data-i18n="blogpost.comment_form_heading">Leave a comment</h4>
     <div id="comment-alert"></div>
     <div class="form-row">
-      <div class="form-group"><label>Your Name *</label><input type="text" id="c-name" placeholder="e.g. Marie Dupont" /></div>
-      <div class="form-group"><label>Email (not published)</label><input type="email" id="c-email" placeholder="your@email.com" /></div>
+      <div class="form-group"><label data-i18n="blogpost.comment_name_label">Your Name *</label><input type="text" id="c-name" data-i18n-placeholder="blogpost.comment_name_ph" placeholder="e.g. Marie Dupont" /></div>
+      <div class="form-group"><label data-i18n="blogpost.comment_email_label">Email (not published)</label><input type="email" id="c-email" data-i18n-placeholder="blogpost.comment_email_ph" placeholder="your@email.com" /></div>
     </div>
-    <div class="form-group"><label>Your Comment *</label><textarea id="c-text" placeholder="Share your thoughts..."></textarea></div>
-    <button class="btn btn-primary" onclick="submitComment()">Post Comment</button>
+    <div class="form-group"><label data-i18n="blogpost.comment_text_label">Your Comment *</label><textarea id="c-text" data-i18n-placeholder="blogpost.comment_text_ph" placeholder="Share your thoughts..."></textarea></div>
+    <button class="btn btn-primary" onclick="submitComment()" data-i18n="blogpost.comment_post_btn">Post Comment</button>
   </div>
 
   <div id="comments-list"></div>
@@ -52,12 +64,12 @@
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-brand"><div class="logo-text">CoachBuddy</div><p>AI-powered education that teaches students to think — not just to memorise.</p></div>
-      <div class="footer-col"><h4>Courses</h4><a href="courses.html">JavaScript</a><a href="courses.html">React</a><a href="courses.html">Node.js</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="blog.html" class="active">Blog</a><a href="contact.html">Contact</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="affiliate.html">Affiliate</a></div>
-      <div class="footer-col"><h4>Platform</h4><a href="order.html" class="btn btn-primary">See Plans →</a></div>
+      <div class="footer-brand"><div class="logo-text">CoachBuddy</div><p data-i18n="footer.tagline">AI-powered education that teaches students to think — not just to memorise.</p></div>
+      <div class="footer-col"><h4 data-i18n="footer.courses_heading">Courses</h4><a href="courses.html" data-i18n="footer.link_js">JavaScript</a><a href="courses.html" data-i18n="students.footer_react">React</a><a href="courses.html" data-i18n="students.footer_nodejs">Node.js</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.company_heading">Company</h4><a href="about.html" data-i18n="nav.about">About</a><a href="blog.html" class="active" data-i18n="nav.blog">Blog</a><a href="contact.html" data-i18n="nav.contact">Contact</a><a href="terms.html" data-i18n="footer.terms">Terms</a><a href="privacy.html" data-i18n="footer.privacy">Privacy</a><a href="affiliate.html" data-i18n="footer.affiliate">Affiliate</a></div>
+      <div class="footer-col"><h4 data-i18n="footer.platform_heading">Platform</h4><a href="order.html" class="btn btn-primary" data-i18n="nav.see_plans">See Plans →</a></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 CoachBuddy — Lam Ai Software Solutions LLC</p></div>
+    <div class="footer-bottom"><p data-i18n="footer.copyright_full">© 2026 CoachBuddy — Lam Ai Software Solutions LLC</p></div>
   </div>
 </footer>
 
@@ -75,28 +87,43 @@ window.addEventListener('scroll', () => {
 });
 
 const postId = new URLSearchParams(location.search).get('id');
+let currentPost = null;
+
+function pd(p) {
+  const lang = (window.cbGetLang && window.cbGetLang()) || 'en';
+  return (p.i18n && (p.i18n[lang] || p.i18n.en)) || {};
+}
+
+function renderPost() {
+  if (!currentPost) return;
+  const d = pd(currentPost);
+  document.title = d.title + ' — CoachBuddy';
+  document.getElementById('post-title').textContent = d.title;
+  document.getElementById('post-meta').innerHTML = `
+    <span class="blog-cat">${d.category}</span>
+    <span style="font-size:14px;color:#9aa3be;margin-left:12px;font-family:Arial,sans-serif;">${new Date(currentPost.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>`;
+  document.getElementById('post-content').innerHTML = d.content;
+}
 
 fetch('data/blog.json')
   .then(r => r.json())
   .then(posts => {
-    const post = posts.find(p => p.id === postId);
-    if (!post) { document.getElementById('post-title').textContent = 'Post not found'; return; }
-    document.title = post.title + ' — CoachBuddy';
-    document.getElementById('post-title').textContent = post.title;
-    document.getElementById('post-meta').innerHTML = `
-      <span class="blog-cat">${post.category}</span>
-      <span style="font-size:14px;color:#9aa3be;margin-left:12px;font-family:Arial,sans-serif;">${new Date(post.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>`;
-    document.getElementById('post-content').innerHTML = post.content;
+    currentPost = posts.find(p => p.id === postId);
+    if (!currentPost) { document.getElementById('post-title').textContent = (window.cbT ? window.cbT('blogpost.post_not_found') : 'Post not found'); return; }
+    renderPost();
   });
+
+document.addEventListener('cblangchange', renderPost);
 
 fetch('data/comments.json')
   .then(r => r.json())
   .then(all => {
     const comments = all.filter(c => c.postId === postId && c.approved);
-    document.getElementById('comments-heading').textContent = `Comments (${comments.length})`;
+    const prefix = window.cbT ? window.cbT('blogpost.comments_heading_prefix') : 'Comments';
+    document.getElementById('comments-heading').textContent = `${prefix} (${comments.length})`;
     const list = document.getElementById('comments-list');
     if (!comments.length) {
-      list.innerHTML = '<p style="color:#9aa3be;font-size:14px;">No comments yet. Be the first!</p>';
+      list.innerHTML = `<p style="color:#9aa3be;font-size:14px;">${window.cbT ? window.cbT('blogpost.no_comments') : 'No comments yet. Be the first!'}</p>`;
       return;
     }
     list.innerHTML = comments.map(c => `
@@ -112,14 +139,14 @@ function submitComment() {
   const text = document.getElementById('c-text').value.trim();
   const alertEl = document.getElementById('comment-alert');
   if (!name || !text) {
-    alertEl.innerHTML = '<div class="alert alert-error">Please fill in your name and comment.</div>';
+    alertEl.innerHTML = `<div class="alert alert-error">${window.cbT ? window.cbT('blogpost.comment_error') : 'Please fill in your name and comment.'}</div>`;
     return;
   }
   // Save to localStorage as pending (admin approves via admin panel)
   const pending = JSON.parse(localStorage.getItem('cb_pending_comments') || '[]');
   pending.push({ id: Date.now().toString(), postId, name, email: document.getElementById('c-email').value, text, date: new Date().toISOString(), approved: false });
   localStorage.setItem('cb_pending_comments', JSON.stringify(pending));
-  alertEl.innerHTML = '<div class="alert alert-success">Thank you! Your comment has been submitted for review.</div>';
+  alertEl.innerHTML = `<div class="alert alert-success">${window.cbT ? window.cbT('blogpost.comment_success') : 'Thank you! Your comment has been submitted for review.'}</div>`;
   document.getElementById('c-name').value = '';
   document.getElementById('c-email').value = '';
   document.getElementById('c-text').value = '';
