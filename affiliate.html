@@ -48,25 +48,102 @@
     }
     .stat-card .num { font-size: 26px; font-weight: 800; color: #2563eb; }
     .stat-card .lbl { font-size: 13px; color: #64748b; margin-top: 4px; }
-    .apply-box {
-      background: #eff6ff;
-      border: 1px solid #dbeafe;
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 60px;
+    .apply-section {
+      background: #f8faff;
+      border-top: 3px solid #2563eb;
+      padding: 60px 24px;
     }
-    .apply-box h3 { margin-top: 0; }
-    .apply-box .btn-primary {
-      display: inline-block;
+    .apply-form-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .apply-form-wrap h2 {
+      font-size: 26px;
+      color: #1e293b;
+      margin-bottom: 10px;
+    }
+    .apply-form-wrap > p {
+      color: #475569;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .affiliate-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media(max-width:600px){ .affiliate-form .form-row { grid-template-columns: 1fr; } }
+    .affiliate-form .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 18px;
+    }
+    .affiliate-form label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+    .affiliate-form input,
+    .affiliate-form select,
+    .affiliate-form textarea {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 15px;
+      color: #1e293b;
+      background: #fff;
+      outline: none;
+      transition: border-color .2s;
+      font-family: inherit;
+    }
+    .affiliate-form input:focus,
+    .affiliate-form select:focus,
+    .affiliate-form textarea:focus {
+      border-color: #2563eb;
+    }
+    .form-note {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #92400e;
+      margin-bottom: 20px;
+    }
+    .btn-submit {
       background: #2563eb;
       color: #fff;
-      padding: 12px 26px;
+      border: none;
       border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 16px;
       font-weight: 700;
-      text-decoration: none;
-      margin-top: 10px;
+      cursor: pointer;
+      transition: background .2s;
+      width: 100%;
+    }
+    .btn-submit:hover { background: #1d4ed8; }
+    .btn-submit:disabled { background: #93c5fd; cursor: default; }
+    .af-success {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 8px;
+      padding: 16px;
+      color: #166534;
+      font-weight: 600;
+      margin-top: 16px;
+      text-align: center;
+    }
+    .af-error {
+      background: #fff1f2;
+      border: 1px solid #fca5a5;
+      border-radius: 8px;
+      padding: 16px;
+      color: #991b1b;
+      font-weight: 600;
+      margin-top: 16px;
+      text-align: center;
     }
   </style>
 <script>window.lemonSqueezyAffiliateConfig = { store: "lamaisoftware" };</script>
@@ -145,11 +222,98 @@
 
 </div>
 
-<div class="apply-box">
-  <h3>Ready to apply?</h3>
-  <p>Email us your name, where you'd promote CoachBuddy (website, social platform, or community), and a bit about your audience.</p>
-  <a class="btn-primary" href="mailto:phillippe2000@proton.me?subject=Affiliate%20Program%20Application">Apply via Email →</a>
+<div class="apply-section">
+  <div class="apply-form-wrap">
+    <h2>Apply to Become a CoachBuddy Affiliate</h2>
+    <p>Fill in the form below. We review every application personally and reply within 1–2 business days. If approved, you will receive an email with your next steps — including how to set up your unique CoachBuddy affiliate link on Lemon Squeezy.</p>
+    <form class="affiliate-form" id="affiliateForm" onsubmit="submitAffiliateForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="af_name">Your Full Name *</label>
+          <input type="text" id="af_name" name="name" required placeholder="e.g. Sarah Johnson" />
+        </div>
+        <div class="form-group">
+          <label for="af_email">Your Email Address *</label>
+          <input type="email" id="af_email" name="email" required placeholder="e.g. sarah@gmail.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="af_platform">Where will you mainly share CoachBuddy? *</label>
+        <select id="af_platform" name="platform" required>
+          <option value="">— Select your main platform —</option>
+          <option value="Facebook">Facebook (personal profile or group)</option>
+          <option value="TikTok">TikTok</option>
+          <option value="Instagram">Instagram</option>
+          <option value="WhatsApp">WhatsApp groups</option>
+          <option value="YouTube">YouTube</option>
+          <option value="Blog/Website">Blog or Website</option>
+          <option value="Pinterest">Pinterest</option>
+          <option value="Multiple">Multiple platforms</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="af_audience">Tell us about your audience *</label>
+        <textarea id="af_audience" name="audience" required rows="3"
+          placeholder="e.g. I run a homeschool moms Facebook group with 2,000 members. Most have children aged 10 to 16."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="af_profile">Your social media page or website link (optional)</label>
+        <input type="url" id="af_profile" name="profile" placeholder="https://facebook.com/yourpage" />
+      </div>
+      <div class="form-group">
+        <label for="af_message">Anything else you would like us to know? (optional)</label>
+        <textarea id="af_message" name="message" rows="2"
+          placeholder="e.g. I am a homeschooling mom of 3 and already use CoachBuddy with my kids."></textarea>
+      </div>
+      <div class="form-note">
+        ⚠️ Submitting this form is NOT automatic approval. You will receive a personal reply from our team within 1–2 business days. Do not share any affiliate link until you receive your approval email.
+      </div>
+      <button type="submit" class="btn-submit" id="af_submit">Submit My Application →</button>
+      <div id="af_success" class="af-success" style="display:none;">
+        ✅ Thank you! Your application has been received. We will be in touch within 1–2 business days.
+      </div>
+      <div id="af_error" class="af-error" style="display:none;">
+        ❌ Something went wrong. Please email us directly at phillippe2000@proton.me
+      </div>
+    </form>
+  </div>
 </div>
+
+<script>
+function submitAffiliateForm(e) {
+  e.preventDefault();
+  var btn = document.getElementById("af_submit");
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+
+  var name = document.getElementById("af_name").value;
+  var email = document.getElementById("af_email").value;
+  var platform = document.getElementById("af_platform").value;
+  var audience = document.getElementById("af_audience").value;
+  var profile = document.getElementById("af_profile").value;
+  var message = document.getElementById("af_message").value;
+
+  var body = "Affiliate Application\n\n" +
+    "Name: " + name + "\n" +
+    "Email: " + email + "\n" +
+    "Platform: " + platform + "\n" +
+    "Audience: " + audience + "\n" +
+    "Profile link: " + (profile || "Not provided") + "\n" +
+    "Message: " + (message || "None");
+
+  var mailto = "mailto:phillippe2000@proton.me" +
+    "?subject=" + encodeURIComponent("CoachBuddy Affiliate Application - " + name) +
+    "&body=" + encodeURIComponent(body);
+
+  window.location.href = mailto;
+
+  setTimeout(function() {
+    document.getElementById("af_success").style.display = "block";
+    btn.textContent = "Application Sent ✓";
+  }, 800);
+}
+</script>
 
 <!-- FOOTER -->
 <footer>
