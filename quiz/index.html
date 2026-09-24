@@ -325,7 +325,7 @@
     var m = new RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
     return m ? decodeURIComponent(m[1]) : null;
   }
-  function setLang(l){
+  window.setLang = function(l){
     lang = l;
     document.getElementById('langVi').className = l === 'vi' ? 'on' : '';
     document.getElementById('langEn').className = l === 'en' ? 'on' : '';
