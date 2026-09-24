@@ -438,13 +438,12 @@
       } else {
         b.onclick = function(){
           try { localStorage.setItem(voteKey(), String(i)); } catch(e){}
-          record('vote', String(i), function(){ render(); reveal(); });
-          document.getElementById('answers').style.display = 'none';
+          record('vote', String(i), function(){ render(); });
         };
       }
       box.appendChild(b);
     });
-    if (alreadyVoted !== null) { box.style.display = ''; reveal(); }
+    document.getElementById('revealBox').classList.add('show');
     renderStats();
   }
 
@@ -462,6 +461,7 @@
     var seen = false;
     try { seen = !!localStorage.getItem(viewKey()); localStorage.setItem(viewKey(), '1'); } catch(e){}
     render();
+    reveal();
     window.scrollTo(0, 0);
     if (!seen) record('view', '');
   }
