@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoachBuddy Quiz — Bạn trả lời đúng không?</title>
+  <meta name="description" content="Giải đáp các câu đố viral trên Facebook: xem cách một AI thông thường trả lời, và cách CoachBuddy hướng dẫn để bạn TỰ TÌM RA đáp án." />
+  <link rel="stylesheet" href="../style.css" />
+  <meta property="og:title" content="Bạn trả lời đúng không? Xem đáp án tại CoachBuddy" />
+  <meta property="og:description" content="So sánh cách một AI thông thường trả lời và cách CoachBuddy dạy bạn tự tìm ra đáp án." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://coachbuddy.dev/quiz/" />
+  <meta property="og:image" content="https://coachbuddy.dev/logo.png" />
+  <link rel="canonical" href="https://coachbuddy.dev/quiz/" />
+  <style>
+    .quiz-wrap { max-width: 640px; margin: 0 auto; padding: 24px 20px 64px; font-family: Arial, sans-serif; }
+    .quiz-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+    .quiz-top a { display:flex; align-items:center; gap:8px; font-weight:700; color:var(--navy); font-size:15px; text-decoration:none; }
+    .quiz-top a:hover { text-decoration:none; }
+    .qlang { display:flex; gap:0; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+    .qlang button { background:#fff; border:none; padding:7px 14px; font-size:13px; font-weight:700; cursor:pointer; color:var(--dim); font-family:inherit; }
+    .qlang button.on { background:var(--navy); color:#fff; }
+    .qtype { display:inline-block; background:var(--blue-light); color:var(--blue); font-weight:700; font-size:13px; padding:5px 12px; border-radius:999px; margin:14px 0 8px; }
+    .qtext { font-family: Georgia, serif; font-size: clamp(26px, 7vw, 38px); font-weight:700; color:var(--navy); line-height:1.3; margin: 8px 0 4px; text-align:center; }
+    .qsub { color:var(--dim); font-size:15px; text-align:center; margin-bottom:18px; }
+    .qtabs { display:flex; gap:8px; justify-content:center; margin: 4px 0 20px; flex-wrap:wrap; }
+    .qtabs button { background:#fff; border:1.5px solid var(--border); color:var(--dim); border-radius:999px; padding:7px 15px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; }
+    .qtabs button.on { border-color:var(--blue); color:var(--blue); background:var(--blue-light); }
+    .answers { display:grid; gap:12px; }
+    .ans-btn { background:#fff; border:2px solid var(--border); border-radius:14px; padding:16px 18px; font-size:19px; font-weight:700; color:var(--navy); cursor:pointer; text-align:left; font-family:inherit; transition: border-color .15s; }
+    .ans-btn:hover { border-color:var(--blue); }
+    .ans-btn:disabled { cursor:default; opacity:.85; }
+    .ans-btn.correct { border-color:var(--green); background:var(--green-light); }
+    .ans-btn.wrong { border-color:#dc2626; background:#fef2f2; }
+    .ans-bar { height:8px; border-radius:99px; background:var(--border); margin-top:10px; overflow:hidden; }
+    .ans-bar > div { height:100%; background:var(--blue); border-radius:99px; }
+    .ans-count { font-size:13px; color:var(--dim); margin-top:5px; font-weight:600; }
+    .stats-line { text-align:center; color:var(--muted); font-size:13.5px; margin:14px 0 0; }
+    .reveal-box { margin-top:26px; display:none; }
+    .reveal-box.show { display:block; }
+    .reveal-grid { display:grid; gap:16px; }
+    @media(min-width:700px){ .reveal-grid { grid-template-columns:1fr 1fr; } }
+    .rbox { border-radius:14px; padding:20px; border:1px solid var(--border); background:var(--surface); }
+    .rbox.cb { background:var(--green-light); border-color:#a7f3d0; }
+    .rbox h3 { font-size:16px; margin-bottom:10px; }
+    .rbox.ai h3 { color:var(--dim); }
+    .rbox .ai-answer { font-size:22px; font-weight:700; color:var(--navy); margin:10px 0 4px; }
+    .rbox .ai-note { font-size:13.5px; color:var(--muted); }
+    .chat { display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+    .cbub { padding:10px 14px; border-radius:12px; font-size:14.5px; line-height:1.55; }
+    .cbub.t { background:#fff; border:1px solid #a7f3d0; color:var(--navy); }
+    .cbub.s { background:#fff; border:1px dashed var(--border); color:var(--dim); font-style:italic; align-self:flex-end; max-width:88%; }
+    .verdict { margin-top:12px; font-weight:700; color:var(--green); font-size:15px; }
+    .pitch { margin-top:26px; text-align:center; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:26px 20px; }
+    .pitch h2 { font-size:20px; margin-bottom:8px; }
+    .pitch p { font-size:15px; margin-bottom:16px; }
+    .pitch .btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn { display:inline-block; padding:13px 28px; border-radius:10px; font-weight:700; font-size:15px; text-decoration:none; font-family:Arial,sans-serif; cursor:pointer; border:none; }
+    .btn-primary { background:var(--blue); color:#fff; }
+    .btn-primary:hover { background:#1d4ed8; text-decoration:none; color:#fff; }
+    .btn-outline { background:transparent; border:2px solid var(--border); color:var(--dim); }
+    .btn-outline:hover { border-color:var(--blue); color:var(--blue); text-decoration:none; }
+    .quiz-foot { text-align:center; margin-top:34px; color:var(--muted); font-size:13px; }
+    .quiz-foot a { color:var(--dim); }
+    .qshare { text-align:center; margin-top:16px; color:var(--dim); font-size:14px; }
+  </style>
+</head>
+<body>
+
+<div class="quiz-wrap">
+  <div class="quiz-top">
+    <a href="../index.html"><img src="../logo.png" alt="CoachBuddy" style="width:30px;height:30px;border-radius:7px;"> CoachBuddy</a>
+    <div class="qlang">
+      <button id="langVi" onclick="setLang('vi')">VI</button>
+      <button id="langEn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+  <div class="qtabs" id="qTabs"></div>
+
+  <span class="qtype" id="qType"></span>
+  <h1 class="qtext" id="qText"></h1>
+  <p class="qsub" id="qSub"></p>
+
+  <div class="answers" id="answers"></div>
+  <p class="stats-line" id="statsLine"></p>
+
+  <div class="reveal-box" id="revealBox">
+    <div class="reveal-grid">
+      <div class="rbox ai">
+        <h3 id="aiTitle">AI thông thường trả lời</h3>
+        <div class="ai-answer" id="aiAnswer"></div>
+        <div class="ai-note" id="aiNote"></div>
+      </div>
+      <div class="rbox cb">
+        <h3 id="cbTitle">CoachBuddy hướng dẫn</h3>
+        <div class="chat" id="cbChat"></div>
+        <div class="verdict" id="cbVerdict"></div>
+      </div>
+    </div>
+
+    <div class="pitch">
+      <h2 id="pitchTitle"></h2>
+      <p id="pitchBody"></p>
+      <div class="btns">
+        <a class="btn btn-primary" id="ctaTrial" href="https://elevate-u-ceda8d9f.base44.app/register" target="_blank"></a>
+        <a class="btn btn-outline" id="ctaPricing" href="../order.html"></a>
+      </div>
+    </div>
+  </div>
+
+  <p class="qshare" id="qShare"></p>
+  <div class="quiz-foot">© 2026 CoachBuddy · <a href="../index.html">coachbuddy.dev</a></div>
+</div>
+
+<script>
+(function(){
+  var API = 'https://jessica-66f062a1.base44.app/functions/recordQuizEvent';
+  var APP_REGISTER = 'https://elevate-u-ceda8d9f.base44.app/register';
+
+  var QUIZ = [
+    {
+      id: 'q1',
+      type: { vi: 'Toán bẫy', en: 'Trap math' },
+      text: { vi: '24 ÷ 4(1 + 2) = ?', en: '24 ÷ 4(1 + 2) = ?' },
+      sub: { vi: 'Câu này đang gây tranh luận. Bạn tính ra bao nhiêu?', en: 'This one starts arguments. What do you get?' },
+      options: ['2', '18', '12', '9'],
+      correct: 1,
+      ai: { vi: '18. Xong.', en: '18. Done.' },
+      chat: {
+        vi: [
+          ['t', 'Khoan tính vội. Sau khi rút gọn trong ngoặc, biểu thức trở thành 24 ÷ 4 × 3. Vậy ta nhân 4 với 3 trước, hay tính từ trái sang phải?'],
+          ['s', 'Ừm… nhân 4 với 3 trước?'],
+          ['t', 'Nhân và chia có cùng độ ưu tiên. Khi bằng nhau thì tính theo hướng nào?'],
+          ['s', 'Từ trái sang phải!'],
+          ['t', 'Chính xác. Vậy 24 ÷ 4 bằng bao nhiêu?'],
+          ['s', '6.'],
+          ['t', 'Rồi 6 × 3 bằng bao nhiêu?'],
+          ['s', '18!'],
+          ['t', 'Đúng rồi — 18, không phải 2. Bẫy nằm ở chỗ tưởng số 4 vẫn "neo" trong ngoặc.']
+        ],
+        en: [
+          ['t', 'Before calculating anything — once we simplify the bracket, the expression becomes 24 ÷ 4 × 3. So do we multiply 4 by 3 first, or work left to right?'],
+          ['s', 'Hmm… multiply 4 by 3 first?'],
+          ['t', 'Multiplication and division have the SAME priority. When priorities are equal, which direction do we go?'],
+          ['s', 'Left to right!'],
+          ['t', 'Exactly. So what is 24 ÷ 4?'],
+          ['s', '6.'],
+          ['t', 'And then 6 × 3?'],
+          ['s', '18!'],
+          ['t', 'Correct — 18, not 2. The trap is thinking the 4 is still "glued" to the bracket.']
+        ]
+      },
+      verdict: { vi: 'Đáp án: 18 — và bạn tự tìm ra nó.', en: 'Answer: 18 — and you found it yourself.' }
+    },
+    {
+      id: 'q2',
+      type: { vi: 'Quy luật số', en: 'Number pattern' },
+      text: { vi: '9 = 90, 8 = 72, 7 = 56, 6 = 42, 3 = ?', en: '9 = 90, 8 = 72, 7 = 56, 6 = 42, 3 = ?' },
+      sub: { vi: 'Đừng nhìn cả dãy. Chỉ nhìn MỘT cặp số.', en: 'Don\'t stare at the whole list. Look at ONE pair.' },
+      options: ['30', '12', '14', '6'],
+      correct: 1,
+      ai: { vi: '12. Xong.', en: '12. Done.' },
+      chat: {
+        vi: [
+          ['t', 'Đừng lo tìm quy luật cả dãy ngay. Chỉ nhìn cặp đầu: 9 → 90. Số nào nhân với 9 ra 90?'],
+          ['s', '10.'],
+          ['t', 'Vậy mỗi số có vẻ được nhân với…?'],
+          ['s', 'Chính nó cộng 1! 9 × 10, 8 × 9…'],
+          ['t', 'Kiểm tra thử với 7 xem?'],
+          ['s', '7 × 8 = 56. Đúng rồi!'],
+          ['t', 'Vậy 3 nhân với bao nhiêu?'],
+          ['s', '3 × 4 = 12!']
+        ],
+        en: [
+          ['t', 'Don\'t try to see the whole pattern yet. Just look at the first pair: 9 → 90. What times 9 gives 90?'],
+          ['s', '10.'],
+          ['t', 'So each number seems to be multiplied by…?'],
+          ['s', 'Itself plus one! 9 × 10, 8 × 9…'],
+          ['t', 'Check it against 7.'],
+          ['s', '7 × 8 = 56. It works!'],
+          ['t', 'So what is 3 multiplied by?'],
+          ['s', '3 × 4 = 12!']
+        ]
+      },
+      verdict: { vi: 'Đáp án: 12. Ai trả lời 30 đã bị "bẫy trừ đều" đánh lừa.', en: 'Answer: 12. If you said 30, the "even subtraction" trap got you.' }
+    },
+    {
+      id: 'q3',
+      type: { vi: 'Câu đố logic', en: 'Lateral riddle' },
+      text: { vi: 'Cộng 5 vào 9… ra 2. Tại sao?', en: 'Add 5 to 9… and get 2. How?' },
+      sub: { vi: 'Trong phép tính thường thì đây là điều bất khả. Vậy còn nơi nào khác?', en: 'In ordinary arithmetic this is impossible. Where else could it be true?' },
+      options: [
+        { vi: 'Một phép tính sai', en: 'A calculation error' },
+        { vi: 'Trên đồng hồ', en: 'On a clock' },
+        { vi: 'Trong số La Mã', en: 'In Roman numerals' },
+        { vi: 'Không bao giờ có thể', en: 'It can never happen' }
+      ],
+      correct: 1,
+      ai: { vi: 'Trên đồng hồ: 9 giờ cộng 5 tiếng là 2 giờ. Xong.', en: 'On a clock: 9 o\'clock plus 5 hours is 2 o\'clock. Done.' },
+      chat: {
+        vi: [
+          ['t', 'Giả sử phép cộng này ĐÚNG thì ở đâu đó. Trong phép tính thường, 9 + 5 bao nhiêu?'],
+          ['s', '14.'],
+          ['t', 'Vậy để bằng 2, con số 14 phải "quay vòng" thành 2. Cái gì có số 14 rồi quay về 2?'],
+          ['s', '…Chu kỳ 12!'],
+          ['t', 'Chính xác. Cái gì chạy theo chu kỳ 12?'],
+          ['s', 'Mặt đồng hồ! 9 giờ + 5 tiếng = 2 giờ.']
+        ],
+        en: [
+          ['t', 'Suppose this addition is true somewhere. In ordinary arithmetic, what is 9 + 5?'],
+          ['s', '14.'],
+          ['t', 'So for it to equal 2, the 14 must "wrap around" to 2. What turns 14 into 2?'],
+          ['s', '…A cycle of 12!'],
+          ['t', 'Exactly. What runs on a 12-cycle?'],
+          ['s', 'A clock face! 9 o\'clock + 5 hours = 2 o\'clock.']
+        ]
+      },
+      verdict: { vi: 'Đáp án: trên đồng hồ.', en: 'Answer: on a clock.' }
+    },
+    {
+      id: 'q4',
+      type: { vi: 'Bẫy tư duy', en: 'Thinking trap' },
+      text: { vi: 'Cây gậy và quả bóng tổng cộng $1.10. Gậy đắt hơn bóng $1.00. Quả bóng giá bao nhiêu?', en: 'A bat and a ball cost $1.10 together. The bat costs $1.00 more than the ball. How much is the ball?' },
+      sub: { vi: 'Hơn 50% sinh viên đại học trả lời sai câu này.', en: 'Over 50% of university students get this one wrong.' },
+      options: ['$0.10', '$0.05', '$1.00', '$0.15'],
+      correct: 1,
+      ai: { vi: '$0.05. Xong.', en: '$0.05. Done.' },
+      chat: {
+        vi: [
+          ['t', 'Giả sử bóng giá $0.10 như ta thường nghĩ ngay. Vậy gậy giá bao nhiêu?'],
+          ['s', 'Đắt hơn $1.00 nên là $1.10.'],
+          ['t', 'Tổng cộng là bao nhiêu?'],
+          ['s', '$0.10 + $1.10 = $1.20… Ơ, không đúng!'],
+          ['t', 'Đề bài nói tổng là bao nhiêu?'],
+          ['s', '$1.10. Vậy giả định đầu sai rồi.'],
+          ['t', 'Đúng. Vậy thử: bóng giá x, gậy giá x + $1.00. Tổng 2x + 1.00 = ?'],
+          ['s', '$1.10 → 2x = $0.10 → x = $0.05!']
+        ],
+        en: [
+          ['t', 'Suppose the ball is $0.10, as intuition suggests. Then what does the bat cost?'],
+          ['s', 'A dollar more, so $1.10.'],
+          ['t', 'And the total?'],
+          ['s', '$0.10 + $1.10 = $1.20… wait, that\'s wrong!'],
+          ['t', 'What did the problem say the total was?'],
+          ['s', '$1.10. So my first guess was wrong.'],
+          ['t', 'Right. Now try: ball is x, bat is x + $1.00. So 2x + 1.00 = ?'],
+          ['s', '$1.10 → 2x = $0.10 → x = $0.05!']
+        ]
+      },
+      verdict: { vi: 'Đáp án: $0.05 — tự kiểm tra giả định là bước quan trọng nhất.', en: 'Answer: $0.05 — testing your assumption is the key move.' }
+    },
+    {
+      id: 'q5',
+      type: { vi: 'Toán đọc kỹ', en: 'Careful reading' },
+      text: { vi: 'Một nửa của 2 + 2 = ?', en: 'Half of 2 + 2 = ?' },
+      sub: { vi: 'Nghe dễ. Đọc chậm lại xem.', en: 'Sounds easy. Read it again, slowly.' },
+      options: ['2', '3', '1', '4'],
+      correct: 1,
+      ai: { vi: '3. Xong.', en: '3. Done.' },
+      chat: {
+        vi: [
+          ['t', 'Đọc chậm nhé. "Một nửa của 2" là bao nhiêu?'],
+          ['s', '1.'],
+          ['t', 'Vậy cả biểu thức thực ra là gì?'],
+          ['s', '1 + 2.'],
+          ['t', 'Bằng bao nhiêu?'],
+          ['s', '3!'],
+          ['t', 'Đúng. Bẫy là đọc thành "một nửa của (2 + 2)" = 2.']
+        ],
+        en: [
+          ['t', 'Read it slowly. What is "half of 2"?'],
+          ['s', '1.'],
+          ['t', 'So the expression really is…?'],
+          ['s', '1 + 2.'],
+          ['t', 'Which is?'],
+          ['s', '3!'],
+          ['t', 'Correct. The trap is reading it as "half of (2 + 2)" = 2.']
+        ]
+      },
+      verdict: { vi: 'Đáp án: 3.', en: 'Answer: 3.' }
+    }
+  ];
+
+  var UI = {
+    vi: {
+      tabs: ['Câu 1','Câu 2','Câu 3','Câu 4','Câu 5'],
+      statsViews: function(v){ return v + ' người đã xem câu này'; },
+      statsVotes: function(v){ return v + ' người đã trả lời'; },
+      pick: 'Bạn chọn đáp án nào? Kết quả sẽ hiện ngay sau đó.',
+      aiTitle: 'AI thông thường trả lời',
+      aiNote: 'Đưa đáp án. Hết. Ngày mai bạn vẫn phải nhờ nó.',
+      cbTitle: 'CoachBuddy hướng dẫn',
+      pitchTitle: 'Sự khác biệt không nằm ở đáp án',
+      pitchBody: 'Mọi AI đều biết đáp án. CoachBuddy dạy con bạn cách TỰ TÌM RA đáp án — và kỹ năng đó ở lại cả đời. Đó là điều một câu trả lời nhanh không làm được.',
+      ctaTrial: 'Dùng thử miễn phí',
+      ctaPricing: 'Xem học phí',
+      share: 'Thử thách bạn bè của bạn trên Facebook cùng câu này 👇',
+      answered: 'Bạn đã trả lời:',
+      others: 'Kết quả từ những người đã trả lời:'
+    },
+    en: {
+      tabs: ['Q1','Q2','Q3','Q4','Q5'],
+      statsViews: function(v){ return v + ' people viewed this question'; },
+      statsVotes: function(v){ return v + ' people answered'; },
+      pick: 'Pick your answer. Results appear right after.',
+      aiTitle: 'An ordinary AI answers',
+      aiNote: 'Gives the answer. Done. Tomorrow you still need it.',
+      cbTitle: 'CoachBuddy guides',
+      pitchTitle: 'The difference isn\'t the answer',
+      pitchBody: 'Every AI knows the answer. CoachBuddy teaches your child to FIND the answer themselves — a skill that stays for life. A quick reply can\'t do that.',
+      ctaTrial: 'Try it free',
+      ctaPricing: 'See pricing',
+      share: 'Challenge your friends on Facebook with this one 👇',
+      answered: 'You answered:',
+      others: 'Results from everyone who answered:'
+    }
+  };
+
+  var lang = 'vi';
+  var current = 0;
+  var stats = { views: 0, votes: {}, totalVotes: 0, cta: 0 };
+
+  function qs(name){
+    var m = new RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  function setLang(l){
+    lang = l;
+    document.getElementById('langVi').className = l === 'vi' ? 'on' : '';
+    document.getElementById('langEn').className = l === 'en' ? 'on' : '';
+    document.documentElement.lang = l;
+    try { localStorage.setItem('cb_lang', l); } catch(e){}
+    render();
+  }
+  function optText(o){ return typeof o === 'object' ? o[lang] : o; }
+
+  function record(eventType, answer, cb){
+    var q = QUIZ[current];
+    try {
+      fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question_id: q.id,
+          event_type: eventType,
+          answer: answer,
+          lang: lang,
+          source: qs('src') || '',
+          referrer: document.referrer || ''
+        })
+      }).then(function(r){ return r.json(); }).then(function(d){
+        if (d && d.stats) { stats = d.stats; renderStats(); }
+        if (cb) cb();
+      }).catch(function(){ if (cb) cb(); });
+    } catch(e) { if (cb) cb(); }
+  }
+
+  function viewKey(){ return 'quiz_view_' + QUIZ[current].id; }
+  function voteKey(){ return 'quiz_vote_' + QUIZ[current].id; }
+
+  function renderStats(){
+    var u = UI[lang];
+    var el = document.getElementById('statsLine');
+    var bits = [];
+    if (stats.views > 0) bits.push(u.statsViews(stats.views));
+    if (stats.totalVotes > 0) bits.push(u.statsVotes(stats.totalVotes));
+    el.textContent = bits.length ? bits.join(' · ') : '';
+  }
+
+  function render(){
+    var u = UI[lang];
+    var q = QUIZ[current];
+
+    // tabs
+    var tabs = document.getElementById('qTabs');
+    tabs.innerHTML = '';
+    QUIZ.forEach(function(qq, i){
+      var b = document.createElement('button');
+      b.textContent = u.tabs[i];
+      b.className = i === current ? 'on' : '';
+      b.onclick = function(){ go(i); };
+      tabs.appendChild(b);
+    });
+
+    document.getElementById('qType').textContent = q.type[lang];
+    document.getElementById('qText').textContent = q.text[lang];
+    document.getElementById('qSub').textContent = q.sub[lang];
+    document.getElementById('aiTitle').textContent = u.aiTitle;
+    document.getElementById('aiNote').textContent = u.aiNote;
+    document.getElementById('cbTitle').textContent = u.cbTitle;
+    document.getElementById('pitchTitle').textContent = u.pitchTitle;
+    document.getElementById('pitchBody').textContent = u.pitchBody;
+    document.getElementById('ctaTrial').textContent = u.ctaTrial;
+    document.getElementById('ctaPricing').textContent = u.ctaPricing;
+    document.getElementById('ctaTrial').onclick = function(){ record('cta', 'trial'); };
+    document.getElementById('ctaPricing').onclick = function(){ record('cta', 'pricing'); };
+    document.getElementById('qShare').textContent = u.share;
+    document.getElementById('aiAnswer').textContent = q.ai[lang];
+
+    // coach chat
+    var chat = document.getElementById('cbChat');
+    chat.innerHTML = '';
+    q.chat[lang].forEach(function(turn){
+      var d = document.createElement('div');
+      d.className = turn[0] === 't' ? 'cbub t' : 'cbub s';
+      d.textContent = turn[1];
+      chat.appendChild(d);
+    });
+    document.getElementById('cbVerdict').textContent = q.verdict[lang];
+
+    // answers
+    var box = document.getElementById('answers');
+    box.innerHTML = '';
+    var alreadyVoted = null;
+    try { alreadyVoted = localStorage.getItem(voteKey()); } catch(e){}
+    q.options.forEach(function(o, i){
+      var b = document.createElement('button');
+      b.className = 'ans-btn';
+      b.textContent = optText(o);
+      if (alreadyVoted !== null) {
+        b.disabled = true;
+        var chosen = alreadyVoted === String(i);
+        if (i === q.correct) b.classList.add('correct');
+        else if (chosen) b.classList.add('wrong');
+        if (stats.totalVotes > 0) {
+          var n = stats.votes[String(i)] || 0;
+          var pct = stats.totalVotes ? Math.round(n * 100 / stats.totalVotes) : 0;
+          var bar = document.createElement('div');
+          bar.className = 'ans-bar';
+          bar.innerHTML = '<div style="width:' + pct + '%"></div>';
+          var cnt = document.createElement('div');
+          cnt.className = 'ans-count';
+          cnt.textContent = pct + '% (' + n + ')';
+          b.appendChild(bar); b.appendChild(cnt);
+        }
+        b.onclick = null;
+      } else {
+        b.onclick = function(){
+          try { localStorage.setItem(voteKey(), String(i)); } catch(e){}
+          record('vote', String(i), function(){ render(); reveal(); });
+          document.getElementById('answers').style.display = 'none';
+        };
+      }
+      box.appendChild(b);
+    });
+    if (alreadyVoted !== null) { box.style.display = ''; reveal(); }
+    renderStats();
+  }
+
+  function reveal(){
+    var key = 'quiz_reveal_' + QUIZ[current].id;
+    var seen = false;
+    try { seen = !!localStorage.getItem(key); localStorage.setItem(key, '1'); } catch(e){}
+    document.getElementById('revealBox').classList.add('show');
+    if (!seen) record('reveal', '');
+  }
+
+  function go(i){
+    current = i;
+    try { history.replaceState(null, '', '?q=' + (i+1) + (qs('src') ? '&src=' + qs('src') : '')); } catch(e){}
+    var seen = false;
+    try { seen = !!localStorage.getItem(viewKey()); localStorage.setItem(viewKey(), '1'); } catch(e){}
+    render();
+    window.scrollTo(0, 0);
+    if (!seen) record('view', '');
+  }
+
+  // init
+  var saved = null;
+  try { saved = localStorage.getItem('cb_lang'); } catch(e){}
+  var qParam = parseInt(qs('q') || '1', 10);
+  current = (qParam >= 1 && qParam <= QUIZ.length) ? qParam - 1 : 0;
+  setLang(saved === 'en' ? 'en' : 'vi');
+  go(current);
+})();
+</script>
+</body>
+</html>
