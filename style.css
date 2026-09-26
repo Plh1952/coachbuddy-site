@@ -54,8 +54,8 @@ nav {
   color: #fff; font-weight: 900; font-size: 18px; font-family: Georgia, serif;
 }
 .nav-logo span { font-weight: 700; font-size: 20px; color: var(--navy); font-family: Georgia, serif; }
-.nav-links { display: flex; align-items: center; gap: 32px; }
-.nav-links a { color: var(--dim); font-size: 15px; font-family: 'Arial', sans-serif; font-weight: 500; transition: color 0.2s; }
+.nav-links { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; row-gap: 8px; }
+.nav-links a { color: var(--dim); font-size: 15px; font-family: 'Arial', sans-serif; font-weight: 500; transition: color 0.2s; white-space: nowrap; }
 .nav-links a:hover, .nav-links a.active { color: var(--navy); text-decoration: none; }
 .nav-cta {
   background: var(--blue); color: #fff !important;
